@@ -27,14 +27,16 @@ export default function Header() {
     >
       <nav className="container-narrow mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+          {/* Logo - only visible after scroll */}
           <a
             href="#hero"
-            className={`font-bold text-lg transition-colors ${
-              isScrolled ? "text-secondary" : "text-white"
+            className={`font-bold text-lg transition-all duration-300 ${
+              isScrolled
+                ? "text-secondary opacity-100 translate-y-0"
+                : "text-white opacity-0 -translate-y-2 pointer-events-none"
             }`}
           >
-            {siteConfig.name.split(" ")[0]}
+            Filip Oborník
             <span className="text-primary">.</span>
           </a>
 
