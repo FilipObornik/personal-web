@@ -7,7 +7,7 @@ import WaveSeparator from "@/components/ui/WaveSeparator";
 
 export default function Services() {
   return (
-    <section id="sluzby" className="section-padding relative overflow-hidden">
+    <section id="sluzby" className="section-padding pt-8 md:pt-12 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
@@ -66,11 +66,11 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 )}
 
-                {/* Number badge */}
-                <div className={`absolute top-6 right-6 text-6xl md:text-7xl font-bold opacity-10 select-none
-                  ${isLarge ? 'text-white' : 'text-secondary'}
-                `}>
-                  0{index + 1}
+                {/* Decorative arcs */}
+                <div className="absolute -top-12 -right-12 pointer-events-none">
+                  <div className={`w-24 h-24 rounded-full border-2 ${isLarge ? 'border-white/10' : 'border-secondary/10'}`} />
+                  <div className={`absolute top-3 left-3 w-[72px] h-[72px] rounded-full border-2 ${isLarge ? 'border-white/[0.07]' : 'border-secondary/[0.07]'}`} />
+                  <div className={`absolute top-6 left-6 w-12 h-12 rounded-full border-2 ${isLarge ? 'border-white/4' : 'border-secondary/4'}`} />
                 </div>
 
                 <div className="relative z-10">

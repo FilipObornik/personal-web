@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Gift, Play } from "lucide-react";
+import { ExternalLink, GraduationCap, Play } from "lucide-react";
 import { freeResources } from "@/lib/data";
-import WaveSeparator from "@/components/ui/WaveSeparator";
 
 export default function FreeResources() {
   return (
@@ -20,7 +19,7 @@ export default function FreeResources() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-secondary rounded-full text-sm font-semibold mb-6"
           >
-            <Gift size={16} />
+            <GraduationCap size={16} />
             AI s rozumem
           </motion.div>
           <motion.h2
@@ -39,7 +38,18 @@ export default function FreeResources() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-muted text-lg max-w-xl mx-auto"
           >
-            S cílem edukovat v oblasti umělé inteligence a vibe codingu jsou založil projekt AI s rozumem, kde tvořím edukační obsah bez zbytečného povyku a hlavně s rozumem.
+            S cílem edukovat v oblasti umělé inteligence a vibe codingu jsou založil projekt{" "}
+            <a
+              href="https://aisrozumem.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative font-bold text-secondary hover:text-primary transition-colors"
+            >
+              {/* Highlighter marker effect */}
+              <span className="absolute -inset-x-1 -bottom-0.5 h-[40%] bg-primary/40 -skew-x-3 rounded-sm" />
+              <span className="relative">AI s rozumem</span>
+            </a>
+            , kde tvořím edukační obsah bez zbytečného povyku a hlavně s rozumem.
           </motion.p>
         </div>
 
@@ -49,7 +59,7 @@ export default function FreeResources() {
             const Icon = resource.icon;
             const isYouTube = resource.title === "YouTube";
             const isDiscord = resource.title === "Discord Komunita";
-            const isAkademie = resource.title === "AI s Rozumem Akademie";
+            const isAkademie = resource.title === "Akademie AI s Rozumem";
 
             // Different gradient for each card
             const gradientClass = isYouTube
@@ -111,8 +121,6 @@ export default function FreeResources() {
           })}
         </div>
       </div>
-
-      <WaveSeparator fillColor="#f8f9fa" variant={3} />
     </section>
   );
 }

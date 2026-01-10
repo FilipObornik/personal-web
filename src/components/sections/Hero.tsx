@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Sparkles } from "lucide-react";
-import { siteConfig } from "@/lib/data";
+import { ArrowRight, Calendar } from "lucide-react";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 export default function Hero() {
@@ -42,17 +41,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left content */}
           <div>
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full text-sm text-white/80 mb-8"
-            >
-              <Sparkles size={16} className="text-primary" />
-              <span>Technologie a AI</span>
-            </motion.div>
-
             {/* Name with accent */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -68,14 +56,14 @@ export default function Hero() {
               </h1>
             </motion.div>
 
-            {/* Tagline */}
+            {/* One-liner differentiation */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/70 mb-8 max-w-lg"
             >
-              {siteConfig.tagline}
+              Technologie i AI jsou nástroje k dosažení výsledku – díky mým zkušenostem s vámi budu od začátku do konce.
             </motion.p>
 
             {/* CTAs */}
@@ -86,18 +74,18 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <a
-                href="#sluzby"
-                className="group inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-secondary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:gap-4"
-              >
-                Prozkoumat služby
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
                 href="#kontakt"
-                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-medium transition-all duration-300 border border-white/10"
+                className="group inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-secondary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:gap-4"
               >
                 <Calendar size={18} />
                 Rezervovat hovor
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              </a>
+              <a
+                href="#sluzby"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-medium transition-all duration-300 border border-white/10"
+              >
+                Prozkoumat služby
               </a>
             </motion.div>
 
@@ -112,19 +100,19 @@ export default function Hero() {
                 <div className="text-3xl font-bold text-white">
                   <AnimatedCounter value={23} suffix="+" delay={0.8} />
                 </div>
-                <div className="text-white/50 text-sm">spokojených klientů</div>
+                <div className="text-white/50 text-sm">klientů</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
                   <AnimatedCounter value={310} suffix="+" delay={1.0} />
                 </div>
-                <div className="text-white/50 text-sm">proškolených účastníků</div>
+                <div className="text-white/50 text-sm">proškolených lidí</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
                   <AnimatedCounter value={8} suffix="+" delay={1.2} />
                 </div>
-                <div className="text-white/50 text-sm">let zkušeností</div>
+                <div className="text-white/50 text-sm">let v oboru</div>
               </div>
             </motion.div>
           </div>
@@ -219,28 +207,7 @@ export default function Hero() {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                   className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
                 >
-                  AI
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: 50, y: 150 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.8,
-                  type: "spring",
-                  stiffness: 280,
-                  damping: 15
-                }}
-                className="absolute top-12 -right-4"
-              >
-                <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-                  className="px-4 py-2 bg-gradient-to-r from-primary/80 to-primary text-secondary font-semibold text-sm rounded-full shadow-lg"
-                >
-                  Vibe Coding
+                  Umělá inteligence
                 </motion.div>
               </motion.div>
 
@@ -261,7 +228,7 @@ export default function Hero() {
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
-                  Automatizace
+                  Technologické konzultace
                 </motion.div>
               </motion.div>
 
@@ -307,61 +274,6 @@ export default function Hero() {
                 </motion.div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: 100, y: -50 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1.0,
-                  type: "spring",
-                  stiffness: 230,
-                  damping: 15
-                }}
-                className="absolute bottom-16 -left-6"
-              >
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut", delay: 2.0 }}
-                  className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
-                >
-                  Technologie
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: -60, y: -100 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1.05,
-                  type: "spring",
-                  stiffness: 270,
-                  damping: 15
-                }}
-                className="absolute -bottom-2 right-12"
-              >
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 2.1 }}
-                  className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
-                >
-                  Speaker
-                </motion.div>
-              </motion.div>
-
-              {/* Small decorative dots - also burst out */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1.1, type: "spring", stiffness: 300 }}
-                className="absolute top-8 -left-12 w-2 h-2 bg-primary/60 rounded-full"
-              />
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1.15, type: "spring", stiffness: 300 }}
-                className="absolute bottom-1/3 -right-12 w-3 h-3 bg-primary/40 rounded-full"
-              />
             </div>
           </div>
         </div>

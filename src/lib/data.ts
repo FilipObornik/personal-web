@@ -232,7 +232,7 @@ export const freeResources: FreeResource[] = [
     buttonText: "Připojit se",
   },
   {
-    title: "AI s Rozumem Akademie",
+    title: "Akademie AI s Rozumem",
     description:
       "Komplexní online kurzy a vzdělávací materiály o AI a vibe codingu. Učte se vlastním tempem krok za krokem.",
     icon: BookOpen,

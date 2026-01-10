@@ -44,7 +44,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-white/60 text-lg max-w-md"
           >
-            Projekty vytvořené s pomocí AI a vibe codingu
+            Spolupráce, projekty i ukázka vibe coded aplikací
           </motion.p>
         </div>
 
@@ -141,12 +141,9 @@ export default function Portfolio() {
             href="#"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-secondary font-semibold px-8 py-4 rounded-full transition-all"
           >
-            Další projekty
+            Zobrazit všechny projekty
             <ExternalLink size={18} />
           </a>
-          <p className="text-white/40 text-sm">
-            Více projektů průběžně přidávám
-          </p>
         </motion.div>
       </div>
 
