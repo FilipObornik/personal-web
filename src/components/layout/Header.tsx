@@ -1,13 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { navigation, siteConfig } from "@/lib/data";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +20,12 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Helper to get correct href based on current page
+  const getHref = (href: string) => {
+    if (isHomePage) return href;
+    return `/${href}`;
+  };
 
   return (
     <header
@@ -27,25 +37,27 @@ export default function Header() {
     >
       <nav className="container-narrow mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo - only visible after scroll */}
-          <a
-            href="#hero"
+          {/* Logo - always visible on subpages, only after scroll on home */}
+          <Link
+            href="/"
             className={`font-bold text-lg transition-all duration-300 ${
               isScrolled
                 ? "text-secondary opacity-100 translate-y-0"
-                : "text-white opacity-0 -translate-y-2 pointer-events-none"
+                : isHomePage
+                  ? "text-white opacity-0 -translate-y-2 pointer-events-none"
+                  : "text-white opacity-100 translate-y-0"
             }`}
           >
             Filip Oborník
             <span className="text-primary">.</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navigation.slice(1, -1).map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                href={getHref(item.href)}
                 className={`text-sm font-medium transition-colors ${
                   isScrolled
                     ? "text-muted hover:text-primary"
@@ -53,10 +65,10 @@ export default function Header() {
                 }`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#kontakt"
+            <Link
+              href={getHref("#kontakt")}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 isScrolled
                   ? "bg-primary text-white hover:bg-primary-dark"
@@ -64,7 +76,7 @@ export default function Header() {
               }`}
             >
               Kontakt
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -93,9 +105,9 @@ export default function Header() {
                 isScrolled ? "border-gray-100 bg-white" : "border-white/10 bg-secondary/95 backdrop-blur-md"
               }`}>
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    href={getHref(item.href)}
                     onClick={() => setIsMenuOpen(false)}
                     className={`block px-4 py-3 rounded-xl font-medium transition-colors ${
                       isScrolled
@@ -104,16 +116,16 @@ export default function Header() {
                     }`}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
                 <div className="pt-2 px-2">
-                  <a
-                    href="#kontakt"
+                  <Link
+                    href={getHref("#kontakt")}
                     onClick={() => setIsMenuOpen(false)}
                     className="block bg-primary hover:bg-primary-dark text-white px-4 py-3 rounded-xl text-center font-semibold transition-colors"
                   >
                     Kontaktujte mě
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

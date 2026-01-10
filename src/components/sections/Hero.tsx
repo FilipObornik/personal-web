@@ -37,7 +37,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container-narrow mx-auto px-4 md:px-8 pt-32 pb-32 md:pt-40 md:pb-48 relative z-10">
+      <div className="container-narrow mx-auto px-4 md:px-8 pt-32 pb-40 md:pt-40 md:pb-56 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left content */}
           <div>
@@ -63,7 +63,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/70 mb-8 max-w-lg"
             >
-              Technologie i AI jsou nástroje k dosažení výsledku – díky mým zkušenostem s vámi budu od začátku do konce.
+              Technologie a AI jsou pouze nástroje k dosažení výsledku – díky mým zkušenostem s vámi budu od začátku do konce.
             </motion.p>
 
             {/* CTAs */}

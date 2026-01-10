@@ -8,6 +8,8 @@ interface AnimatedCounterProps {
   suffix?: string;
   delay?: number;
   className?: string;
+  damping?: number;
+  stiffness?: number;
 }
 
 export default function AnimatedCounter({
@@ -15,12 +17,14 @@ export default function AnimatedCounter({
   suffix = "",
   delay = 0,
   className = "",
+  damping = 60,
+  stiffness = 40,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, {
-    damping: 60,
-    stiffness: 40,
+    damping,
+    stiffness,
   });
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [displayValue, setDisplayValue] = useState(0);

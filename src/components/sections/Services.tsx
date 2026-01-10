@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { services } from "@/lib/data";
 import WaveSeparator from "@/components/ui/WaveSeparator";
 
@@ -57,10 +58,14 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group relative overflow-hidden rounded-2xl md:rounded-3xl p-6 md:p-8 card-lift cursor-pointer
-                  ${isFullWidth ? 'md:col-span-2 lg:col-span-3 bg-white border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)]' : isLarge ? 'lg:col-span-2 bg-secondary text-white' : 'bg-white border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)]'}
-                `}
+                className={isFullWidth ? 'md:col-span-2 lg:col-span-3' : isLarge ? 'lg:col-span-2' : ''}
               >
+                <Link
+                  href={`/sluzby/${service.slug}`}
+                  className={`group relative overflow-hidden rounded-2xl md:rounded-3xl p-6 md:p-8 card-lift cursor-pointer block h-full
+                  ${isFullWidth ? 'bg-white border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)]' : isLarge ? 'bg-secondary text-white' : 'bg-white border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)]'}
+                `}
+                >
                 {/* Hover gradient overlay for large cards */}
                 {isLarge && (
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -113,6 +118,7 @@ export default function Services() {
                     <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
+                </Link>
               </motion.div>
             );
           })}
