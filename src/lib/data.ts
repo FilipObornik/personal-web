@@ -120,7 +120,7 @@ export const services: Service[] = [
     slug: "seminare",
     title: "Semináře & Workshopy",
     shortDescription:
-      "Individuální i skupinová školení na téma AI a vibe coding. Naučím vás pracovat s AI nástroji efektivně a prakticky. Přijedu za Vámi nebo se potkáme online.",
+      "Individuální i skupinová školení na téma AI a vibe coding. Naučím vás pracovat s AI nástroji efektivně a prakticky ať už jste začátečník a nebo potřebujete zapojit AI do profesionálního vývoje software. Přijedu za Vámi nebo se potkáme online.",
     icon: GraduationCap,
   },
   {
@@ -128,7 +128,7 @@ export const services: Service[] = [
     slug: "konzultace",
     title: "Konzultace",
     shortDescription:
-      "Ad-hoc technické konzultace. Jednorázově nebo pravidelně - poradím s konkrétními výzvami.",
+      "Díky své mnohaleté zkušenosti jako vývojář a sofware analytik Vám dokáži poradi s Vašimi technickými výzvami.",
     icon: MessageSquare,
   },
   {
@@ -144,15 +144,15 @@ export const services: Service[] = [
     slug: "mentoring",
     title: "Mentoring",
     shortDescription:
-      "Individuální nebo skupinový mentoring v oblasti AI a vibe codingu. Pravidelné konzultace přizpůsobené přesně Vašim cílům a tempu.",
+      "Individuální nebo skupinový mentoring v oblasti AI a vibe codingu. Pravidelná online nebo osobní setkání přizpůsobené přesně Vašim cílům a tempu. Vhodné pro chvíle, kdy nevíte, kde začít nebo potřebujete co nejefektivnějí přistoupit k Vašemu vzdělávání nebo konkrétním řešením.",
     icon: Users,
   },
   {
-    id: "5",
+    id: "6",
     slug: "partnerske-projekty",
     title: "Software projekty",
     shortDescription:
-      "Pro větší projekty vás dokáži propojit s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru.",
+      "Pro větší projekty vám dokáži poskytnout technické konzultace a v případě potřeby implementace Vás propojím s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru. Ať už s AI nebo bez ní.",
     icon: Handshake,
   },
 ];

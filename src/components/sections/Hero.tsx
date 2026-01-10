@@ -50,7 +50,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full text-sm text-white/80 mb-8"
             >
               <Sparkles size={16} className="text-primary" />
-              <span>AI & Vibe Coding Expert</span>
+              <span>Technologie a AI</span>
             </motion.div>
 
             {/* Name with accent */}
@@ -73,7 +73,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/70 mb-8 max-w-lg"
+              className="text-lg md:text-xl text-white/70 mb-8 max-w-lg"
             >
               {siteConfig.tagline}
             </motion.p>
@@ -110,19 +110,19 @@ export default function Hero() {
             >
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={23} suffix="+" />
+                  <AnimatedCounter value={23} suffix="+" delay={0.8} />
                 </div>
                 <div className="text-white/50 text-sm">spokojených klientů</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={310} suffix="+" />
+                  <AnimatedCounter value={310} suffix="+" delay={1.0} />
                 </div>
                 <div className="text-white/50 text-sm">proškolených účastníků</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={8} suffix="+" />
+                  <AnimatedCounter value={8} suffix="+" delay={1.2} />
                 </div>
                 <div className="text-white/50 text-sm">let zkušeností</div>
               </div>
@@ -130,18 +130,45 @@ export default function Hero() {
           </div>
 
           {/* Right visual - Photo with organic blob shape and floating badges */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
-          >
+          <div className="relative hidden lg:block">
             <div className="relative w-full max-w-md mx-auto">
-              {/* Gradient glow behind photo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent blur-3xl scale-110" />
+              {/* Gradient glow behind photo - pulses on reveal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1.1 }}
+                transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent blur-3xl"
+              />
 
-              {/* Organic blob photo container */}
-              <div
+              {/* Tear effect - expanding rings */}
+              <motion.div
+                initial={{ scale: 0, opacity: 1 }}
+                animate={{ scale: 2.5, opacity: 0 }}
+                transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <div className="w-32 h-32 rounded-full border-4 border-primary/60" />
+              </motion.div>
+              <motion.div
+                initial={{ scale: 0, opacity: 1 }}
+                animate={{ scale: 2, opacity: 0 }}
+                transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <div className="w-32 h-32 rounded-full border-2 border-white/40" />
+              </motion.div>
+
+              {/* Organic blob photo container - tears open */}
+              <motion.div
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.2,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 20
+                }}
                 className="relative aspect-[4/5]"
                 style={{
                   clipPath: "url(#blob-mask)",
@@ -154,9 +181,16 @@ export default function Hero() {
                   className="object-cover object-top"
                   priority
                 />
+                {/* Flash effect on reveal */}
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="absolute inset-0 bg-secondary"
+                />
                 {/* Subtle inner shadow overlay */}
                 <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.3)]" />
-              </div>
+              </motion.div>
 
               {/* SVG blob mask definition */}
               <svg className="absolute w-0 h-0">
@@ -167,16 +201,22 @@ export default function Hero() {
                 </defs>
               </svg>
 
-              {/* Floating tech badges */}
+              {/* Floating tech badges - burst out from center */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                initial={{ opacity: 0, scale: 0, x: 100, y: 200 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.7,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 15
+                }}
                 className="absolute -top-2 right-8"
               >
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                   className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
                 >
                   AI
@@ -184,14 +224,20 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                initial={{ opacity: 0, scale: 0, x: 50, y: 150 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.8,
+                  type: "spring",
+                  stiffness: 280,
+                  damping: 15
+                }}
                 className="absolute top-12 -right-4"
               >
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
                   className="px-4 py-2 bg-gradient-to-r from-primary/80 to-primary text-secondary font-semibold text-sm rounded-full shadow-lg"
                 >
                   Vibe Coding
@@ -199,14 +245,20 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+                initial={{ opacity: 0, scale: 0, x: 150, y: 100 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.85,
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 15
+                }}
                 className="absolute top-1/4 -left-8"
               >
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Automatizace
@@ -214,14 +266,20 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                initial={{ opacity: 0, scale: 0, x: 120, y: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.9,
+                  type: "spring",
+                  stiffness: 240,
+                  damping: 15
+                }}
                 className="absolute top-[45%] -left-4"
               >
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 2.9, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                  transition={{ duration: 2.9, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Školení
@@ -229,14 +287,20 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.9 }}
+                initial={{ opacity: 0, scale: 0, x: -80, y: 80 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.95,
+                  type: "spring",
+                  stiffness: 250,
+                  damping: 15
+                }}
                 className="absolute top-[55%] -right-6"
               >
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.9 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Mentoring
@@ -244,14 +308,20 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.0 }}
+                initial={{ opacity: 0, scale: 0, x: 100, y: -50 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 1.0,
+                  type: "spring",
+                  stiffness: 230,
+                  damping: 15
+                }}
                 className="absolute bottom-16 -left-6"
               >
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                  transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut", delay: 2.0 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Technologie
@@ -259,25 +329,41 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.1 }}
+                initial={{ opacity: 0, scale: 0, x: -60, y: -100 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 1.05,
+                  type: "spring",
+                  stiffness: 270,
+                  damping: 15
+                }}
                 className="absolute -bottom-2 right-12"
               >
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 2.1 }}
                   className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
                 >
                   Speaker
                 </motion.div>
               </motion.div>
 
-              {/* Small decorative dots */}
-              <div className="absolute top-8 -left-12 w-2 h-2 bg-primary/60 rounded-full" />
-              <div className="absolute bottom-1/3 -right-12 w-3 h-3 bg-primary/40 rounded-full" />
+              {/* Small decorative dots - also burst out */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 1.1, type: "spring", stiffness: 300 }}
+                className="absolute top-8 -left-12 w-2 h-2 bg-primary/60 rounded-full"
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 1.15, type: "spring", stiffness: 300 }}
+                className="absolute bottom-1/3 -right-12 w-3 h-3 bg-primary/40 rounded-full"
+              />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

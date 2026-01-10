@@ -6,30 +6,33 @@ import { useInView, useMotionValue, useSpring } from "framer-motion";
 interface AnimatedCounterProps {
   value: number;
   suffix?: string;
-  duration?: number;
+  delay?: number;
   className?: string;
 }
 
 export default function AnimatedCounter({
   value,
   suffix = "",
-  duration = 2,
+  delay = 0,
   className = "",
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, {
-    damping: 50,
-    stiffness: 100,
+    damping: 60,
+    stiffness: 40,
   });
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     if (isInView) {
-      motionValue.set(value);
+      const timeout = setTimeout(() => {
+        motionValue.set(value);
+      }, delay * 1000);
+      return () => clearTimeout(timeout);
     }
-  }, [isInView, motionValue, value]);
+  }, [isInView, motionValue, value, delay]);
 
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {
