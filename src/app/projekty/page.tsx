@@ -117,6 +117,20 @@ export default function ProjectsPage() {
             </motion.div>
           </AnimatePresence>
 
+          {/* More projects info */}
+          {filteredProjects.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12 text-center"
+            >
+              <p className="text-gray-500 text-sm">
+                Mám za sebou desítky dalších projektů. Postupně připravuji případové studie.
+              </p>
+            </motion.div>
+          )}
+
           {/* Empty state */}
           {filteredProjects.length === 0 && (
             <motion.div

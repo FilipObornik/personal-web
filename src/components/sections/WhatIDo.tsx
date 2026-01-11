@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { whatIDo } from "@/lib/data";
 
 export default function WhatIDo() {
@@ -75,6 +77,23 @@ export default function WhatIDo() {
               );
             })}
         </div>
+
+        {/* Moje cesta link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-8 text-center"
+        >
+          <Link
+            href="/moje-cesta"
+            className="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors group"
+          >
+            <span>Podívejte se na mou profesní cestu</span>
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

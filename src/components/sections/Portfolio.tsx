@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Code2 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { projectItems } from "@/lib/data";
 import WaveSeparator from "@/components/ui/WaveSeparator";
 
@@ -66,17 +67,18 @@ export default function Portfolio() {
                 `}>
                   {/* Image area */}
                   <div className="absolute inset-0 bg-gradient-to-br from-secondary-light/50 to-secondary">
-                    {/* Placeholder pattern */}
-                    <div className="absolute inset-0 opacity-20"
-                      style={{
-                        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-                        backgroundSize: '24px 24px'
-                      }}
-                    />
+                    {(index === 0 && item.featuredImageUrl ? item.featuredImageUrl : item.imageUrl) && (
+                      <Image
+                        src={index === 0 && item.featuredImageUrl ? item.featuredImageUrl : item.imageUrl}
+                        alt={item.title}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    )}
                   </div>
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/95 to-secondary/60 opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
 
                   {/* Content */}
                   <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
@@ -135,6 +137,9 @@ export default function Portfolio() {
             Zobrazit všechny projekty
             <ArrowRight size={18} />
           </Link>
+          <p className="text-white/40 text-sm">
+            ...a další projekty postupně přidávám
+          </p>
         </motion.div>
       </div>
 

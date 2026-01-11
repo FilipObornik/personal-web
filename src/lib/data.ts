@@ -60,6 +60,7 @@ export interface ProjectItem {
   description: string;
   tags: string[];
   imageUrl: string;
+  featuredImageUrl?: string;
   year: string;
   featured?: boolean;
   demoUrl?: string;
@@ -122,6 +123,16 @@ export interface ExperienceItem {
   link?: string;
 }
 
+export interface CareerItem {
+  title: string;
+  company: string;
+  companyUrl?: string;
+  location?: string;
+  dateRange: string;
+  description: string;
+  highlights?: string[];
+}
+
 // ============================================
 // DATA - Edit these to update website content
 // ============================================
@@ -132,9 +143,9 @@ export const siteConfig = {
   tagline: "Pomohu vám využít sílu technologií a AI pro vaše projekty",
   description:
     "Semináře, mentoring, konzultace a implementace technických a AI řešení. Naučte se vibe coding a pracujte efektivněji s umělou inteligencí.",
-  email: "filip@example.com", // [PLACEHOLDER: Update email]
-  linkedin: "https://linkedin.com/in/filipobornik", // [PLACEHOLDER: Update LinkedIn URL]
-  calendarUrl: "https://calendar.google.com/calendar/appointments/...", // [PLACEHOLDER: Update calendar URL]
+  email: "info@filipobornik.cz",
+  linkedin: "https://linkedin.com/in/obornik",
+  calendarUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_9GuxtdMSenskvP4AMBfLJYelAMs5W1wa3vJ_EnwKSMLsxWzxzV5NTweVMhNXj-nU1HPmKFD9?gv=true",
 };
 
 export const navigation = [
@@ -257,42 +268,43 @@ export const projectItems: ProjectItem[] = [
     slug: "takdy",
     title: "Takdy.cz",
     description:
-      "Webová aplikace pro plánování termínu skupinových akcí a událostí.",
-    tags: ["Vibe Coding"],
-    imageUrl: "/images/portfolio/takdy.jpg",
-    year: "2024",
+      "Bezplatná aplikace pro snadné plánování společných setkání. Jako Doodle, ale jednodušší a bez registrace.",
+    tags: ["Vibe Coding", "Next.js", "Supabase"],
+    imageUrl: "/images/portfolio/takdy/takdy_promo.png",
+    featuredImageUrl: "/images/portfolio/takdy/takdy_landing.png",
+    year: "2026",
     featured: true,
     demoUrl: "https://takdy.cz",
   },
-  {
-    slug: "timetracking",
-    title: "AI Time Tracking",
-    description:
-      "Chytrý nástroj pro sledování času s AI funkcemi pro automatickou kategorizaci.",
-    tags: ["Web App", "AI", "Produktivita"],
-    imageUrl: "/images/portfolio/timetracking.jpg",
-    year: "2024",
-    featured: true,
-    demoUrl: "https://timetracking.aisrozumem.cz",
-  },
+  // {
+  //   slug: "timetracking",
+  //   title: "AI Time Tracking",
+  //   description:
+  //     "Chytrý nástroj pro sledování času s AI funkcemi pro automatickou kategorizaci.",
+  //   tags: ["Web App", "AI", "Produktivita"],
+  //   imageUrl: "/images/portfolio/timetracking.jpg",
+  //   year: "2024",
+  //   featured: true,
+  //   demoUrl: "https://timetracking.aisrozumem.cz",
+  // },
   {
     slug: "osobni-web",
     title: "Osobní web",
     description:
       "Tato webová stránka - vytvořena kompletně pomocí vibe codingu s Claude Code.",
     tags: ["Vibe Coding", "Next.js", "TypeScript"],
-    imageUrl: "/images/portfolio/osobni-web.jpg",
-    year: "2025",
+    imageUrl: "/images/portfolio/portfolio/portfolio_landing.png",
+    year: "2026a",
     featured: true,
   },
   {
     slug: "tymbe",
     title: "Tymbe",
     description:
-      "Mobilní aplikace pro flexibilní brigády a správu pracovníků.",
-    tags: ["Mobile App", "React Native", "Startup"],
-    imageUrl: "/images/portfolio/tymbe.jpg",
-    year: "2023",
+      "Mobilní aplikace pro flexibilní brigády. Ukázka mých technických zkušeností ve vedení vývojového týmu a doručení produktu - bez AI.",
+    tags: ["Team Lead", "Flutter", "Mobile App", "Product Delivery"],
+    imageUrl: "/images/portfolio/tymbe/promo_banner.png",
+    year: "2024",
     featured: true,
     demoUrl: "https://tymbe.cz",
   },
@@ -426,7 +438,7 @@ export const workshopFormats: WorkshopFormat[] = [
     icon: Building2,
   },
   {
-    title: "Individuální konzultace",
+    title: "Mentoring",
     description: "1:1 formát pro maximální efektivitu. Řešíme přesně vaše výzvy a potřeby.",
     icon: UserCheck,
   },
@@ -508,5 +520,111 @@ export const externalLinks = {
   aiUniversita: "https://aiuniversita.cz", // [PLACEHOLDER: Update URL]
   youtubeChannel: "https://youtube.com/@placeholder", // [PLACEHOLDER: Update URL]
   academy: "https://akademie.aisrozumem.cz",
-  calendarUrl: "https://calendar.google.com/calendar/appointments/...", // [PLACEHOLDER: Update URL]
+  calendarUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_9GuxtdMSenskvP4AMBfLJYelAMs5W1wa3vJ_EnwKSMLsxWzxzV5NTweVMhNXj-nU1HPmKFD9?gv=true",
 };
+
+// ============================================
+// CAREER HISTORY DATA
+// ============================================
+
+export const careerHistory: CareerItem[] = [
+  {
+    title: "AI & Vibe Coding konzultant",
+    company: "filipobornik.cz",
+    companyUrl: "https://filipobornik.cz",
+    dateRange: "2025 - současnost",
+    description: "Semináře, workshopy a mentoring v oblasti AI a vibe codingu. Pomáhám firmám i jednotlivcům efektivně využívat AI nástroje a tvořit software pomocí přirozeného jazyka.",
+    highlights: ["Školení", "Mentoring", "AI implementace"],
+  },
+  {
+    title: "Tvůrce edukačního obsahu o AI",
+    company: "AI s rozumem",
+    companyUrl: "https://aisrozumem.cz",
+    dateRange: "2025 - současnost",
+    description: "YouTube, Discord komunita a online kurzy. Průvodce světem umělé inteligence - v klidu a hlavně s rozumem.",
+    highlights: ["YouTube", "Discord", "Online kurzy"],
+  },
+  {
+    title: "Team leader, Flutter developer",
+    company: "Tymbe, a.s.",
+    companyUrl: "https://tymbe.cz",
+    dateRange: "2023 - současnost",
+    description: "Vedení Flutter týmu při vývoji mobilní aplikace Tymbe. Zodpovědnost za produktové otázky a tvorbu návrhu softwarového řešení.",
+    highlights: ["Flutter", "Team lead", "Product"],
+  },
+  {
+    title: "Co-founder, CTO",
+    company: "nevr.app",
+    companyUrl: "https://nevr.app/",
+    dateRange: "2023 - současnost",
+    description: "Creative studio zaměřené na vývoj mobilních a webových aplikací.",
+    highlights: ["Startup", "Mobile apps", "Web development"],
+  },
+  {
+    title: "Konzultant",
+    company: "Na volné noze",
+    dateRange: "2023 - současnost",
+    description: "Konzultace v oblastech AI integrace, Flutter, Android, team leading, produkt a SW analýza.",
+    highlights: ["AI integrace", "Flutter", "Android", "Team leading", "SW analýza"],
+  },
+  {
+    title: "Konzultant (dříve Android vývojář, team lead, SW analytik)",
+    company: "DAMI development s.r.o.",
+    companyUrl: "https://damidev.cz",
+    location: "Hradec Králové",
+    dateRange: "2018 - 2025",
+    description: "Vývoj nativních mobilních aplikací pro Android, práce jako grafik a analytik. Široký rozhled nad celkovým procesem vývoje aplikací.",
+    highlights: ["Android", "Kotlin", "Software analýza", "Team lead"],
+  },
+  {
+    title: "Instructor, vyučující",
+    company: "Univerzita Hradec Králové",
+    companyUrl: "https://uhk.cz",
+    location: "Hradec Králové",
+    dateRange: "2023 - 2024",
+    description: "Tvorba materiálů a výuka předmětu Úvod do mobilních technologií na FIM UHK. Výuka zaměřená na Jetpack Compose, Kotlin, MVVM a MVI architekturu.",
+    highlights: ["Android", "Výuka", "Jetpack Compose"],
+  },
+  {
+    title: "Co-founder, backend developer",
+    company: "Around Us - šipkovaná 21. století",
+    dateRange: "2020 - 2022",
+    description: "Šipkovaná 21. století - dobrodružná hra v přírodě. Objev zajímavá místa v ČR prostřednictvím úkolů prověřujících intelekt, kondici i odvahu.",
+    companyUrl: "https://aroundus.filipobornik.cz/",
+    highlights: ["Startup", "Gamifikace", "Full-stack"],
+  },
+  {
+    title: "Stážista",
+    company: "IHMC",
+    companyUrl: "https://ihmc.us",
+    location: "Florida, USA",
+    dateRange: "2021",
+    description: "Stáž v prestižním výzkumném institutu. Práce s Docker, Hadoop a NodeJS.",
+    highlights: ["Docker", "Hadoop", "NodeJS"],
+  },
+  {
+    title: "Android vývojář",
+    company: "SABO Mobile IT GmbH",
+    companyUrl: "https://saboit.de",
+    location: "Praha",
+    dateRange: "2019",
+    description: "Vývoj Android aplikací pro německou společnost specializující se na mobilní IT řešení.",
+    highlights: ["Android", "Kotlin"],
+  },
+];
+
+export const education: CareerItem[] = [
+  {
+    title: "Bakalářské studium - Aplikovaná informatika",
+    company: "Univerzita Hradec Králové",
+    companyUrl: "https://uhk.cz",
+    dateRange: "2019 - 2023",
+    description: "Bakalářská práce: Bezpečnost Android aplikací z pohledu vývojáře.",
+  },
+  {
+    title: "Střední škola - Programování a hardware",
+    company: "SPŠE Pardubice",
+    dateRange: "2015 - 2019",
+    description: "Střední průmyslová škola elektrotechnická s výukou programování.",
+  },
+];

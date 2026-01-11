@@ -63,7 +63,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/70 mb-8 max-w-lg"
             >
-              Technologie a AI jsou pouze nástroje k dosažení výsledku – díky mým zkušenostem s vámi budu od začátku do konce.
+              Technologie a AI jsou pouze nástroje k dosažení výsledku – díky mým zkušenostem a přesahu napříč obory s Vámi při jeho řešení budu od začátku do konce.
             </motion.p>
 
             {/* CTAs */}
