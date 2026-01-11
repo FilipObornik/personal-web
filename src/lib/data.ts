@@ -54,6 +54,17 @@ export interface PortfolioItem {
   demoUrl?: string;
 }
 
+export interface ProjectItem {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  imageUrl: string;
+  year: string;
+  featured?: boolean;
+  demoUrl?: string;
+}
+
 export interface Testimonial {
   id: string;
   name: string;
@@ -236,6 +247,67 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl: "/images/portfolio/placeholder.jpg",
   },
 ];
+
+// ============================================
+// PROJECTS DATA
+// ============================================
+
+export const projectItems: ProjectItem[] = [
+  {
+    slug: "takdy",
+    title: "Takdy.cz",
+    description:
+      "Webová aplikace pro plánování termínu skupinových akcí a událostí.",
+    tags: ["Vibe Coding"],
+    imageUrl: "/images/portfolio/takdy.jpg",
+    year: "2024",
+    featured: true,
+    demoUrl: "https://takdy.cz",
+  },
+  {
+    slug: "timetracking",
+    title: "AI Time Tracking",
+    description:
+      "Chytrý nástroj pro sledování času s AI funkcemi pro automatickou kategorizaci.",
+    tags: ["Web App", "AI", "Produktivita"],
+    imageUrl: "/images/portfolio/timetracking.jpg",
+    year: "2024",
+    featured: true,
+    demoUrl: "https://timetracking.aisrozumem.cz",
+  },
+  {
+    slug: "osobni-web",
+    title: "Osobní web",
+    description:
+      "Tato webová stránka - vytvořena kompletně pomocí vibe codingu s Claude Code.",
+    tags: ["Vibe Coding", "Next.js", "TypeScript"],
+    imageUrl: "/images/portfolio/osobni-web.jpg",
+    year: "2025",
+    featured: true,
+  },
+  {
+    slug: "tymbe",
+    title: "Tymbe",
+    description:
+      "Mobilní aplikace pro flexibilní brigády a správu pracovníků.",
+    tags: ["Mobile App", "React Native", "Startup"],
+    imageUrl: "/images/portfolio/tymbe.jpg",
+    year: "2023",
+    featured: true,
+    demoUrl: "https://tymbe.cz",
+  },
+];
+
+// Helper functions for projects
+export function getAllProjectTags(): string[] {
+  const tags = new Set<string>();
+  projectItems.forEach((p) => p.tags.forEach((t) => tags.add(t)));
+  return Array.from(tags).sort();
+}
+
+export function getProjectBySlug(slug: string): ProjectItem | undefined {
+  return projectItems.find((p) => p.slug === slug);
+}
 
 export const testimonials: Testimonial[] = [
   {
