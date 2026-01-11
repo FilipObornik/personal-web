@@ -201,7 +201,7 @@ export const services: Service[] = [
     slug: "partnerske-projekty",
     title: "Software projekty",
     shortDescription:
-      "Pro větší projekty vám dokáži poskytnout technické konzultace a v případě potřeby implementace Vás propojím s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru. Ať už s AI nebo bez ní.",
+      "Menší projekty realizujeme společně a pro větší projekty vám dokáži poskytnout technické konzultace a v případě potřeby implementace Vás propojím s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru. Ať už s AI nebo bez ní.",
     icon: Handshake,
   },
 ];
