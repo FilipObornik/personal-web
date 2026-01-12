@@ -8,7 +8,7 @@ import WaveSeparator from "@/components/ui/WaveSeparator";
 
 export default function Services() {
   return (
-    <section id="sluzby" className="section-padding pt-8 md:pt-12 relative overflow-hidden">
+    <section id="sluzby" className="section-padding relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 

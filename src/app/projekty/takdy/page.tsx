@@ -134,7 +134,7 @@ export default function TakdyProjectPage() {
               </a>
               <span className="inline-flex items-center gap-2 text-white/50 text-sm">
                 <Calendar size={16} />
-                2024
+                2026
               </span>
             </motion.div>
           </div>
@@ -144,13 +144,13 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* Screenshot Section */}
-      <section className="bg-white pt-12 pb-8 md:pt-16 md:pb-12">
+      <section className="bg-white pt-12 pb-12 md:pt-16 md:pb-16 overflow-visible">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-2xl md:rounded-3xl shadow-2xl border border-gray-200"
+            className="relative rounded-2xl md:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden"
           >
             <Image
               src="/images/portfolio/takdy/takdy_promo.png"
@@ -164,7 +164,7 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* Problem Section */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding pb-32 md:pb-40 bg-white relative">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
@@ -192,7 +192,7 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* Solution Section */}
-      <section className="section-padding bg-section-alt relative">
+      <section className="min-h-[500px] md:min-h-[600px] pt-16 md:pt-0 pb-32 md:pb-40 bg-section-alt relative flex flex-col justify-center">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
@@ -244,7 +244,7 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* Features Section */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding pt-12 md:pt-20 pb-56 md:pb-80 bg-white relative">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -280,7 +280,7 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* Vibe Coding Section */}
-      <section className="section-padding bg-secondary relative">
+      <section className="min-h-[500px] md:min-h-[650px] pt-16 md:pt-12 pb-32 md:pb-40 bg-secondary relative flex flex-col justify-center">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
@@ -327,7 +327,7 @@ export default function TakdyProjectPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding pb-40 md:pb-52 bg-white relative">
         <div className="container-narrow mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div

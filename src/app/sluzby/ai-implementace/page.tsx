@@ -268,7 +268,7 @@ export default function AIImplementacePage() {
         </section>
 
         {/* Implementation Types Section */}
-        <section className="section-padding pb-32 md:pb-40 bg-secondary relative overflow-hidden">
+        <section className="pt-32 md:pt-48 pb-40 md:pb-52 px-4 md:px-8 bg-secondary relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0">
             <svg
               viewBox="0 0 1440 120"
@@ -644,7 +644,7 @@ export default function AIImplementacePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="pt-24 md:pt-36 pb-32 md:pb-40 bg-secondary relative overflow-hidden">
+        <section className="pt-32 md:pt-48 pb-40 md:pb-52 px-4 md:px-8 bg-secondary relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0">
             <svg
               viewBox="0 0 1440 120"

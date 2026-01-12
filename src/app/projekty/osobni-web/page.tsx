@@ -8,7 +8,6 @@ import {
   Calendar,
   Check,
   Zap,
-  Code2,
   Sparkles,
   Clock,
   Wallet,
@@ -79,7 +78,7 @@ export default function OsobniWebProjectPage() {
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container-narrow mx-auto px-4 md:px-8 relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 relative">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -154,8 +153,8 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Screenshot Section */}
-      <section className="bg-white pt-12 pb-16 md:pt-16 md:pb-20">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="bg-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -174,14 +173,13 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Challenge Section */}
-      <section className="section-padding bg-white relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
             >
               <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
                 <Zap size={16} />
@@ -202,14 +200,13 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Solution Section */}
-      <section className="section-padding bg-section-alt relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+      <section className="pt-12 md:pt-16 pb-40 md:pb-48 bg-section-alt relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
             >
               <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
                 <Check size={16} />
@@ -250,8 +247,8 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="section-padding bg-white relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -286,14 +283,13 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Result Section */}
-      <section className="section-padding bg-secondary relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+      <section className="pt-12 md:pt-16 pb-40 md:pb-48 bg-secondary relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
             >
               <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
                 <Sparkles size={16} />
@@ -309,7 +305,7 @@ export default function OsobniWebProjectPage() {
             </motion.div>
 
             {/* What the site includes */}
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 mt-8">
               {[
                 "Úvodní sekce",
                 "Přehled služeb",
@@ -337,14 +333,13 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-white relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
             >
               <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
                 <Lightbulb size={16} />
@@ -353,7 +348,7 @@ export default function OsobniWebProjectPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6">
                 Chcete podobný web?
               </h2>
-              <p className="text-gray-600 text-lg mb-8 max-w-xl mx-auto">
+              <p className="text-gray-600 text-lg mb-8">
                 Pomohu vám vytvořit podobný web nebo vás naučím, jak na to sami.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -372,7 +367,7 @@ export default function OsobniWebProjectPage() {
               </div>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 mt-12 text-left">
               {[
                 {
                   title: "Osobní portfolio",
@@ -429,20 +424,16 @@ export default function OsobniWebProjectPage() {
       </section>
 
       {/* Other Projects */}
-      <section className="section-padding bg-section-alt">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="py-16 md:py-20 bg-section-alt">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
           >
-            <h2 className="text-2xl font-bold text-secondary">
+            <h2 className="text-2xl font-bold text-secondary mb-6">
               Další projekty
             </h2>
-          </motion.div>
-
-          <div className="flex justify-center">
             <Link
               href="/projekty"
               className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-medium"
@@ -450,7 +441,7 @@ export default function OsobniWebProjectPage() {
               Zobrazit všechny projekty
               <ExternalLink size={16} />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 

@@ -67,7 +67,7 @@ export default function TymbeProjectPage() {
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container-narrow mx-auto px-4 md:px-8 relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 relative">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -147,8 +147,8 @@ export default function TymbeProjectPage() {
       </section>
 
       {/* About Section with Screenshot */}
-      <section className="section-padding bg-white relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -195,8 +195,8 @@ export default function TymbeProjectPage() {
       </section>
 
       {/* Role Section */}
-      <section className="section-padding bg-section-alt relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-section-alt relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -233,14 +233,13 @@ export default function TymbeProjectPage() {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="section-padding bg-secondary relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-secondary relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 Tech Stack
@@ -251,7 +250,7 @@ export default function TymbeProjectPage() {
               </p>
             </motion.div>
 
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 mt-8">
               {techStack.map((tech, index) => (
                 <motion.div
                   key={tech.name}
@@ -277,52 +276,49 @@ export default function TymbeProjectPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-white relative">
-        <div className="container-narrow mx-auto px-4 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
-              <Briefcase size={16} />
-              Spolupráce
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6">
-              Potřebujete podobný projekt?
-            </h2>
-            <p className="text-gray-600 mb-8 max-w-xl mx-auto">
-              Pomohu vám s technickými konzultacemi, návrhem architektury nebo
-              vás propojím s partnery pro komplexní softwarová řešení.
-            </p>
-            <Link
-              href="/sluzby/partnerske-projekty"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-secondary font-semibold px-8 py-4 rounded-full transition-all"
+      <section className="py-20 md:py-28 pb-28 md:pb-36 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
             >
-              Software projekty
-              <ExternalLink size={18} />
-            </Link>
-          </motion.div>
+              <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider mb-4">
+                <Briefcase size={16} />
+                Spolupráce
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6">
+                Potřebujete podobný projekt?
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Pomohu vám s technickými konzultacemi, návrhem architektury nebo
+                vás propojím s partnery pro komplexní softwarová řešení.
+              </p>
+              <Link
+                href="/sluzby/partnerske-projekty"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-secondary font-semibold px-8 py-4 rounded-full transition-all"
+              >
+                Software projekty
+                <ExternalLink size={18} />
+              </Link>
+            </motion.div>
+          </div>
         </div>
         <WaveSeparator fillColor="#f8fafc" />
       </section>
 
       {/* Other Projects */}
-      <section className="section-padding bg-section-alt">
-        <div className="container-narrow mx-auto px-4 md:px-8">
+      <section className="py-16 md:py-20 bg-section-alt">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
           >
-            <h2 className="text-2xl font-bold text-secondary">
+            <h2 className="text-2xl font-bold text-secondary mb-6">
               Další projekty
             </h2>
-          </motion.div>
-
-          <div className="flex justify-center">
             <Link
               href="/projekty"
               className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-medium"
@@ -330,7 +326,7 @@ export default function TymbeProjectPage() {
               Zobrazit všechny projekty
               <ExternalLink size={16} />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 

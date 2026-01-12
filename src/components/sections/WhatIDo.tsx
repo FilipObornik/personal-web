@@ -7,7 +7,7 @@ import { whatIDo } from "@/lib/data";
 
 export default function WhatIDo() {
   return (
-    <section id="co-delam" className="section-padding pb-8 md:pb-12">
+    <section id="co-delam" className="section-padding">
       <div className="container-narrow mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">

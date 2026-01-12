@@ -9,7 +9,7 @@ import WaveSeparator from "@/components/ui/WaveSeparator";
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="section-padding bg-secondary relative overflow-hidden">
+    <section id="portfolio" className="pt-16 md:pt-20 pb-24 md:pb-32 px-4 md:px-8 bg-secondary relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
