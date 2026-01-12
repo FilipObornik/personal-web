@@ -17,15 +17,37 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log("Form submitted:", formData);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: "", email: "", service: "", message: "" });
+    setError(null);
+
+    try {
+      const response = await fetch(
+        "https://n8n.filipobornik.com/webhook/402ede76-f446-4f9f-b7c3-00da6becf432",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", service: "", message: "" });
+      } else {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setError(
+        "Nepodařilo se odeslat zprávu. Zkuste to prosím později nebo mě kontaktujte přímo e-mailem."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const tabs = [
@@ -159,6 +181,11 @@ export default function Contact() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
+                      {error && (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                          {error}
+                        </div>
+                      )}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label htmlFor="name" className="block text-sm font-semibold text-secondary mb-2">
