@@ -25,6 +25,12 @@ export default function Contact() {
     setError(null);
 
     try {
+      // Get readable service name from slug
+      const selectedService = services.find((s) => s.slug === formData.service);
+      const subject =
+        selectedService?.title ||
+        (formData.service === "other" ? "Jiné" : formData.service);
+
       const response = await fetch(
         "https://n8n.filipobornik.com/webhook/402ede76-f446-4f9f-b7c3-00da6becf432",
         {
@@ -33,7 +39,7 @@ export default function Contact() {
           body: JSON.stringify({
             name: formData.name,
             email: formData.email,
-            subject: formData.service,
+            subject,
             message: formData.message,
           }),
         }
