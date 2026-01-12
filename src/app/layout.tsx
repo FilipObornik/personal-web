@@ -14,7 +14,8 @@ const suse = SUSE({
 });
 
 export const metadata: Metadata = {
-  title: "Filip Oborník | AI & Vibe Coding Expert",
+  metadataBase: new URL("https://filipobornik.cz"),
+  title: "Filip Oborník | AI, Vibe Coding a technologie",
   description:
     "Pomohu vám s AI a vibe codingem. Semináře, mentoring, konzultace a implementace AI řešení.",
   keywords: [
@@ -27,11 +28,26 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Filip Oborník" }],
   openGraph: {
-    title: "Filip Oborník | AI & Vibe Coding Expert",
+    title: "Filip Oborník | AI, Vibe Coding a technologie",
     description:
       "Pomohu vám s AI a vibe codingem. Semináře, mentoring, konzultace a implementace AI řešení.",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: "/images/og_image.png",
+        width: 1200,
+        height: 630,
+        alt: "Filip Oborník - AI, Vibe Coding a technologie",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Filip Oborník | AI, Vibe Coding a technologie",
+    description:
+      "Pomohu vám s AI a vibe codingem. Semináře, mentoring, konzultace a implementace AI řešení.",
+    images: ["/images/og_image.png"],
   },
 };
 

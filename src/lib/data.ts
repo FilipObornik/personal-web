@@ -139,7 +139,7 @@ export interface CareerItem {
 
 export const siteConfig = {
   name: "Filip Oborník",
-  title: "AI & Vibe Coding Expert",
+  title: "AI, Vibe Coding a technologie",
   tagline: "Pomohu vám využít sílu technologií a AI pro vaše projekty",
   description:
     "Semináře, mentoring, konzultace a implementace technických a AI řešení. Naučte se vibe coding a pracujte efektivněji s umělou inteligencí.",
