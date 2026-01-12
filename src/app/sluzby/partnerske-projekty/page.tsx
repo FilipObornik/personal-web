@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   Handshake,
   ArrowRight,
-  Quote,
   CheckCircle2,
   Code2,
   Cpu,
@@ -283,7 +282,7 @@ export default function PartnerskeProjektyPage() {
               <path d="M0 0H1440V30C1380 30 1320 30 1200 35C1080 40 960 50 840 55C720 60 600 60 480 50C360 40 240 20 120 10C60 5 0 0 0 0Z" fill="white" />
             </svg>
           </div>
-          <div className="container-narrow mx-auto">
+          <div className="container-narrow mx-auto px-6 md:px-12 py-16 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
                 <motion.span
@@ -351,27 +350,36 @@ export default function PartnerskeProjektyPage() {
                 className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
               >
                 <div className="text-center mb-6">
-                  <Quote className="text-primary mx-auto mb-4" size={32} />
-                  <p className="text-white/80 text-lg italic leading-relaxed mb-4">
-                    &ldquo;Díky Filipově koordinaci jsme získali kvalitní tým
-                    vývojářů a jasný plán projektu. Komunikace byla přehledná
-                    a výsledek předčil očekávání.&rdquo;
+                  <Target className="text-primary mx-auto mb-4" size={32} />
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    Ověřené zkušenosti
+                  </h3>
+                  <p className="text-white/80 text-base leading-relaxed mb-4">
+                    Jako team leader ve společnosti Tymbe vedu vývojový tým
+                    a zodpovídám za doručení mobilní aplikace s tisíci uživateli.
+                    Vím, co obnáší vést projekt od návrhu po produkci.
                   </p>
-                  <p className="text-primary font-semibold">— Spokojený klient</p>
+                  <Link
+                    href="/projekty/tymbe"
+                    className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+                  >
+                    Zobrazit projekt Tymbe
+                    <ArrowRight size={16} />
+                  </Link>
                 </div>
                 <div className="border-t border-white/10 pt-6 mt-6">
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
                       <div className="text-2xl font-bold text-primary mb-1">
-                        10+ let
+                        8+ let
                       </div>
                       <div className="text-white/60 text-sm">zkušeností v IT</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-primary mb-1">
-                        Ověření
+                        Team Lead
                       </div>
-                      <div className="text-white/60 text-sm">partneři</div>
+                      <div className="text-white/60 text-sm">v Tymbe</div>
                     </div>
                   </div>
                 </div>
@@ -562,7 +570,7 @@ export default function PartnerskeProjektyPage() {
               <path d="M0 0H1440V30C1380 30 1320 30 1200 35C1080 40 960 50 840 55C720 60 600 60 480 50C360 40 240 20 120 10C60 5 0 0 0 0Z" fill="white" />
             </svg>
           </div>
-          <div className="container-narrow mx-auto text-center">
+          <div className="container-narrow mx-auto text-center px-6 md:px-12 py-16 md:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

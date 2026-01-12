@@ -45,7 +45,7 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonials - Staggered layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
@@ -55,7 +55,7 @@ export default function Testimonials() {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className={`group ${index === 1 ? 'lg:mt-8' : ''}`}
             >
-              <div className="relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/20 transition-all duration-500 h-full">
+              <div className="relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/20 transition-all duration-500">
                 {/* Large quote mark */}
                 <div className="absolute -top-4 -left-2 text-8xl font-serif text-primary/10 select-none leading-none">
                   &ldquo;

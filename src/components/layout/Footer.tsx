@@ -11,7 +11,7 @@ export default function Footer() {
             © {currentYear} {siteConfig.name}
           </p>
           <p className="text-gray-500 text-sm mt-1">
-            IČO: 12345678
+            IČO: 07306300
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   GraduationCap,
@@ -18,10 +18,6 @@ import {
   ThumbsUp,
   RefreshCcw,
   UserCheck,
-  Send,
-  Loader2,
-  CheckCircle,
-  AlertCircle,
 } from "lucide-react";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
@@ -38,233 +34,6 @@ import {
   workshopTestimonials,
   externalLinks,
 } from "@/lib/data";
-
-const WEBHOOK_URL = "https://n8n.filipobornik.com/webhook/402ede76-f446-4f9f-b7c3-00da6becf432";
-
-function WorkshopContactForm() {
-  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-    gdpr: false,
-    honeypot: "",
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Spam protection (Honeypot)
-    if (formData.honeypot) {
-      console.warn("Spam detected");
-      return;
-    }
-
-    setFormState("loading");
-
-    try {
-      const response = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          gdpr: formData.gdpr ? "on" : "off",
-          source: "webinare-a-workshopy",
-        }),
-      });
-
-      if (response.ok) {
-        setFormState("success");
-      } else {
-        throw new Error(`Server responded with status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Submission error:", error);
-      setFormState("error");
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  return (
-    <section id="kontakt" className="pt-16 md:pt-24 pb-32 md:pb-40 bg-secondary relative overflow-hidden">
-      <div className="container-narrow mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
-        >
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Máte zájem o školení nebo workshop<span className="text-primary">?</span>
-            </h2>
-            <p className="text-white/70 text-lg">
-              Ať už hledáte školení pro sebe nebo pro celý tým, rád s Vámi
-              proberu možnosti. Vyplňte formulář a ozvu se Vám.
-            </p>
-          </div>
-
-          {formState === "success" ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20"
-            >
-              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="text-white" size={32} />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Děkuji za Váš zájem!</h3>
-              <p className="text-white/70 mb-6">
-                Ozvu se Vám co nejdříve s možnostmi spolupráce.
-              </p>
-              <Link
-                href="/sluzby/mentoring"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-semibold transition-colors border border-white/20"
-              >
-                Nebo zkusit mentoring
-                <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Honeypot field */}
-              <div aria-hidden="true" className="absolute left-[-9999px]">
-                <label htmlFor="hp-field">Nevyplňovat:</label>
-                <input
-                  type="text"
-                  name="honeypot"
-                  id="hp-field"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={formData.honeypot}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="name" className="block text-white/80 text-sm font-medium mb-2">
-                    Jméno *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    placeholder="Vaše jméno"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-white/80 text-sm font-medium mb-2">
-                    E-mail *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="vas@email.cz"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-white/80 text-sm font-medium mb-2">
-                  Jaký typ workshopu nebo školení hledáte? *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  placeholder="Popište prosím, co byste potřebovali - téma, počet účastníků, preference formátu..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
-                />
-              </div>
-
-              <div className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  id="gdpr"
-                  name="gdpr"
-                  required
-                  checked={formData.gdpr}
-                  onChange={handleChange}
-                  className="mt-1 w-5 h-5 rounded border-white/20 bg-white/10 text-primary focus:ring-primary focus:ring-offset-0"
-                />
-                <label htmlFor="gdpr" className="text-white/60 text-sm">
-                  Souhlasím se zpracováním osobních údajů za účelem odpovědi na můj dotaz.
-                </label>
-              </div>
-
-              {formState === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-3 bg-red-500/20 border border-red-500/30 rounded-xl p-4"
-                >
-                  <AlertCircle className="text-red-400 flex-shrink-0" size={20} />
-                  <p className="text-red-200 text-sm">
-                    Něco se pokazilo. Zkuste to prosím znovu nebo mě kontaktujte přímo na e-mail.
-                  </p>
-                </motion.div>
-              )}
-
-              <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-                <button
-                  type="submit"
-                  disabled={formState === "loading"}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark disabled:opacity-70 disabled:cursor-not-allowed text-white px-8 py-4 rounded-full font-semibold transition-colors"
-                >
-                  {formState === "loading" ? (
-                    <>
-                      <Loader2 className="animate-spin" size={18} />
-                      Odesílám...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      Odeslat poptávku
-                    </>
-                  )}
-                </button>
-                <Link
-                  href="/sluzby/mentoring"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-colors border border-white/20"
-                >
-                  Nebo zkusit mentoring
-                </Link>
-              </div>
-            </form>
-          )}
-        </motion.div>
-      </div>
-      <WaveSeparator fillColor="#F8FAFC" variant={4} />
-    </section>
-  );
-}
 
 export default function SeminarePage() {
   // Scroll to top instantly on page load to prevent animations triggering during smooth scroll
@@ -367,8 +136,8 @@ export default function SeminarePage() {
         </section>
 
         {/* Experience Section */}
-        <section className="section-padding pb-32 md:pb-40 bg-secondary relative overflow-hidden">
-          <div className="container-narrow mx-auto">
+        <section className="min-h-[600px] md:min-h-[700px] bg-secondary relative overflow-hidden flex items-center">
+          <div className="container-narrow mx-auto py-20 md:py-24 -translate-y-10 md:-translate-y-14">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left - Text */}
               <div>
@@ -1032,11 +801,45 @@ export default function SeminarePage() {
               ))}
             </div>
           </div>
-          <WaveSeparator fillColor="#05121f" variant={2} />
+          <WaveSeparator fillColor="#05121f" variant={4} />
         </section>
 
-        {/* CTA Section with Form */}
-        <WorkshopContactForm />
+        {/* CTA Section */}
+        <section className="min-h-[420px] md:min-h-[480px] bg-secondary relative overflow-hidden flex items-center">
+          {/* Offset wrapper to account for wave overlay at bottom */}
+          <div className="container-narrow mx-auto text-center py-20 md:py-24 -translate-y-10 md:-translate-y-14">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-2xl mx-auto"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Máte zájem o školení nebo workshop<span className="text-primary">?</span>
+              </h2>
+              <p className="text-white/70 text-lg mb-8">
+                Ať už hledáte školení pro sebe nebo pro celý tým, rád s Vámi
+                proberu možnosti. Napište mi a domluvíme se.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/#kontakt"
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-colors"
+                >
+                  Zadat poptávku
+                  <ArrowRight size={18} />
+                </Link>
+                <Link
+                  href="/sluzby/mentoring"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-colors border border-white/20"
+                >
+                  Nebo dlouhodobý mentoring
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+          <WaveSeparator fillColor="#F8FAFC" variant={4} />
+        </section>
 
         {/* Other Services */}
         <OtherServices currentSlug="webinare-a-workshopy" />

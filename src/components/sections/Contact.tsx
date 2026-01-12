@@ -126,7 +126,7 @@ export default function Contact() {
                   src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_9GuxtdMSenskvP4AMBfLJYelAMs5W1wa3vJ_EnwKSMLsxWzxzV5NTweVMhNXj-nU1HPmKFD9?gv=true"
                   style={{ border: 0 }}
                   width="100%"
-                  height="600"
+                  className="h-[800px] md:h-[600px]"
                   title="Rezervace termínu"
                 />
               </div>

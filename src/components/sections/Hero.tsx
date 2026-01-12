@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 export default function Hero() {
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <section
       id="hero"
@@ -123,24 +125,24 @@ export default function Hero() {
               {/* Gradient glow behind photo - pulses on reveal */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1.1 }}
-                transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                animate={imageLoaded ? { opacity: 1, scale: 1.1 } : { opacity: 0, scale: 0.5 }}
+                transition={{ duration: 1, ease: "easeOut" }}
                 className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent blur-3xl"
               />
 
               {/* Tear effect - expanding rings */}
               <motion.div
                 initial={{ scale: 0, opacity: 1 }}
-                animate={{ scale: 2.5, opacity: 0 }}
-                transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                animate={imageLoaded ? { scale: 2.5, opacity: 0 } : { scale: 0, opacity: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
               >
                 <div className="w-32 h-32 rounded-full border-4 border-primary/60" />
               </motion.div>
               <motion.div
                 initial={{ scale: 0, opacity: 1 }}
-                animate={{ scale: 2, opacity: 0 }}
-                transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}
+                animate={imageLoaded ? { scale: 2, opacity: 0 } : { scale: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
               >
                 <div className="w-32 h-32 rounded-full border-2 border-white/40" />
@@ -149,10 +151,9 @@ export default function Hero() {
               {/* Organic blob photo container - tears open */}
               <motion.div
                 initial={{ scale: 0, rotate: -10 }}
-                animate={{ scale: 1, rotate: 0 }}
+                animate={imageLoaded ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -10 }}
                 transition={{
                   duration: 0.8,
-                  delay: 0.2,
                   type: "spring",
                   stiffness: 200,
                   damping: 20
@@ -168,12 +169,13 @@ export default function Hero() {
                   fill
                   className="object-cover object-top"
                   priority
+                  onLoad={() => setImageLoaded(true)}
                 />
                 {/* Flash effect on reveal */}
                 <motion.div
                   initial={{ opacity: 1 }}
-                  animate={{ opacity: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  animate={imageLoaded ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
                   className="absolute inset-0 bg-secondary"
                 />
                 {/* Subtle inner shadow overlay */}
@@ -192,10 +194,10 @@ export default function Hero() {
               {/* Floating tech badges - burst out from center */}
               <motion.div
                 initial={{ opacity: 0, scale: 0, x: 100, y: 200 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 100, y: 200 }}
                 transition={{
                   duration: 0.6,
-                  delay: 0.7,
+                  delay: 0.5,
                   type: "spring",
                   stiffness: 300,
                   damping: 15
@@ -203,8 +205,8 @@ export default function Hero() {
                 className="absolute -top-2 right-8"
               >
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                  animate={imageLoaded ? { y: [0, -8, 0] } : {}}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
                   className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
                 >
                   Umělá inteligence
@@ -213,10 +215,10 @@ export default function Hero() {
 
               <motion.div
                 initial={{ opacity: 0, scale: 0, x: 150, y: 100 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 150, y: 100 }}
                 transition={{
                   duration: 0.6,
-                  delay: 0.85,
+                  delay: 0.65,
                   type: "spring",
                   stiffness: 260,
                   damping: 15
@@ -224,8 +226,8 @@ export default function Hero() {
                 className="absolute top-1/4 -left-8"
               >
                 <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
+                  animate={imageLoaded ? { y: [0, 6, 0] } : {}}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Technologické konzultace
@@ -234,10 +236,10 @@ export default function Hero() {
 
               <motion.div
                 initial={{ opacity: 0, scale: 0, x: 120, y: 50 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 120, y: 50 }}
                 transition={{
                   duration: 0.6,
-                  delay: 0.9,
+                  delay: 0.7,
                   type: "spring",
                   stiffness: 240,
                   damping: 15
@@ -245,8 +247,8 @@ export default function Hero() {
                 className="absolute top-[45%] -left-4"
               >
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 2.9, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+                  animate={imageLoaded ? { y: [0, -5, 0] } : {}}
+                  transition={{ duration: 2.9, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Školení
@@ -255,10 +257,10 @@ export default function Hero() {
 
               <motion.div
                 initial={{ opacity: 0, scale: 0, x: -80, y: 80 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: -80, y: 80 }}
                 transition={{
                   duration: 0.6,
-                  delay: 0.95,
+                  delay: 0.75,
                   type: "spring",
                   stiffness: 250,
                   damping: 15
@@ -266,8 +268,8 @@ export default function Hero() {
                 className="absolute top-[55%] -right-6"
               >
                 <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.9 }}
+                  animate={imageLoaded ? { y: [0, -6, 0] } : {}}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
                 >
                   Mentoring

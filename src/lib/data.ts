@@ -324,26 +324,27 @@ export function getProjectBySlug(slug: string): ProjectItem | undefined {
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "[Placeholder] Jan Novák",
-    role: "Developer",
-    company: "Tech Company",
+    name: "Účastník kurzu",
+    role: "Online kurz",
+    company: "Zorientujte se ve světě umělé inteligence",
     content:
-      "Filipův mentoring mi otevřel oči. Naučil jsem se pracovat s AI nástroji způsobem, který mi šetří hodiny práce denně.",
+      "Jsem rád, že kurz zahrnul velkou část oboru AI, abych si dokázal představit její využití v praxi.",
   },
   {
     id: "2",
-    name: "[Placeholder] Marie Svobodová",
-    role: "Product Manager",
-    company: "Startup XYZ",
+    name: "YouTube divák",
+    role: "YouTube video",
+    company: "AI a robotizace",
     content:
-      "Seminář o vibe codingu byl skvělý. Praktické ukázky a hands-on přístup - přesně to, co jsme potřebovali.",
+      "Super vysvětluješ, hlavně v pohodě, seš svůj a to je dnes asi jedinečný. Každý má titulky ve smyslu heeeej to je šílenýýý a nevím co ještě, je to přepálený. Tvá videa, projev, všechno je na jedničku s hvězdičkou, samozřejmě i témata. Hodně štěstí a doufám, že budeš mít více videí. Klobouk dolů a díky.",
   },
   {
     id: "3",
-    name: "[Placeholder] Petr Dvořák",
-    role: "Freelancer",
+    name: "Vývojář",
+    role: "Online školení",
+    company: "AI v profesionálním vývoji",
     content:
-      "Díky konzultacím s Filipem jsem dokázal implementovat AI do svého workflow. Produktivita šla nahoru.",
+      "Za mě super úvod do problematiky používání AI při programování. Délka i forma super, přiměřené množství informací i zdrojů.",
   },
 ];
 

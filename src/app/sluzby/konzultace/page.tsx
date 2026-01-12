@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   MessageSquare,
   ArrowRight,
-  Quote,
   ExternalLink,
   CheckCircle2,
   Lightbulb,
@@ -242,7 +241,7 @@ export default function KonzultacePage() {
         </section>
 
         {/* Why Me Section */}
-        <section className="section-padding pb-32 md:pb-40 bg-secondary relative overflow-hidden">
+        <section className="pt-28 md:pt-40 pb-28 md:pb-40 px-4 md:px-8 bg-secondary relative overflow-hidden">
           {/* Top wave */}
           <div className="absolute top-0 left-0 right-0">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" preserveAspectRatio="none">
@@ -317,30 +316,28 @@ export default function KonzultacePage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
               >
-                <div className="text-center mb-6">
-                  <Quote className="text-primary mx-auto mb-4" size={32} />
-                  <p className="text-white/80 text-lg italic leading-relaxed mb-4">
-                    &ldquo;Konzultace s Filipem mi ušetřila týdny zkoušení
-                    různých přístupů. Během hodiny jsme vyřešili problém, nad
-                    kterým jsem se trápil měsíc.&rdquo;
-                  </p>
-                  <p className="text-primary font-semibold">— Spokojený klient</p>
-                </div>
-                <div className="border-t border-white/10 pt-6 mt-6">
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-primary mb-1">
-                        Praktický
-                      </div>
-                      <div className="text-white/60 text-sm">přístup</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-primary mb-1">
-                        Srozumitelný
-                      </div>
-                      <div className="text-white/60 text-sm">výklad</div>
-                    </div>
-                  </div>
+                <div className="mb-6">
+                  <CheckCircle2 className="text-primary mb-4" size={32} />
+                  <h3 className="text-xl font-bold text-white mb-4">
+                    Můj závazek k Vám
+                  </h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Praktické rady, které můžete hned použít",
+                      "Upřímná zpětná vazba, i když není příjemná",
+                      "Žádné zbytečné upselly na dražší balíčky",
+                      "Fokus na váš konkrétní problém",
+                      "Jasné další kroky na konci každé konzultace",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <CheckCircle2
+                          className="text-primary shrink-0 mt-0.5"
+                          size={18}
+                        />
+                        <span className="text-white/80">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
             </div>
@@ -550,7 +547,7 @@ export default function KonzultacePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="pt-24 md:pt-36 pb-32 md:pb-40 bg-secondary relative overflow-hidden">
+        <section className="pt-28 md:pt-40 pb-32 md:pb-44 px-4 md:px-8 bg-secondary relative overflow-hidden">
           {/* Top wave */}
           <div className="absolute top-0 left-0 right-0">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" preserveAspectRatio="none">

@@ -256,7 +256,7 @@ export default function MentoringPage() {
               />
             </svg>
           </div>
-          <div className="container-narrow mx-auto">
+          <div className="container-narrow mx-auto px-6 md:px-12 py-16 md:py-24">
             <div className="text-center mb-12">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -607,7 +607,7 @@ export default function MentoringPage() {
               />
             </svg>
           </div>
-          <div className="container-narrow mx-auto text-center">
+          <div className="container-narrow mx-auto text-center px-6 md:px-12 py-16 md:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
