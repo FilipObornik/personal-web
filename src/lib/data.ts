@@ -167,7 +167,7 @@ export const whatIDo: WhatIDoItem[] = [
   },
   {
     title: "1:1 Mentoring",
-    description: "Individuální mentoring přizpůsobený vašim potřebám",
+    description: "Individuální technický a AI mentoring přizpůsobený vašim potřebám",
     icon: Users,
     href: "#sluzby",
   },
