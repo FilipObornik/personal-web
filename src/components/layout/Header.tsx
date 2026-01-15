@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { navigation, siteConfig } from "@/lib/data";
+import { navigation } from "@/lib/data";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hasBanner, setHasBanner] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
@@ -21,6 +22,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Check for banner on homepage
+  useEffect(() => {
+    if (isHomePage) {
+      const checkBanner = () => {
+        setHasBanner(document.documentElement.classList.contains("has-banner"));
+      };
+      checkBanner();
+      // Observe class changes on html element
+      const observer = new MutationObserver(checkBanner);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+      return () => observer.disconnect();
+    } else {
+      setHasBanner(false);
+    }
+  }, [isHomePage]);
+
   // Helper to get correct href based on current page
   const getHref = (href: string) => {
     if (isHomePage) return href;
@@ -29,11 +46,12 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm"
           : "bg-transparent"
       }`}
+      style={{ top: isHomePage && hasBanner ? "var(--banner-height, 0px)" : 0 }}
     >
       <nav className="container-narrow mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">

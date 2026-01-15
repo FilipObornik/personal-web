@@ -7,11 +7,13 @@ import Portfolio from "@/components/sections/Portfolio";
 import FreeResources from "@/components/sections/FreeResources";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
+import WorkshopBanner from "@/components/sections/WorkshopBanner";
 
 export default function Home() {
   return (
     <>
       <Header />
+      <WorkshopBanner />
       <main>
         <Hero />
         <WhatIDo />

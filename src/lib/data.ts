@@ -629,3 +629,135 @@ export const education: CareerItem[] = [
     description: "Střední průmyslová škola elektrotechnická s výukou programování.",
   },
 ];
+
+// ============================================
+// WORKSHOP HRADEC DATA
+// ============================================
+
+export interface WorkshopHradecAgendaItem {
+  time: string;
+  title: string;
+  note?: string;
+  isHighlight?: boolean;
+  isBreak?: boolean;
+}
+
+export interface WorkshopHradecFeature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export const workshopHradec = {
+  showBanner: false, // Set to true to show the banner in navigation
+  title: "Vibe Coding Workshop",
+  subtitle: "Stavte aplikace s AI · žádné programování",
+  heroDescription: "Celodenní praktický workshop tváří v tvář. Maximálně 10 účastníků, individuální vedení, reálné projekty. V Hradci Králové.",
+  location: "Hradec Králové",
+  locationDetail: "Parkování zdarma 2 min od místa konání, 10 min pěšky od vlakového nádraží",
+  date: "Sobota (upřesníme)",
+  capacity: 10,
+  price: 4500,
+  priceIncludes: [
+    "Celodenní workshop",
+    "Voda a káva",
+    "Občerstvení po dobu workshopu",
+    "Networking",
+  ],
+  priceNote: "Příklad: Cena prezentačního webu - 10-20tis Kč. Za zlomek ceny Vás tento workshop naučí tvořit to samé a ještě mnohem více.",
+  heroFeatures: [
+    "Osobní mentoring",
+    "Vlastní aplikace za 1 den",
+    "Max 10 lidí",
+  ],
+  registrationUrl: "#zajem",
+  formWebhookUrl: "", // To be configured
+};
+
+export const workshopHradecAgenda: WorkshopHradecAgendaItem[] = [
+  { time: "9:00 – 10:00", title: "Příchod, seznámení, občerstvení, káva", note: "čím dříve dorazíte, tím máte více času na networking" },
+  { time: "10:00 – 11:00", title: "Teorie k vibe codingu", note: "co to je, k čemu je dobrý a kde jsou jeho limity", isHighlight: true },
+  { time: "11:00 – 11:30", title: "Coffee break", note: "výběrová káva z lokální pražírny připravena na pákovém kávovaru" },
+  { time: "11:00 – 13:00", title: "Společné tvoření aplikace vibe codingem", note: "společně se naučíme funkční základ a vytvoříme si aplikaci", isHighlight: true },
+  { time: "13:00 – 14:00", title: "Oběd - networking a dotazy", note: "jídlo v podobě cateringu - řízečky, obložené chleby, ovoce, zelenina, ...", isBreak: true },
+  { time: "14:00 – 17:00", title: "Vlastní projekty + mentoring", note: "vytvoříte si vlastní frontend aplikaci, která řeší váš reálný problém. A já vám budu celou dobu k ruce", isHighlight: true },
+  { time: "17:00 – 18:00", title: "Sdílení, rozbor, další kroky", note: "projdeme Vaše dotazy, nejasnosti a nejčastější problémy, na kterých jste se zasekli.", isHighlight: true },
+  { time: "18:00 – ???", title: "Networking", note: "seznamování a diskutování témat kolem AI a vibe codingu" },
+];
+
+export const workshopHradecPhilosophy: WorkshopHradecFeature[] = [
+  {
+    icon: "🎣",
+    title: "Naučím vás lovit",
+    description: "Nechci vám dávat hotové recepty jak tvořit konkrétní aplikace. Naučím vás proces vibe codingu — jak přemýšlet, jak se ptát, jak iterovat. Odejdete s dovedností, kterou budete moci využívat v praxi a stavět na ní a rozvíjet nadále při vaší práci s AI.",
+  },
+  {
+    icon: "🧠",
+    title: 'Pochopíte „proč"',
+    description: 'Nejde jen o to vědět, kam v jakém nástroji kliknout. Je to o pochopení principů vibe codingu. O tom jak AI „myslí", jak vibe coding funguje, kdy je vhodné ho použít a kde má naopak své limity, a jak z něj dostat maximum pro vaše konkrétní potřeby.',
+  },
+];
+
+export const workshopHradecTakeaways = {
+  skills: [
+    "Tvořit software za pomocí AI bez znalosti programování",
+    "Pracovat s limity AI (halucinace, stabilita, UX)",
+    "Poznat, kdy je vhodné vibe coding použít a kdy zatím nedostačuje",
+    "Rychle validovat nápad → funkční prototyp",
+    "Strukturovat zadání pro AI tak, aby výsledek fungoval",
+    "Pochopení jak jednotlivé dílky software do sebe zapadají",
+  ],
+  outputs: [
+    "Funkční aplikaci nebo nástroj, který jste vytvořili pomocí vibe codingu",
+    "Prezentaci a další podklady použité při workshopu",
+  ],
+};
+
+export const workshopHradecForWhom = {
+  ideal: [
+    "Chcete se naučit prakticky využít vibe coding pro podnikání, v práci nebo v osobním životě",
+    "Máte základní technickou gramotnost (práce s PC, instalace softwaru) - znalost AI není nutná",
+    "Preferujete učení praxí před pasivním posloucháním",
+    "Chcete sami umět posoudit, co má smysl tvořit pomocí vibe codingu a kde jsou jeho limity",
+    "Jste ochotni investovat čas a cestu do Hradce Králové",
+    "Máte vlastní notebook, který si můžete přivést sebou",
+  ],
+  notFor: [
+    "Jste profesionální vývojář (frontend/backend)",
+    "Již ovládáte základní vibe coding - pro vás připravuji pokročilý workshop",
+    "Hledáte pasivní přednášku nebo záznam",
+    'Očekáváte „zázračné zkratky" bez práce',
+    'Nechcete se ani trochu vzdělávat v technologiích a pochopit, jak fungují',
+    "Věříte, že AI udělá 100 % práce za vás",
+    "Jste úplný technický laik, který neovládá základní práci s počítačem",
+  ],
+};
+
+export const workshopHradecVibeCoding: WorkshopHradecFeature[] = [
+  {
+    icon: "🤖",
+    title: "AI jako váš programátor",
+    description: "Vibe Coding je způsob tvorby aplikací, webů a nástrojů, kde AI píše kód za vás. Vy popisujete, co chcete vytvořit, a AI to realizuje. Nepotřebujete znát programovací jazyky — stačí umět jasně formulovat své požadavky.",
+  },
+  {
+    icon: "⚡",
+    title: "Od nápadu k prototypu za hodiny",
+    description: "Co dříve trvalo dny nebo týdny práce zkušeného vývojáře, dnes zvládnete za hodiny. Vibe Coding demokratizuje tvorbu softwaru a otevírá ji všem, kdo mají nápady a chuť je realizovat.",
+  },
+  {
+    icon: "🎯",
+    title: "Proč se to naučit?",
+    description: "Automatizujte opakující se úkoly, vytvářejte si vlastní interní nástroje přesně na míru, rychle ověřujte nápady a získejte konkurenční výhodu. Kdo ovládne vibe coding, ovládne budoucnost práce s technologiemi.",
+  },
+  {
+    icon: "⚠️",
+    title: "Je nutné znát limity",
+    description: "Vibe coding není všelék. Na workshopu se naučíte rozpoznat, kdy je vibe coding ideální řešení, a kdy je lepší oslovit profesionálního programátora. Pochopení hranic je klíčem k úspěchu.",
+  },
+];
+
+export const workshopHradecStats = {
+  youtubeSubscribers: "2 500+",
+  academyStudents: "180+",
+  discordMembers: "170+",
+};
