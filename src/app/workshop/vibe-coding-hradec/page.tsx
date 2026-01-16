@@ -681,7 +681,7 @@ export default function WorkshopHradecPage() {
 
         {/* What is Vibe Coding Section */}
         <section className="min-h-[500px] bg-secondary relative overflow-hidden">
-          <div className="container-narrow mx-auto pt-20 pb-32 md:pt-24 md:pb-40">
+          <div className="container-narrow mx-auto px-4 md:px-8 pt-20 pb-32 md:pt-24 md:pb-40">
             <div className="text-center mb-12">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -752,6 +752,99 @@ export default function WorkshopHradecPage() {
                 </p>
               </div>
             </motion.div>
+
+            {/* Project Showcase */}
+            <div className="mt-16 max-w-4xl mx-auto">
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-2xl font-bold text-white text-center mb-8"
+              >
+                Příklady projektů vytvořených vibe codingem
+                <span className="text-primary">.</span>
+              </motion.h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Takdy */}
+                <motion.a
+                  href="https://takdy.cz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="aspect-video relative overflow-hidden">
+                    <Image
+                      src="/images/portfolio/takdy/takdy_landing.png"
+                      alt="Takdy.cz - aplikace pro plánování setkání"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-bold text-white text-lg">Takdy.cz</h4>
+                      <ExternalLink size={14} className="text-white/40 group-hover:text-primary transition-colors" />
+                    </div>
+                    <p className="text-white/60 text-sm mb-3">
+                      Bezplatná aplikace pro snadné plánování společných setkání. Jako Doodle, ale jednodušší a bez registrace.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-primary/20 rounded-full text-primary text-xs font-medium">
+                        Vibe Coding
+                      </span>
+                      <span className="px-2 py-1 bg-white/10 rounded-full text-white/60 text-xs">
+                        Next.js
+                      </span>
+                      <span className="px-2 py-1 bg-white/10 rounded-full text-white/60 text-xs">
+                        Supabase
+                      </span>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* Osobní web */}
+                <motion.a
+                  href="/"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="aspect-video relative overflow-hidden">
+                    <Image
+                      src="/images/portfolio/portfolio/portfolio_landing.png"
+                      alt="Osobní web filipobornik.cz"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-bold text-white text-lg">Osobní web</h4>
+                      <ExternalLink size={14} className="text-white/40 group-hover:text-primary transition-colors" />
+                    </div>
+                    <p className="text-white/60 text-sm mb-3">
+                      Tato webová stránka - vytvořena kompletně pomocí vibe codingu s Claude Code.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-primary/20 rounded-full text-primary text-xs font-medium">
+                        Vibe Coding
+                      </span>
+                      <span className="px-2 py-1 bg-white/10 rounded-full text-white/60 text-xs">
+                        Next.js
+                      </span>
+                      <span className="px-2 py-1 bg-white/10 rounded-full text-white/60 text-xs">
+                        TypeScript
+                      </span>
+                    </div>
+                  </div>
+                </motion.a>
+              </div>
+            </div>
           </div>
           <WaveSeparator fillColor="white" variant={4} />
         </section>
@@ -995,7 +1088,7 @@ export default function WorkshopHradecPage() {
           id="zajem"
           className="min-h-[600px] bg-secondary relative overflow-hidden"
         >
-          <div className="container-narrow mx-auto py-20 md:py-24">
+          <div className="container-narrow mx-auto px-4 md:px-8 py-20 md:py-24">
             <div className="text-center mb-12">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
