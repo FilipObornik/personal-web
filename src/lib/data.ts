@@ -354,7 +354,7 @@ export const freeResources: FreeResource[] = [
     description:
       "Vzdělávací video o AI, vibe codingu a technologiích. Vibe coding, praktické návody i trocha filozofování o AI.",
     icon: Youtube,
-    url: "https://youtube.com/@placeholder", // [PLACEHOLDER: Update URL]
+    url: "https://www.youtube.com/@aisrozumem",
     buttonText: "Odebírat kanál",
   },
   {
@@ -362,7 +362,7 @@ export const freeResources: FreeResource[] = [
     description:
       "Připojte se k naší komunitě. Sdílíme zkušenosti, inspirujeme se, pomáháme si a diskutujeme o AI.",
     icon: MessageCircle,
-    url: "https://discord.gg/placeholder", // [PLACEHOLDER: Update URL]
+    url: "https://discord.com/invite/mgrgyZuJuv",
     buttonText: "Připojit se",
   },
   {
@@ -378,12 +378,12 @@ export const freeResources: FreeResource[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: "YouTube",
-    url: "https://youtube.com/@placeholder", // [PLACEHOLDER: Update URL]
+    url: "https://www.youtube.com/@aisrozumem",
     icon: Youtube,
   },
   {
     name: "Discord",
-    url: "https://discord.gg/placeholder", // [PLACEHOLDER: Update URL]
+    url: "https://discord.com/invite/mgrgyZuJuv",
     icon: MessageCircle,
   },
 ];
@@ -518,8 +518,8 @@ export const workshopTestimonials: WorkshopTestimonial[] = [
 ];
 
 export const externalLinks = {
-  aiUniversita: "https://aiuniversita.cz", // [PLACEHOLDER: Update URL]
-  youtubeChannel: "https://youtube.com/@placeholder", // [PLACEHOLDER: Update URL]
+  aiUniversita: "https://aiuniverzita.cz", // [PLACEHOLDER: Update URL]
+  youtubeChannel: "https://www.youtube.com/@aisrozumem",
   academy: "https://akademie.aisrozumem.cz",
   calendarUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_9GuxtdMSenskvP4AMBfLJYelAMs5W1wa3vJ_EnwKSMLsxWzxzV5NTweVMhNXj-nU1HPmKFD9?gv=true",
 };
@@ -760,4 +760,36 @@ export const workshopHradecStats = {
   youtubeSubscribers: "2 500+",
   academyStudents: "180+",
   discordMembers: "170+",
+};
+
+export const workshopHradecTool = {
+  name: "Macaly",
+  url: "https://www.macaly.com",
+  tagline: "Pokud to umíte popsat, můžete to vytvořit",
+  description: "Na workshopu budeme pracovat s nástrojem Macaly — AI platformou pro tvorbu webů a aplikací, která je ideální pro začátečníky. Macaly vám umožní vytvářet funkční webové stránky a aplikace pouze popisováním toho, co chcete vytvořit.",
+  freeCredits: "10 000 000",
+  freeCreditsNote: "Každý účastník workshopu dostane 10 milionů kreditů na Macaly zdarma — to je více než dost na celý workshop i následné experimentování.",
+  features: [
+    {
+      icon: "🎨",
+      title: "Intuitivní rozhraní",
+      description: "Macaly má přehledné a jednoduché prostředí. Žádné složité nastavování — stačí popsat svou vizi a AI ji převede do funkčního webu nebo aplikace.",
+    },
+    {
+      icon: "🔄",
+      title: "Přenositelné dovednosti",
+      description: "Principy, které se naučíte v Macaly (jak formulovat požadavky, jak iterovat, jak debugovat s AI), jsou univerzální. Snadno je pak přenesete do jiných nástrojů jako Cursor, Lovable, Bolt nebo Claude Code.",
+    },
+    {
+      icon: "🚀",
+      title: "Vše v jednom",
+      description: "Macaly zahrnuje hosting, databázi, generování obrázků i SEO optimalizaci. Nemusíte řešit infrastrukturu — soustředíte se čistě na tvorbu.",
+    },
+    {
+      icon: "👶",
+      title: "Ideální pro začátečníky",
+      description: "Nástroj je navržen pro lidi bez technických znalostí. Je to perfektní startovní bod, kde se naučíte základy vibe codingu v bezpečném a přívětivém prostředí.",
+    },
+  ],
+  note: "Dovednosti získané na workshopu nejsou vázané pouze na Macaly. Naučíte se principy, které využijete v jakémkoliv AI kódovacím nástroji — ať už je to Cursor, Lovable, Bolt, nebo Claude Code.",
 };

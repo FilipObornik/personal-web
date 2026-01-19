@@ -31,6 +31,7 @@ import {
   workshopHradecForWhom,
   workshopHradecVibeCoding,
   workshopHradecStats,
+  workshopHradecTool,
 } from "@/lib/data";
 
 export default function WorkshopHradecPage() {
@@ -53,10 +54,25 @@ export default function WorkshopHradecPage() {
       return;
     }
 
-    // For now, just simulate success - webhook URL can be configured later
     try {
-      // TODO: Configure webhook URL in data.ts
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("https://n8n.filipobornik.com/webhook/a15b1988-f640-4cff-a9ef-7e06b4930275", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          goal: formData.get("goal"),
+          expectations: formData.get("expectations"),
+          city: formData.get("city"),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Webhook request failed");
+      }
+
       setFormStatus("success");
     } catch {
       setFormStatus("error");
@@ -373,8 +389,102 @@ export default function WorkshopHradecPage() {
           <WaveSeparator fillColor="white" variant={2} />
         </section>
 
-        {/* Takeaways Section */}
+        {/* Tool Section - Macaly */}
         <section className="section-padding bg-white relative overflow-hidden">
+          <div className="container-narrow mx-auto">
+            <div className="text-center mb-12">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block"
+              >
+                Nástroj workshopu
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-4xl font-bold text-secondary mb-4"
+              >
+                Budeme pracovat s {workshopHradecTool.name}
+                <span className="text-primary">.</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-muted max-w-2xl mx-auto"
+              >
+                {workshopHradecTool.description}
+              </motion.p>
+            </div>
+
+            {/* Free Credits Banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-linear-to-r from-primary/10 to-primary/5 rounded-2xl p-6 md:p-8 max-w-xl mx-auto mb-10 border border-primary/20 text-center"
+            >
+              <span className="text-5xl mb-4 block">🎁</span>
+              <p className="text-secondary font-bold text-xl md:text-2xl mb-2">
+                {workshopHradecTool.freeCredits} kreditů zdarma
+              </p>
+              <p className="text-muted text-sm">
+                {workshopHradecTool.freeCreditsNote}
+              </p>
+            </motion.div>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {workshopHradecTool.features.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-6 border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+                >
+                  <div className="text-3xl mb-4">{feature.icon}</div>
+                  <h3 className="font-bold text-secondary text-lg mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Note about transferable skills */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex gap-4 bg-primary/5 rounded-2xl p-6 max-w-4xl mx-auto mt-8 border border-primary/10"
+            >
+              <div className="text-2xl">
+                <Lightbulb className="text-primary" />
+              </div>
+              <div>
+                <h4 className="font-bold text-secondary mb-2">
+                  Dovednosti přenositelné kamkoliv
+                </h4>
+                <p className="text-muted text-sm leading-relaxed">
+                  {workshopHradecTool.note}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Takeaways Section */}
+        <section className="section-padding bg-section-alt relative overflow-hidden">
           <div className="container-narrow mx-auto">
             <div className="text-center mb-12">
               <motion.span
@@ -455,7 +565,7 @@ export default function WorkshopHradecPage() {
         </section>
 
         {/* For Whom Section */}
-        <section className="section-padding bg-section-alt relative overflow-hidden">
+        <section className="section-padding bg-white relative overflow-hidden">
           <div className="container-narrow mx-auto">
             <div className="text-center mb-12">
               <motion.span
@@ -539,7 +649,7 @@ export default function WorkshopHradecPage() {
         </section>
 
         {/* Info Section */}
-        <section className="section-padding bg-white relative overflow-hidden">
+        <section className="section-padding bg-section-alt relative overflow-hidden">
           <div className="container-narrow mx-auto">
             <div className="text-center mb-12">
               <motion.span
@@ -568,7 +678,7 @@ export default function WorkshopHradecPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="col-span-1 md:col-span-3 bg-section-alt rounded-2xl p-6 flex items-start gap-4"
+                className="col-span-1 md:col-span-3 bg-white rounded-2xl p-6 flex items-start gap-4 shadow-sm"
               >
                 <MapPin className="text-primary flex-shrink-0" size={24} />
                 <div>
@@ -587,7 +697,7 @@ export default function WorkshopHradecPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-section-alt rounded-2xl p-6 flex items-start gap-4"
+                className="bg-white rounded-2xl p-6 flex items-start gap-4 shadow-sm"
               >
                 <Calendar className="text-primary flex-shrink-0" size={24} />
                 <div>
@@ -603,7 +713,7 @@ export default function WorkshopHradecPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 }}
-                className="bg-section-alt rounded-2xl p-6 flex items-start gap-4"
+                className="bg-white rounded-2xl p-6 flex items-start gap-4 shadow-sm"
               >
                 <Users className="text-primary flex-shrink-0" size={24} />
                 <div>
@@ -619,7 +729,7 @@ export default function WorkshopHradecPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="bg-section-alt rounded-2xl p-6 flex items-start gap-4"
+                className="bg-white rounded-2xl p-6 flex items-start gap-4 shadow-sm"
               >
                 <span className="text-xl">💰</span>
                 <div>
@@ -981,7 +1091,7 @@ export default function WorkshopHradecPage() {
                   className="flex flex-wrap gap-3 mb-8"
                 >
                   <a
-                    href="https://youtube.com/@aisrozumem"
+                    href="https://www.youtube.com/@aisrozumem"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-secondary text-sm font-medium hover:shadow-md transition-shadow"
@@ -991,7 +1101,7 @@ export default function WorkshopHradecPage() {
                     <ExternalLink size={12} className="opacity-50" />
                   </a>
                   <a
-                    href="https://discord.gg/mgrgyZuJuv"
+                    href="https://discord.com/invite/mgrgyZuJuv"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-secondary text-sm font-medium hover:shadow-md transition-shadow"
