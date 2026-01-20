@@ -81,21 +81,18 @@ END:VCARD`;
 
 function downloadVCard() {
   const vcard = generateVCard();
-  const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "Filip_Obornik.vcf";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+
+  // Try to open vCard directly (triggers "Add to Contacts" on mobile)
+  const dataUri = `data:text/vcard;charset=utf-8,${encodeURIComponent(vcard)}`;
+
+  // On iOS/Android, this typically opens the contacts app directly
+  window.location.href = dataUri;
 }
 
 export default function VizitkaPage() {
   return (
     <div className="min-h-screen min-h-dvh bg-white flex items-center justify-center sm:p-8">
-      <main className="w-full max-w-[390px] bg-white sm:rounded-3xl sm:shadow-2xl sm:shadow-black/10 sm:border sm:border-gray-200 overflow-hidden flex flex-col min-h-dvh sm:min-h-0 sm:max-h-[844px]">
+      <main className="w-full sm:max-w-[390px] bg-white sm:rounded-3xl sm:shadow-2xl sm:shadow-black/10 sm:border sm:border-gray-200 overflow-hidden flex flex-col min-h-dvh sm:min-h-0 sm:max-h-[844px]">
       {/* Dark blue header section */}
       <section className="relative bg-secondary overflow-hidden flex-shrink-0">
         {/* Background decorations */}
