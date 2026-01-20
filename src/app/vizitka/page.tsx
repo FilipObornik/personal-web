@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -82,16 +83,44 @@ END:VCARD`;
 function downloadVCard() {
   const vcard = generateVCard();
 
-  // Try to open vCard directly (triggers "Add to Contacts" on mobile)
-  const dataUri = `data:text/vcard;charset=utf-8,${encodeURIComponent(vcard)}`;
+  // Create a downloadable link with nice filename
+  const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "Filip Oborník - virtuální vizitka.vcf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
 
-  // On iOS/Android, this typically opens the contacts app directly
-  window.location.href = dataUri;
+function CopyableICO() {
+  const [copied, setCopied] = useState(false);
+  const ico = "07306300";
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(ico);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <motion.button
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.8 }}
+      onClick={handleCopy}
+      className="text-center text-secondary/30 text-[11px] pt-4 active:text-secondary/50 transition-colors"
+    >
+      {copied ? "Zkopírováno!" : `IČO: ${ico}`}
+    </motion.button>
+  );
 }
 
 export default function VizitkaPage() {
   return (
-    <div className="min-h-screen min-h-dvh bg-white flex items-center justify-center sm:p-8">
+    <div className="min-h-screen min-h-dvh bg-secondary sm:bg-white flex items-center justify-center sm:p-8">
       <main className="w-full sm:max-w-[390px] bg-white sm:rounded-3xl sm:shadow-2xl sm:shadow-black/10 sm:border sm:border-gray-200 overflow-hidden flex flex-col min-h-dvh sm:min-h-0 sm:max-h-[844px]">
       {/* Dark blue header section */}
       <section className="relative bg-secondary overflow-hidden flex-shrink-0">
@@ -123,21 +152,21 @@ export default function VizitkaPage() {
         <div className="relative z-10 pt-10 pb-14 px-5">
           {/* Photo */}
           <div className="flex justify-center mb-5">
-            <motion.div
-              initial={{ scale: 0, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              transition={{
-                delay: 0.1,
-                type: "spring",
-                stiffness: 200,
-                damping: 20,
-              }}
-              className="relative"
-            >
-              {/* Glow */}
-              <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl scale-125" />
-              {/* Photo container */}
-              <div className="relative w-28 h-28 rounded-full overflow-hidden border-[3px] border-primary/50 shadow-xl shadow-primary/20">
+            <div className="relative">
+              {/* Glow - static, no animation */}
+              <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl scale-150" />
+              {/* Photo container - animated */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  delay: 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 20,
+                }}
+                className="relative w-28 h-28 rounded-full overflow-hidden border-[3px] border-primary/50 shadow-xl shadow-primary/20"
+              >
                 <Image
                   src={contactData.photo}
                   alt={contactData.name}
@@ -145,8 +174,8 @@ export default function VizitkaPage() {
                   className="object-cover object-top scale-[1.35]"
                   priority
                 />
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
 
           {/* Name */}
@@ -286,15 +315,8 @@ export default function VizitkaPage() {
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Footer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-center text-secondary/30 text-[11px] pt-4"
-        >
-          filipobornik.cz
-        </motion.p>
+        {/* Footer - IČO with copy functionality */}
+        <CopyableICO />
       </section>
     </main>
     </div>
