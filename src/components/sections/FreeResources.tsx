@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, GraduationCap, Play } from "lucide-react";
+import { ExternalLink, GraduationCap, Play, Headphones, Coffee } from "lucide-react";
+import Image from "next/image";
 import { freeResources } from "@/lib/data";
 
 export default function FreeResources() {
@@ -120,6 +121,115 @@ export default function FreeResources() {
             );
           })}
         </div>
+
+        {/* Podcast Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-12 md:mt-16"
+        >
+          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-amber-800 to-amber-950">
+            {/* Pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-10"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            />
+
+            <div className="relative p-6 md:p-8 lg:p-10">
+              <div className="flex flex-col lg:flex-row gap-8 items-center">
+                {/* Podcast Image */}
+                <div className="flex-shrink-0 w-full lg:w-auto">
+                  <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/coffee_break_promo.png"
+                      alt="Coffee Break s Filipem - Podcast"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Podcast Content */}
+                <div className="flex-1 text-center lg:text-left">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-4">
+                    <Coffee size={14} />
+                    Nový podcast
+                  </div>
+
+                  <h3 className="font-bold text-2xl md:text-3xl text-white mb-3">
+                    Coffee Break s Filipem
+                  </h3>
+
+                  <p className="text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+                    Novinky, inspirace a Filipova zamyšlení ze světa AI, technologií a produktů. Servírováno u kávy.
+                  </p>
+
+                  {/* Spotify Embed */}
+                  <div className="mb-6 rounded-xl overflow-hidden">
+                    <iframe
+                      src="https://open.spotify.com/embed/episode/4X2GpbilABovEHlL0M4t0v?utm_source=generator&theme=0"
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                      className="rounded-xl"
+                    />
+                  </div>
+
+                  {/* Platform Links */}
+                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                    <a
+                      href="https://open.spotify.com/show/42u73bXQYUOmXkyf9sySMz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:bg-white/30"
+                    >
+                      <Headphones size={16} />
+                      Spotify
+                    </a>
+                    <a
+                      href="https://podcasts.apple.com/gb/podcast/coffee-break-s-filipem/id1869317894"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:bg-white/30"
+                    >
+                      Apple Podcasts
+                      <ExternalLink size={14} />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/playlist?list=PLy6-Siwmo4p-EIxm3U2DPlrMVAs0mrNZJ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:bg-white/30"
+                    >
+                      <Play size={14} className="fill-current" />
+                      YouTube
+                    </a>
+                    <a
+                      href="https://podcast.filipobornik.cz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:bg-white/30"
+                    >
+                      Web podcastu
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute top-6 right-6 w-20 h-20 border border-white/10 rounded-full hidden lg:block" />
+              <div className="absolute bottom-10 right-16 w-8 h-8 bg-white/5 rounded-full hidden lg:block" />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

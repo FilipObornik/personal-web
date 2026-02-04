@@ -123,21 +123,11 @@ export default function VizitkaPage() {
     <div className="min-h-screen min-h-dvh bg-secondary sm:bg-white flex items-center justify-center sm:p-8">
       <main className="w-full sm:max-w-[390px] bg-white sm:rounded-3xl sm:shadow-2xl sm:shadow-black/10 sm:border sm:border-gray-200 overflow-hidden flex flex-col min-h-dvh sm:min-h-0 sm:max-h-[844px]">
       {/* Dark blue header section */}
-      <section className="relative bg-secondary overflow-hidden flex-shrink-0">
+      <section className="relative bg-secondary flex-shrink-0">
         {/* Background decorations */}
-        <div className="absolute inset-0">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.5, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-            className="absolute bottom-0 -left-20 w-48 h-48 bg-primary/10 rounded-full blur-3xl"
-          />
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 -left-20 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
           {/* Grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -148,13 +138,14 @@ export default function VizitkaPage() {
           />
         </div>
 
+        {/* Photo glow - positioned absolutely to go all the way up */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
+
         {/* Content */}
         <div className="relative z-10 pt-10 pb-14 px-5">
           {/* Photo */}
           <div className="flex justify-center mb-5">
             <div className="relative">
-              {/* Glow - static, no animation */}
-              <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl scale-150" />
               {/* Photo container - animated */}
               <motion.div
                 initial={{ scale: 0 }}
@@ -312,11 +303,11 @@ export default function VizitkaPage() {
           ))}
         </motion.div>
 
+        {/* IČO - right below social links */}
+        <CopyableICO />
+
         {/* Spacer */}
         <div className="flex-1" />
-
-        {/* Footer - IČO with copy functionality */}
-        <CopyableICO />
       </section>
     </main>
     </div>
