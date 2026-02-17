@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Globe,
   Youtube,
@@ -106,15 +105,13 @@ function CopyableICO() {
   };
 
   return (
-    <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.8 }}
+    <button
       onClick={handleCopy}
       className="text-center text-secondary/30 text-[11px] pt-4 active:text-secondary/50 transition-colors"
+      style={{ animation: "vizitka-fade 0.5s ease-out 0.8s backwards" }}
     >
       {copied ? "Zkopírováno!" : `IČO: ${ico}`}
-    </motion.button>
+    </button>
   );
 }
 
@@ -146,17 +143,10 @@ export default function VizitkaPage() {
           {/* Photo */}
           <div className="flex justify-center mb-5">
             <div className="relative">
-              {/* Photo container - animated */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  delay: 0.1,
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 20,
-                }}
+              {/* Photo container */}
+              <div
                 className="relative w-28 h-28 rounded-full overflow-hidden border-[3px] border-primary/50 shadow-xl shadow-primary/20"
+                style={{ animation: "vizitka-scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards" }}
               >
                 <Image
                   src={contactData.photo}
@@ -165,53 +155,45 @@ export default function VizitkaPage() {
                   className="object-cover object-top scale-[1.35]"
                   priority
                 />
-              </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Name */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div
             className="text-center mb-1"
+            style={{ animation: "vizitka-fade-up 0.5s ease-out 0.2s backwards" }}
           >
             <h1 className="text-2xl font-bold leading-tight text-white">
               Filip Oborník<span className="text-primary">.</span>
             </h1>
-          </motion.div>
+          </div>
 
           {/* Title */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+          <p
             className="text-white/70 text-center text-sm"
+            style={{ animation: "vizitka-fade-up-sm 0.5s ease-out 0.3s backwards" }}
           >
             {contactData.title}
-          </motion.p>
+          </p>
 
           {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.32 }}
+          <p
             className="text-white/50 text-center text-xs mb-3"
+            style={{ animation: "vizitka-fade-up-sm 0.5s ease-out 0.32s backwards" }}
           >
             {contactData.subtitle}
-          </motion.p>
+          </p>
 
           {/* Phone */}
-          <motion.a
+          <a
             href={`tel:${contactData.phone}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
             className="flex items-center justify-center gap-2 text-white active:text-primary transition-colors py-1"
+            style={{ animation: "vizitka-fade-up-sm 0.5s ease-out 0.35s backwards" }}
           >
             <Phone size={15} className="text-primary" />
             <span className="font-medium text-sm">{contactData.phone}</span>
-          </motion.a>
+          </a>
         </div>
 
         {/* Wave separator */}
@@ -235,34 +217,28 @@ export default function VizitkaPage() {
       {/* White content section */}
       <section className="relative bg-white px-5 pb-2 pt-2 flex-1 flex flex-col">
         {/* Save to phone button */}
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+        <button
           onClick={downloadVCard}
           className="w-full bg-primary hover:bg-primary-dark text-secondary font-bold py-4 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-primary/25 mb-5 text-[15px]"
+          style={{ animation: "vizitka-fade-up-sm 0.5s ease-out 0.4s backwards" }}
         >
           <Download size={19} strokeWidth={2.5} />
           Uložit do telefonu
-        </motion.button>
+        </button>
 
         {/* Primary links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+        <div
           className="grid grid-cols-3 gap-2.5 mb-5"
+          style={{ animation: "vizitka-fade 0.5s ease-out 0.5s backwards" }}
         >
           {primaryLinks.map((link, index) => (
-            <motion.a
+            <a
               key={link.label}
               href={link.href}
               target={link.href.startsWith("mailto:") ? undefined : "_blank"}
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + index * 0.05 }}
               className="flex flex-col items-center gap-2 py-4 px-2 rounded-2xl bg-secondary/[0.03] active:bg-secondary/[0.08] border border-secondary/10 transition-all duration-200 active:scale-[0.98]"
+              style={{ animation: `vizitka-fade-up-sm 0.5s ease-out ${0.5 + index * 0.05}s backwards` }}
             >
               <div className="w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-md shadow-primary/20">
                 <link.icon size={20} className="text-secondary" />
@@ -270,38 +246,34 @@ export default function VizitkaPage() {
               <span className="text-secondary font-medium text-[13px]">
                 {link.label}
               </span>
-            </motion.a>
+            </a>
           ))}
-        </motion.div>
+        </div>
 
         {/* Divider */}
         <div className="border-t border-secondary/10 mb-5" />
 
         {/* Secondary links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.65 }}
+        <div
           className="flex justify-center gap-8"
+          style={{ animation: "vizitka-fade 0.5s ease-out 0.65s backwards" }}
         >
           {secondaryLinks.map((link, index) => (
-            <motion.a
+            <a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.65 + index * 0.05 }}
               className="flex flex-col items-center gap-1.5 py-2 px-3 active:opacity-70 transition-opacity"
+              style={{ animation: `vizitka-fade-scale 0.5s ease-out ${0.65 + index * 0.05}s backwards` }}
             >
               <div className="w-9 h-9 bg-secondary/10 rounded-full flex items-center justify-center">
                 <link.icon size={17} className="text-secondary/50" />
               </div>
               <span className="text-secondary/40 text-[11px]">{link.label}</span>
-            </motion.a>
+            </a>
           ))}
-        </motion.div>
+        </div>
 
         {/* IČO - right below social links */}
         <CopyableICO />
