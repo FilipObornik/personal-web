@@ -142,7 +142,7 @@ export default function VizitkaPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
 
         {/* Content */}
-        <div className="relative z-10 pt-10 pb-14 px-5">
+        <div className="relative z-10 pt-4 pb-14 px-5">
           {/* Photo */}
           <div className="flex justify-center mb-5">
             <div className="relative">
@@ -233,7 +233,7 @@ export default function VizitkaPage() {
       </section>
 
       {/* White content section */}
-      <section className="relative bg-white px-5 pb-6 pt-2 flex-1 flex flex-col">
+      <section className="relative bg-white px-5 pb-2 pt-2 flex-1 flex flex-col">
         {/* Save to phone button */}
         <motion.button
           initial={{ opacity: 0, y: 10 }}
@@ -306,8 +306,6 @@ export default function VizitkaPage() {
         {/* IČO - right below social links */}
         <CopyableICO />
 
-        {/* Spacer */}
-        <div className="flex-1" />
       </section>
     </main>
     </div>
