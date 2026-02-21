@@ -5,7 +5,7 @@ import { ExternalLink, GraduationCap, Play, Headphones, Coffee } from "lucide-re
 import Image from "next/image";
 import { freeResources } from "@/lib/data";
 
-export default function FreeResources() {
+export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: string }) {
   return (
     <section id="vzdelavani" className="section-padding relative overflow-hidden">
       {/* Background decoration */}
@@ -172,7 +172,7 @@ export default function FreeResources() {
                   {/* Spotify Embed */}
                   <div className="mb-6 rounded-xl overflow-hidden">
                     <iframe
-                      src="https://open.spotify.com/embed/episode/4X2GpbilABovEHlL0M4t0v?utm_source=generator&theme=0"
+                      src={spotifyEmbedUrl}
                       width="100%"
                       height="152"
                       frameBorder="0"
