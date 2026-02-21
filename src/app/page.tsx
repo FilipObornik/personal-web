@@ -8,8 +8,12 @@ import FreeResources from "@/components/sections/FreeResources";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import WorkshopBanner from "@/components/sections/WorkshopBanner";
+import { getLatestEpisodeId, getSpotifyEmbedUrl } from "@/lib/spotify";
 
-export default function Home() {
+export default async function Home() {
+  const latestEpisodeId = await getLatestEpisodeId();
+  const spotifyEmbedUrl = getSpotifyEmbedUrl(latestEpisodeId);
+
   return (
     <>
       <Header />
@@ -19,7 +23,7 @@ export default function Home() {
         <WhatIDo />
         <Services />
         <Portfolio />
-        <FreeResources />
+        <FreeResources spotifyEmbedUrl={spotifyEmbedUrl} />
         <Testimonials />
         <Contact />
       </main>
