@@ -109,7 +109,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      <WaveSeparator fillColor="#05121f" variant={4} />
+      <WaveSeparator fillColor="white" variant={4} />
     </section>
   );
 }
