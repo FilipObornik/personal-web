@@ -44,12 +44,10 @@ export default function Header() {
     return `/${href}`;
   };
 
-  const showSolidHeader = isScrolled || !isHomePage;
-
   return (
     <header
       className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
-        showSolidHeader
+        isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm"
           : "bg-transparent"
       }`}
@@ -61,9 +59,11 @@ export default function Header() {
           <Link
             href="/"
             className={`font-bold text-lg transition-all duration-300 ${
-              showSolidHeader
+              isScrolled
                 ? "text-secondary opacity-100 translate-y-0"
-                : "text-white opacity-0 -translate-y-2 pointer-events-none"
+                : isHomePage
+                  ? "text-white opacity-0 -translate-y-2 pointer-events-none"
+                  : "text-white opacity-100 translate-y-0"
             }`}
           >
             Filip Oborník
@@ -77,7 +77,7 @@ export default function Header() {
                 key={item.name}
                 href={getHref(item.href)}
                 className={`text-sm font-medium transition-colors ${
-                  showSolidHeader
+                  isScrolled
                     ? "text-muted hover:text-primary"
                     : "text-white/70 hover:text-white"
                 }`}
@@ -88,7 +88,7 @@ export default function Header() {
             <Link
               href={getHref("#kontakt")}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                showSolidHeader
+                isScrolled
                   ? "bg-primary text-white hover:bg-primary-dark"
                   : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/20"
               }`}
@@ -101,7 +101,7 @@ export default function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`md:hidden p-2 transition-colors ${
-              showSolidHeader ? "text-secondary" : "text-white"
+              isScrolled ? "text-secondary" : "text-white"
             }`}
             aria-label={isMenuOpen ? "Zavřít menu" : "Otevřít menu"}
           >
@@ -120,7 +120,7 @@ export default function Header() {
               className="md:hidden overflow-hidden"
             >
               <div className={`py-4 space-y-1 border-t ${
-                showSolidHeader ? "border-gray-100 bg-white" : "border-white/10 bg-secondary/95 backdrop-blur-md"
+                isScrolled ? "border-gray-100 bg-white" : "border-white/10 bg-secondary/95 backdrop-blur-md"
               }`}>
                 {navigation.map((item) => (
                   <Link
@@ -128,7 +128,7 @@ export default function Header() {
                     href={getHref(item.href)}
                     onClick={() => setIsMenuOpen(false)}
                     className={`block px-4 py-3 rounded-xl font-medium transition-colors ${
-                      showSolidHeader
+                      isScrolled
                         ? "text-secondary hover:bg-section-alt"
                         : "text-white/80 hover:text-white hover:bg-white/10"
                     }`}
