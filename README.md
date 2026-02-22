@@ -1,8 +1,32 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Features
+
+- 🎨 Modern, responsive design with Tailwind CSS
+- ✨ Smooth animations with Framer Motion
+- 📸 Instagram feed integration (Graph API)
+- 🎙️ Spotify podcast embed
+- 📱 Fully responsive across all devices
+
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+### Environment Variables
+
+Copy `.env.local.example` to `.env.local` and configure:
+
+```bash
+cp .env.local.example .env.local
+```
+
+For Instagram feed setup, see [INSTAGRAM.md](./INSTAGRAM.md).
+
+Then, run the development server:
 
 ```bash
 npm run dev
