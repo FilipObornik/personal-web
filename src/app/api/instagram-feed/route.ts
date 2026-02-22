@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 3600; // revalidate every hour
+export const revalidate = 600; // revalidate every 10 minutes
 
 interface BeholdPost {
   id: string;
