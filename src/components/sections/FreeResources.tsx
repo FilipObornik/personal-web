@@ -203,7 +203,7 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
                   Slovníček AI pojmů
                 </h3>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  25+ pojmů z oblasti umělé inteligence srozumitelně vysvětlených. Od základů AI přes prompt engineering až po vibe coding.
+                  50+ pojmů z oblasti umělé inteligence srozumitelně vysvětlených. Od základů AI přes prompt engineering až po vibe coding.
                 </p>
 
                 {/* Sample terms */}
