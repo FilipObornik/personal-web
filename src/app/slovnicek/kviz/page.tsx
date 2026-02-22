@@ -15,10 +15,16 @@ export const metadata: Metadata = {
 
 export default function QuizPage() {
   return (
-    <section className="section-padding bg-white flex-1 flex flex-col justify-center">
-      <div className="container-narrow mx-auto">
-        <QuizGame terms={glossaryTerms} />
-      </div>
-    </section>
+    <>
+      {/* Dark strip for header navigation visibility */}
+      <div className="bg-secondary pt-20 md:pt-24" />
+
+      {/* Quiz Content */}
+      <section className="section-padding bg-white flex-1 flex flex-col justify-center">
+        <div className="container-narrow mx-auto">
+          <QuizGame terms={glossaryTerms} />
+        </div>
+      </section>
+    </>
   );
 }
