@@ -167,7 +167,7 @@ export default function Hero() {
                   src="/images/portrait.png"
                   alt="Filip Oborník"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-[center_5%] scale-[1.15]" style={{ transformOrigin: "center 5%" }}
                   priority
                   onLoad={() => setImageLoaded(true)}
                 />
