@@ -34,7 +34,7 @@ export async function GET() {
 
   try {
     const res = await fetch(`https://feeds.behold.so/${feedId}`, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
 
     if (!res.ok) {
