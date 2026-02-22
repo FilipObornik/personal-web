@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 86400; // revalidate every 24 hours
+export const revalidate = 3600; // revalidate every hour
 
 interface BeholdPost {
   id: string;
@@ -34,7 +34,7 @@ export async function GET() {
 
   try {
     const res = await fetch(`https://feeds.behold.so/${feedId}`, {
-      next: { revalidate: 86400 },
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
