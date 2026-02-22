@@ -1,11 +1,41 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, GraduationCap, Play, Headphones, Coffee } from "lucide-react";
 import Image from "next/image";
-import { freeResources } from "@/lib/data";
+import { freeResources, ACADEMY_STUDENT_COUNT } from "@/lib/data";
+
+interface CommunityStats {
+  youtube: number | null;
+  discord: number | null;
+  academy: number;
+}
+
+function formatStat(value: number): string {
+  return value.toLocaleString("cs-CZ");
+}
 
 export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: string }) {
+  const [stats, setStats] = useState<CommunityStats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/community-stats")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) setStats(data);
+      })
+      .catch(() => {
+        // Fallback: show academy stat even if API fails
+        setStats({ youtube: null, discord: null, academy: ACADEMY_STUDENT_COUNT });
+      });
+  }, []);
+
+  function getStatValue(key: "youtube" | "discord" | "academy"): number | null {
+    if (!stats) return null;
+    return stats[key];
+  }
+
   return (
     <section id="vzdelavani" className="section-padding relative overflow-hidden">
       {/* Background decoration */}
@@ -60,7 +90,6 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
             const Icon = resource.icon;
             const isYouTube = resource.title === "YouTube";
             const isDiscord = resource.title === "Discord Komunita";
-            const isAkademie = resource.title === "Akademie AI s Rozumem";
 
             // Different gradient for each card
             const gradientClass = isYouTube
@@ -68,6 +97,8 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
               : isDiscord
               ? 'bg-gradient-to-br from-indigo-500 to-purple-600'
               : 'bg-gradient-to-br from-primary to-amber-500';
+
+            const statValue = resource.statKey ? getStatValue(resource.statKey) : null;
 
             return (
               <motion.div
@@ -87,9 +118,30 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
                   />
 
                   <div className="relative p-6 md:p-8">
-                    {/* Icon */}
-                    <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="text-white" size={28} />
+                    {/* Icon + Stat Row */}
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="text-white" size={28} />
+                      </div>
+
+                      {/* Stat Badge */}
+                      <AnimatePresence>
+                        {statValue != null && resource.statLabel && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4, delay: 0.2 }}
+                            className="text-right"
+                          >
+                            <div className="text-2xl md:text-3xl font-bold text-white leading-none">
+                              {formatStat(statValue)}+
+                            </div>
+                            <div className="text-xs text-white/70 mt-0.5">
+                              {resource.statLabel}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
 
                     {/* Content */}

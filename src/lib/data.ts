@@ -81,6 +81,8 @@ export interface FreeResource {
   icon: LucideIcon;
   url: string;
   buttonText: string;
+  statLabel?: string;
+  statKey?: "youtube" | "discord" | "academy";
 }
 
 export interface SocialLink {
@@ -348,6 +350,8 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+export const ACADEMY_STUDENT_COUNT = 198;
+
 export const freeResources: FreeResource[] = [
   {
     title: "YouTube",
@@ -356,6 +360,8 @@ export const freeResources: FreeResource[] = [
     icon: Youtube,
     url: "https://www.youtube.com/@aisrozumem",
     buttonText: "Odebírat kanál",
+    statLabel: "odběratelů",
+    statKey: "youtube",
   },
   {
     title: "Discord Komunita",
@@ -364,6 +370,8 @@ export const freeResources: FreeResource[] = [
     icon: MessageCircle,
     url: "https://discord.com/invite/mgrgyZuJuv",
     buttonText: "Připojit se",
+    statLabel: "členů",
+    statKey: "discord",
   },
   {
     title: "Akademie AI s Rozumem",
@@ -372,6 +380,8 @@ export const freeResources: FreeResource[] = [
     icon: BookOpen,
     url: "https://akademie.aisrozumem.cz",
     buttonText: "Vstoupit do akademie",
+    statLabel: "studentů",
+    statKey: "academy",
   },
 ];
 
