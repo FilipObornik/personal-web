@@ -209,8 +209,8 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
                 {/* Sample terms */}
                 <div className="flex-1 flex items-center">
                   <div className="flex flex-wrap gap-2">
-                    {["Prompt", "LLM", "Fine-tuning", "RAG", "Halucinace", "Vibe Coding", "AI Agent", "Neuronová síť", "Token", "ChatGPT"].map((term) => (
-                      <span key={term} className="px-3 py-1 bg-white/8 text-white/60 text-xs rounded-full border border-white/10">
+                    {["Prompt", "LLM", "Fine-tuning", "RAG", "Halucinace", "Vibe Coding", "AI Agent", "Neuronová síť", "Token", "ChatGPT"].map((term, index) => (
+                      <span key={term} className={`px-3 py-1 bg-white/8 text-white/60 text-xs rounded-full border border-white/10${index >= 7 ? " hidden sm:inline-block" : ""}`}>
                         {term}
                       </span>
                     ))}
