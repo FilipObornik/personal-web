@@ -7,6 +7,7 @@ interface BeholdPost {
   timestamp: string;
   permalink: string;
   mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  isReel?: boolean;
   caption: string;
   prunedCaption: string;
   likeCount: number;
@@ -42,10 +43,15 @@ export async function GET() {
 
     const data: BeholdFeed = await res.json();
 
+    // Filter out reels/videos - only keep static image posts
+    const staticPosts = data.posts.filter(
+      (post) => post.mediaType !== "VIDEO"
+    );
+
     return NextResponse.json({
       username: data.username,
       profilePictureUrl: data.profilePictureUrl,
-      posts: data.posts,
+      posts: staticPosts,
     });
   } catch {
     return NextResponse.json({ posts: [] });
