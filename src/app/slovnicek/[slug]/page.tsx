@@ -81,7 +81,7 @@ export default async function TermPage({ params }: TermPageProps) {
       />
 
       {/* Hero */}
-      <section className="relative bg-secondary pt-24 md:pt-32 pb-24 md:pb-28 overflow-hidden">
+      <section className="relative bg-secondary pt-24 md:pt-32 pb-32 md:pb-36 overflow-hidden">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
 
