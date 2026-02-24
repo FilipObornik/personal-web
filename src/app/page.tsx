@@ -27,8 +27,8 @@ export default async function Home() {
         <Portfolio />
         <FreeResources spotifyEmbedUrl={spotifyEmbedUrl} />
         <Testimonials />
-        <Newsletter />
         <Instagram />
+        <Newsletter />
         <Contact />
       </main>
       <Footer />

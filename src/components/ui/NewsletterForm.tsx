@@ -122,7 +122,7 @@ export default function NewsletterForm({ variant }: NewsletterFormProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="vas@email.cz"
-                className="w-full pl-11 pr-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                className="w-full pl-11 pr-4 py-4 bg-section-alt border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-secondary"
               />
             </div>
             <button
