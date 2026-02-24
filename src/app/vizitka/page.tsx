@@ -43,15 +43,25 @@ const secondaryLinks = [
   { icon: Linkedin, label: "LinkedIn", href: contactData.linkedin },
 ];
 
-const PROMPT_TEXT = "vibe-code vizitku pro Filipa Oborníka @ COE 2026";
+const PROMPT_TEXT =
+  "Hej Claude, postav vizitku pro toho týpka z COE 2026, co staví AI produkty a učí to i ostatní. Ať to žije.";
 
-const GEN_LINES = [
-  { text: "Kontaktní údaje", delay: 0 },
-  { text: "Design vizitky", delay: 250 },
-  { text: "COE 2026 branding", delay: 500 },
+const THINKING_LINES = [
+  { text: "Analyzuji požadavek...", delay: 0 },
+  { text: "AI konzultant, co sám používá AI na svou vizitku? Meta.", delay: 600 },
+  { text: "Vizitka musí být cooler než PowerPoint prezentace na expu", delay: 1300 },
+  { text: "Přidám matrix rain, protože proč ne", delay: 2000 },
 ];
 
-const GENERATION_TIME = "2.1";
+const GEN_LINES = [
+  { text: "Stahuji fotku... ok, aspoň se usmívá", delay: 0 },
+  { text: "Kontaktní údaje nalezeny", delay: 450 },
+  { text: "Aplikuji COE 2026 branding", delay: 850 },
+  { text: "Přidávám Easter egg pro pozorné čtenáře", delay: 1250 },
+  { text: "Vizitka zkompilována", delay: 1600 },
+];
+
+const GENERATION_TIME = "4.2";
 
 // ============================================
 // HOOKS
@@ -166,47 +176,63 @@ function MatrixRain({ opacity = 0.15 }: { opacity?: number }) {
 // TERMINAL OVERLAY
 // ============================================
 
-type Phase = "intro" | "generating" | "reveal" | "card";
+type Phase = "intro" | "thinking" | "generating" | "reveal" | "card";
 
 function TerminalOverlay({
   phase,
+  onThinkingDone,
   onGeneratingDone,
 }: {
   phase: Phase;
+  onThinkingDone: () => void;
   onGeneratingDone: () => void;
 }) {
   const { displayed: promptText, done: promptDone } = useTypewriter(
     PROMPT_TEXT,
-    30,
-    300
+    35,
+    600
   );
+  const [thinkingLines, setThinkingLines] = useState<number>(0);
+  const [thinkingCollapsed, setThinkingCollapsed] = useState(false);
   const [visibleLines, setVisibleLines] = useState<number>(0);
   const [showDone, setShowDone] = useState(false);
 
-  // Progress lines after prompt finishes
+  // Start thinking phase after prompt finishes
   useEffect(() => {
-    if (!promptDone || phase !== "generating") return;
+    if (!promptDone || phase !== "thinking") return;
+
+    const timers: NodeJS.Timeout[] = [];
+
+    THINKING_LINES.forEach((line, i) => {
+      timers.push(setTimeout(() => setThinkingLines(i + 1), line.delay));
+    });
+
+    // Collapse thinking and signal done
+    timers.push(
+      setTimeout(() => setThinkingCollapsed(true), 2800)
+    );
+    timers.push(
+      setTimeout(() => onThinkingDone(), 3200)
+    );
+
+    return () => timers.forEach(clearTimeout);
+  }, [promptDone, phase, onThinkingDone]);
+
+  // Generation lines
+  useEffect(() => {
+    if (phase !== "generating") return;
 
     const timers: NodeJS.Timeout[] = [];
 
     GEN_LINES.forEach((line, i) => {
-      timers.push(
-        setTimeout(() => setVisibleLines(i + 1), line.delay)
-      );
+      timers.push(setTimeout(() => setVisibleLines(i + 1), line.delay));
     });
 
-    // "Done" line
-    timers.push(
-      setTimeout(() => setShowDone(true), 750)
-    );
-
-    // Signal completion
-    timers.push(
-      setTimeout(() => onGeneratingDone(), 1200)
-    );
+    timers.push(setTimeout(() => setShowDone(true), 1900));
+    timers.push(setTimeout(() => onGeneratingDone(), 2500));
 
     return () => timers.forEach(clearTimeout);
-  }, [promptDone, phase, onGeneratingDone]);
+  }, [phase, onGeneratingDone]);
 
   return (
     <motion.div
@@ -214,7 +240,7 @@ function TerminalOverlay({
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
-      <div className="w-full max-w-[360px]">
+      <div className="w-full max-w-[370px]">
         {/* Terminal window */}
         <div className="bg-[#0d1b2a]/90 backdrop-blur-sm rounded-xl border border-white/10 shadow-2xl shadow-primary/10 overflow-hidden">
           {/* Title bar */}
@@ -223,15 +249,15 @@ function TerminalOverlay({
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
             <span className="ml-2 text-white/30 text-[10px] font-mono">
-              vibe-terminal
+              claude-code ~/vizitka
             </span>
           </div>
 
           {/* Terminal body */}
-          <div className="p-4 font-mono text-sm leading-relaxed">
+          <div className="p-4 font-mono text-[13px] leading-relaxed">
             {/* Prompt line */}
             <div className="flex gap-2">
-              <span className="text-primary shrink-0">{">"}</span>
+              <span className="text-primary shrink-0">$</span>
               <span className="text-white/90">
                 {promptText}
                 {!promptDone && (
@@ -240,8 +266,54 @@ function TerminalOverlay({
               </span>
             </div>
 
-            {/* Generation lines */}
-            {phase === "generating" && promptDone && (
+            {/* Thinking / reasoning phase */}
+            {(phase === "thinking" || phase === "generating" || thinkingCollapsed) &&
+              promptDone && (
+                <div className="mt-3">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex items-center gap-1.5 mb-1.5"
+                  >
+                    <span className="text-violet-400 text-xs">
+                      {thinkingCollapsed ? "▸" : "▾"}
+                    </span>
+                    <span className="text-violet-400/70 text-xs italic">
+                      reasoning
+                      {!thinkingCollapsed && (
+                        <span className="thinking-dots" />
+                      )}
+                    </span>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {!thinkingCollapsed && (
+                      <motion.div
+                        initial={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden border-l-2 border-violet-500/20 pl-3 ml-1 space-y-1"
+                      >
+                        {THINKING_LINES.slice(0, thinkingLines).map((line, i) => (
+                          <motion.p
+                            key={i}
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="text-white/30 text-[11px] italic"
+                          >
+                            {line.text}
+                          </motion.p>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
+
+            {/* Generation / agent execution lines */}
+            {(phase === "generating" ||
+              (phase === "reveal" && visibleLines > 0)) && (
               <div className="mt-3 space-y-1.5">
                 {GEN_LINES.slice(0, visibleLines).map((line, i) => (
                   <motion.div
@@ -357,19 +429,6 @@ function BusinessCard({ onReplay }: { onReplay: () => void }) {
 
         {/* Content */}
         <div className="relative z-10 pt-4 pb-14 px-5">
-          {/* COE 2026 Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-            className="flex justify-center mb-3"
-          >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-primary text-[11px] font-semibold tracking-wide">
-              <Sparkles size={11} />
-              COE 2026
-            </span>
-          </motion.div>
-
           {/* Photo */}
           <div className="flex justify-center mb-5">
             <motion.div
@@ -563,17 +622,21 @@ export default function VizitkaPage() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [key, setKey] = useState(0);
 
-  // Phase transitions
+  // Phase transitions: intro → thinking → generating → reveal → card
   useEffect(() => {
     if (phase === "intro") {
-      const timer = setTimeout(() => setPhase("generating"), 100);
+      const timer = setTimeout(() => setPhase("thinking"), 100);
       return () => clearTimeout(timer);
     }
   }, [phase, key]);
 
+  const handleThinkingDone = useCallback(() => {
+    setPhase("generating");
+  }, []);
+
   const handleGeneratingDone = useCallback(() => {
     setPhase("reveal");
-    setTimeout(() => setPhase("card"), 500);
+    setTimeout(() => setPhase("card"), 800);
   }, []);
 
   const handleSkip = useCallback(() => {
@@ -606,6 +669,7 @@ export default function VizitkaPage() {
             {/* Terminal */}
             <TerminalOverlay
               phase={phase}
+              onThinkingDone={handleThinkingDone}
               onGeneratingDone={handleGeneratingDone}
             />
 
@@ -613,7 +677,7 @@ export default function VizitkaPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 0.5 }}
+              transition={{ delay: 2, duration: 0.5 }}
               className="absolute bottom-8 left-0 right-0 text-center"
             >
               <span className="text-white/20 text-xs font-mono">
