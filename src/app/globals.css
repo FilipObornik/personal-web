@@ -134,6 +134,29 @@ html {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* Terminal cursor blink */
+.terminal-cursor {
+  animation: terminal-blink 0.8s step-end infinite;
+}
+
+/* Thinking dots animation */
+.thinking-dots::after {
+  content: '';
+  animation: thinking-dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes thinking-dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* Noise texture overlay */
 .noise-overlay {
   position: relative;
