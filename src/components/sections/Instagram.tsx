@@ -54,7 +54,7 @@ export default function Instagram() {
   }
 
   return (
-    <section className="pt-20 md:pt-32 pb-72 md:pb-96 relative overflow-hidden">
+    <section className="pt-20 md:pt-32 pb-20 md:pb-32 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
 
@@ -204,7 +204,6 @@ export default function Instagram() {
         </motion.div>
       </div>
 
-      <WaveSeparator fillColor="#05121f" variant={4} />
     </section>
   );
 }
