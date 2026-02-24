@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "Vizitka | Filip Oborník",
+  title: "Filip Oborník | COE 2026",
   description:
-    "Kontaktní karta Filipa Oborníka - AI & Vibe Coding konzultant. Semináře, mentoring a konzultace.",
+    "Digitální vizitka Filipa Oborníka - AI & Vibe Coding konzultant @ Czech Online Expo 2026.",
   openGraph: {
-    title: "Filip Oborník - Vizitka",
-    description: "AI & Vibe Coding konzultant - Semináře, mentoring, konzultace",
+    title: "Filip Oborník | COE 2026",
+    description: "AI & Vibe Coding konzultant @ Czech Online Expo 2026",
     type: "profile",
   },
   robots: {
