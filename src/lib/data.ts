@@ -772,6 +772,20 @@ export const workshopHradecStats = {
   discordMembers: "170+",
 };
 
+// ============================================
+// NEWSLETTER DATA
+// ============================================
+
+export const newsletterContent = {
+  badge: "Zůstaňte v obraze",
+  title: "Nechte si posílat novinky",
+  description:
+    "Zajímavé projekty, nové workshopy a další věci, o které nechcete přijít. Žádný spam — jen to podstatné, občas.",
+  privacyNote: "Žádný spam. Odhlásit se můžete kdykoliv jedním kliknutím.",
+  footerTitle: "Novinky e-mailem",
+  footerDescription: "Projekty, workshopy a další — přímo do schránky.",
+};
+
 export const workshopHradecTool = {
   name: "Macaly",
   url: "https://www.macaly.com",

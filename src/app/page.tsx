@@ -8,6 +8,7 @@ import FreeResources from "@/components/sections/FreeResources";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import Instagram from "@/components/sections/Instagram";
+import Newsletter from "@/components/sections/Newsletter";
 import WorkshopBanner from "@/components/sections/WorkshopBanner";
 import { getLatestEpisodeId, getSpotifyEmbedUrl } from "@/lib/spotify";
 
@@ -26,6 +27,7 @@ export default async function Home() {
         <Portfolio />
         <FreeResources spotifyEmbedUrl={spotifyEmbedUrl} />
         <Testimonials />
+        <Newsletter />
         <Instagram />
         <Contact />
       </main>
