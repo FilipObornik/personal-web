@@ -178,3 +178,84 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* ===== Easter Egg: Glitch Effect ===== */
+
+/* RGB channel split - red */
+.glitch-rgb-red {
+  animation: glitch-rgb-red 0.5s steps(3) forwards;
+  opacity: 0.6;
+}
+@keyframes glitch-rgb-red {
+  0% { transform: translate(0); filter: hue-rotate(-30deg) saturate(3); }
+  20% { transform: translate(4px, -2px); filter: hue-rotate(-60deg) saturate(4); }
+  40% { transform: translate(-3px, 1px); filter: hue-rotate(-30deg) saturate(3); }
+  60% { transform: translate(2px, 3px); filter: hue-rotate(-90deg) saturate(5); }
+  80% { transform: translate(-4px, -1px); filter: hue-rotate(-45deg) saturate(3); }
+  100% { transform: translate(0); filter: none; opacity: 0; }
+}
+
+/* RGB channel split - cyan */
+.glitch-rgb-cyan {
+  animation: glitch-rgb-cyan 0.5s steps(4) forwards;
+  opacity: 0.5;
+}
+@keyframes glitch-rgb-cyan {
+  0% { transform: translate(0); filter: hue-rotate(150deg) saturate(3); }
+  25% { transform: translate(-3px, 2px); filter: hue-rotate(180deg) saturate(4); }
+  50% { transform: translate(4px, -1px); filter: hue-rotate(120deg) saturate(5); }
+  75% { transform: translate(-2px, -3px); filter: hue-rotate(160deg) saturate(3); }
+  100% { transform: translate(0); filter: none; opacity: 0; }
+}
+
+/* Horizontal slice displacement */
+.glitch-slice {
+  animation: glitch-flicker 0.5s steps(2) forwards;
+}
+.glitch-slice-inner {
+  animation: glitch-slice-move 0.5s steps(5) forwards;
+}
+@keyframes glitch-slice-move {
+  0% { clip-path: inset(10% 0 80% 0); transform: translateX(0); }
+  20% { clip-path: inset(30% 0 50% 0); transform: translateX(-8px); }
+  40% { clip-path: inset(60% 0 20% 0); transform: translateX(12px); }
+  60% { clip-path: inset(15% 0 70% 0); transform: translateX(-5px); }
+  80% { clip-path: inset(45% 0 40% 0); transform: translateX(6px); }
+  100% { clip-path: inset(0); transform: translateX(0); opacity: 0; }
+}
+
+/* Scanlines overlay */
+.glitch-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 0, 0.03) 2px,
+    rgba(0, 255, 0, 0.03) 4px
+  );
+  animation: glitch-flicker 0.5s steps(3) forwards;
+}
+
+/* Flicker animation */
+@keyframes glitch-flicker {
+  0% { opacity: 0; }
+  10% { opacity: 0.8; }
+  20% { opacity: 0.2; }
+  30% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+  70% { opacity: 0.8; }
+  90% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+/* Matrix characters fade-in */
+.glitch-matrix-fade {
+  animation: glitch-matrix 0.5s ease-out forwards;
+  background: rgba(5, 18, 31, 0.7);
+}
+@keyframes glitch-matrix {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  70% { opacity: 0.8; }
+  100% { opacity: 0; }
+}

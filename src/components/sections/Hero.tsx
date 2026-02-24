@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import HeroPhoto from "@/components/sections/HeroPhoto";
 
 export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -119,165 +119,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right visual - Photo with organic blob shape and floating badges */}
-          <div className="relative hidden lg:block">
-            <div className="relative w-full max-w-md mx-auto">
-              {/* Gradient glow behind photo - pulses on reveal */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={imageLoaded ? { opacity: 1, scale: 1.1 } : { opacity: 0, scale: 0.5 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent blur-3xl"
-              />
-
-              {/* Tear effect - expanding rings */}
-              <motion.div
-                initial={{ scale: 0, opacity: 1 }}
-                animate={imageLoaded ? { scale: 2.5, opacity: 0 } : { scale: 0, opacity: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              >
-                <div className="w-32 h-32 rounded-full border-4 border-primary/60" />
-              </motion.div>
-              <motion.div
-                initial={{ scale: 0, opacity: 1 }}
-                animate={imageLoaded ? { scale: 2, opacity: 0 } : { scale: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              >
-                <div className="w-32 h-32 rounded-full border-2 border-white/40" />
-              </motion.div>
-
-              {/* Organic blob photo container - tears open */}
-              <motion.div
-                initial={{ scale: 0, rotate: -10 }}
-                animate={imageLoaded ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -10 }}
-                transition={{
-                  duration: 0.8,
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 20
-                }}
-                className="relative aspect-[4/5]"
-                style={{
-                  clipPath: "url(#blob-mask)",
-                }}
-              >
-                <Image
-                  src="/images/portrait.png"
-                  alt="Filip Oborník"
-                  fill
-                  className="object-cover object-[center_5%] scale-[1.15]" style={{ transformOrigin: "center 5%" }}
-                  priority
-                  onLoad={() => setImageLoaded(true)}
-                />
-                {/* Flash effect on reveal */}
-                <motion.div
-                  initial={{ opacity: 1 }}
-                  animate={imageLoaded ? { opacity: 0 } : { opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="absolute inset-0 bg-secondary"
-                />
-                {/* Subtle inner shadow overlay */}
-                <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.3)]" />
-              </motion.div>
-
-              {/* SVG blob mask definition */}
-              <svg className="absolute w-0 h-0">
-                <defs>
-                  <clipPath id="blob-mask" clipPathUnits="objectBoundingBox">
-                    <path d="M0.5,0.02 C0.75,0.02 0.92,0.15 0.96,0.35 C1,0.55 0.95,0.75 0.85,0.88 C0.75,1 0.55,0.98 0.4,0.96 C0.25,0.94 0.1,0.88 0.05,0.7 C0,0.52 0.05,0.3 0.15,0.15 C0.25,0 0.35,0.02 0.5,0.02" />
-                  </clipPath>
-                </defs>
-              </svg>
-
-              {/* Floating tech badges - burst out from center */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: 100, y: 200 }}
-                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 100, y: 200 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.5,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 15
-                }}
-                className="absolute -top-2 right-8"
-              >
-                <motion.div
-                  animate={imageLoaded ? { y: [0, -8, 0] } : {}}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
-                  className="px-4 py-2 bg-primary text-secondary font-semibold text-sm rounded-full shadow-lg shadow-primary/30"
-                >
-                  Umělá inteligence
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: 150, y: 100 }}
-                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 150, y: 100 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.65,
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 15
-                }}
-                className="absolute top-1/4 -left-8"
-              >
-                <motion.div
-                  animate={imageLoaded ? { y: [0, 6, 0] } : {}}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                  className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
-                >
-                  Technologické konzultace
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: 120, y: 50 }}
-                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: 120, y: 50 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.7,
-                  type: "spring",
-                  stiffness: 240,
-                  damping: 15
-                }}
-                className="absolute top-[45%] -left-4"
-              >
-                <motion.div
-                  animate={imageLoaded ? { y: [0, -5, 0] } : {}}
-                  transition={{ duration: 2.9, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-                  className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
-                >
-                  Školení
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0, x: -80, y: 80 }}
-                animate={imageLoaded ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 0, scale: 0, x: -80, y: 80 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.75,
-                  type: "spring",
-                  stiffness: 250,
-                  damping: 15
-                }}
-                className="absolute top-[55%] -right-6"
-              >
-                <motion.div
-                  animate={imageLoaded ? { y: [0, -6, 0] } : {}}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
-                  className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium text-sm rounded-full border border-white/20"
-                >
-                  Mentoring
-                </motion.div>
-              </motion.div>
-
-            </div>
-          </div>
+          {/* Right visual - Photo with organic blob shape, floating badges & easter egg */}
+          <HeroPhoto imageLoaded={imageLoaded} onImageLoad={() => setImageLoaded(true)} />
         </div>
       </div>
 
