@@ -100,19 +100,19 @@ export default function Hero() {
             >
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={23} suffix="+" delay={0.8} />
+                  <AnimatedCounter value={23} suffix="+" delay={0.4} />
                 </div>
                 <div className="text-white/50 text-sm">klientů</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={310} suffix="+" delay={1.0} />
+                  <AnimatedCounter value={310} suffix="+" delay={0.5} />
                 </div>
                 <div className="text-white/50 text-sm">proškolených lidí</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">
-                  <AnimatedCounter value={8} suffix="+" delay={1.2} />
+                  <AnimatedCounter value={8} suffix="+" delay={0.6} />
                 </div>
                 <div className="text-white/50 text-sm">let v oboru</div>
               </div>

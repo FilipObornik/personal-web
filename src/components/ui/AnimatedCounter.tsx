@@ -17,8 +17,8 @@ export default function AnimatedCounter({
   suffix = "",
   delay = 0,
   className = "",
-  damping = 60,
-  stiffness = 40,
+  damping = 30,
+  stiffness = 150,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
