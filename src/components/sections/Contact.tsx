@@ -209,7 +209,7 @@ export default function Contact() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
-                            placeholder="Vaše jméno"
+                            placeholder="vaše jméno"
                           />
                         </div>
                         <div>

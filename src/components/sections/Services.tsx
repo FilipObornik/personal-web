@@ -40,7 +40,7 @@ export default function Services() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-muted text-lg"
           >
-            Vyberte si formu, která vám nejvíce vyhovuje. Nicméně každá spolupráce je unikátní - pokud zde nenaleznete, co hledáte, rezervujte si nezávaznou schůzku a probereme, jak mohu pomoci přímo Vám.
+            Vyberte si formu, která vám nejvíce vyhovuje. Nicméně každá spolupráce je unikátní - pokud zde nenaleznete, co hledáte, rezervujte si nezávaznou schůzku a probereme, jak mohu pomoci přímo vám.
           </motion.p>
         </div>
 

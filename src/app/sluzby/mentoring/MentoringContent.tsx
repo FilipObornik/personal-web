@@ -133,7 +133,7 @@ const whyMentoring = [
     icon: Brain,
     title: "Praktické zkušenosti",
     description:
-      "Učíte se Vašich reálných projektech a situacích, ne na teoretických příkladech.",
+      "Učíte se vašich reálných projektech a situacích, ne na teoretických příkladech.",
   },
 ];
 

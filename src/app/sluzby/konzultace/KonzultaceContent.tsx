@@ -58,7 +58,7 @@ const consultationTypes = [
   {
     title: "Technické konzultace",
     description:
-      "Řešení konkrétních technických problémů, pomoc s Vašich automatizacemi nebo vibe coded řešeními.",
+      "Řešení konkrétních technických problémů, pomoc s vašich automatizacemi nebo vibe coded řešeními.",
     icon: Code2,
     examples: ["Architektura aplikace", "Zhodnocení vibe coded řešení", "..."],
   },
@@ -319,7 +319,7 @@ export default function KonzultaceContent() {
                 <div className="mb-6">
                   <CheckCircle2 className="text-primary mb-4" size={32} />
                   <h3 className="text-xl font-bold text-white mb-4">
-                    Můj závazek k Vám
+                    Můj závazek k vám
                   </h3>
                   <ul className="space-y-3">
                     {[

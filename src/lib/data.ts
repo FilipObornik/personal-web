@@ -193,7 +193,7 @@ export const services: Service[] = [
     slug: "webinare-a-workshopy",
     title: "Semináře & Workshopy",
     shortDescription:
-      "Individuální i skupinová školení na téma AI a vibe coding. Naučím vás pracovat s AI nástroji efektivně a prakticky ať už jste začátečník a nebo potřebujete zapojit AI do profesionálního vývoje software. Přijedu za Vámi nebo se potkáme online.",
+      "Individuální i skupinová školení na téma AI a vibe coding. Naučím vás pracovat s AI nástroji efektivně a prakticky ať už jste začátečník a nebo potřebujete zapojit AI do profesionálního vývoje software. Přijedu za vámi nebo se potkáme online.",
     icon: GraduationCap,
   },
   {
@@ -201,7 +201,7 @@ export const services: Service[] = [
     slug: "konzultace",
     title: "Konzultace",
     shortDescription:
-      "Díky své mnohaleté zkušenosti jako vývojář a sofware analytik Vám dokáži poradi s Vašimi technickými výzvami.",
+      "Díky své mnohaleté zkušenosti jako vývojář a sofware analytik vám dokáži poradi s vašimi technickými výzvami.",
     icon: MessageSquare,
   },
   {
@@ -217,7 +217,7 @@ export const services: Service[] = [
     slug: "mentoring",
     title: "Mentoring",
     shortDescription:
-      "Individuální nebo skupinový mentoring v oblasti AI a vibe codingu. Pravidelná online nebo osobní setkání přizpůsobené přesně Vašim cílům a tempu. Vhodné pro chvíle, kdy nevíte, kde začít nebo potřebujete co nejefektivnějí přistoupit k Vašemu vzdělávání nebo konkrétním řešením.",
+      "Individuální nebo skupinový mentoring v oblasti AI a vibe codingu. Pravidelná online nebo osobní setkání přizpůsobené přesně vašim cílům a tempu. Vhodné pro chvíle, kdy nevíte, kde začít nebo potřebujete co nejefektivnějí přistoupit k vašemu vzdělávání nebo konkrétním řešením.",
     icon: Users,
   },
   {
@@ -225,7 +225,7 @@ export const services: Service[] = [
     slug: "partnerske-projekty",
     title: "Software projekty",
     shortDescription:
-      "Menší projekty realizujeme společně a pro větší projekty vám dokáži poskytnout technické konzultace a v případě potřeby implementace Vás propojím s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru. Ať už s AI nebo bez ní.",
+      "Menší projekty realizujeme společně a pro větší projekty vám dokáži poskytnout technické konzultace a v případě potřeby implementace vás propojím s mými partnery, kteří doručijí komplexní a profesionální softwarová řešení na míru. Ať už s AI nebo bez ní.",
     icon: Handshake,
   },
 ];
@@ -674,7 +674,7 @@ export const workshopHradec = {
     "Občerstvení po dobu workshopu",
     "Networking",
   ],
-  priceNote: "Příklad: Cena prezentačního webu - 10-20tis Kč. Za zlomek ceny Vás tento workshop naučí tvořit to samé a ještě mnohem více.",
+  priceNote: "Příklad: Cena prezentačního webu - 10-20tis Kč. Za zlomek ceny vás tento workshop naučí tvořit to samé a ještě mnohem více.",
   heroFeatures: [
     "Osobní mentoring",
     "Vlastní aplikace za 1 den",
@@ -691,7 +691,7 @@ export const workshopHradecAgenda: WorkshopHradecAgendaItem[] = [
   { time: "11:00 – 13:00", title: "Společné tvoření aplikace vibe codingem", note: "společně se naučíme funkční základ a vytvoříme si aplikaci", isHighlight: true },
   { time: "13:00 – 14:00", title: "Oběd - networking a dotazy", note: "jídlo v podobě cateringu - řízečky, obložené chleby, ovoce, zelenina, ...", isBreak: true },
   { time: "14:00 – 17:00", title: "Vlastní projekty + mentoring", note: "vytvoříte si vlastní frontend aplikaci, která řeší váš reálný problém. A já vám budu celou dobu k ruce", isHighlight: true },
-  { time: "17:00 – 18:00", title: "Sdílení, rozbor, další kroky", note: "projdeme Vaše dotazy, nejasnosti a nejčastější problémy, na kterých jste se zasekli.", isHighlight: true },
+  { time: "17:00 – 18:00", title: "Sdílení, rozbor, další kroky", note: "projdeme vaše dotazy, nejasnosti a nejčastější problémy, na kterých jste se zasekli.", isHighlight: true },
   { time: "18:00 – ???", title: "Networking", note: "seznamování a diskutování témat kolem AI a vibe codingu" },
 ];
 
@@ -747,7 +747,7 @@ export const workshopHradecVibeCoding: WorkshopHradecFeature[] = [
   {
     icon: "🤖",
     title: "AI jako váš programátor",
-    description: "Vibe Coding je způsob tvorby aplikací, webů a nástrojů, kde AI píše kód za vás. Vy popisujete, co chcete vytvořit, a AI to realizuje. Nepotřebujete znát programovací jazyky — stačí umět jasně formulovat své požadavky.",
+    description: "Vibe Coding je způsob tvorby aplikací, webů a nástrojů, kde AI píše kód za vás. vy popisujete, co chcete vytvořit, a AI to realizuje. Nepotřebujete znát programovací jazyky — stačí umět jasně formulovat své požadavky.",
   },
   {
     icon: "⚡",
