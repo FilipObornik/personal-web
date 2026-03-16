@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, GraduationCap, Play, Headphones, Coffee, BookOpen, Sparkles } from "lucide-react";
+import { ExternalLink, GraduationCap, Play, Headphones, Coffee, BookOpen, Sparkles, Mic, Radio } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { freeResources, ACADEMY_STUDENT_COUNT } from "@/lib/data";
@@ -175,46 +175,44 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
           })}
         </div>
 
-        {/* Glossary + Podcast - side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-          {/* Glossary Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="group relative"
-          >
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary-light h-full">
-              {/* Pattern overlay - subtle */}
-              <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-              />
+        {/* Glossary Card - full width */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="group relative mt-8"
+        >
+          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary-light">
+            {/* Pattern overlay - subtle */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            />
 
-              <div className="relative p-6 md:p-8 flex flex-col h-full">
-                <div className="w-12 h-12 bg-primary/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <BookOpen className="text-primary" size={24} />
+            <div className="relative p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 bg-primary/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <BookOpen className="text-primary" size={24} />
+                  </div>
+                  <h3 className="font-bold text-xl md:text-2xl text-white">
+                    Slovníček AI pojmů
+                  </h3>
                 </div>
-
-                <h3 className="font-bold text-xl md:text-2xl text-white mb-2">
-                  Slovníček AI pojmů
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="text-white/70 text-sm leading-relaxed mb-4">
                   50+ pojmů z oblasti umělé inteligence srozumitelně vysvětlených. Od základů AI přes prompt engineering až po vibe coding.
                 </p>
 
                 {/* Sample terms */}
-                <div className="flex-1 flex items-center py-5 md:py-4">
-                  <div className="flex flex-wrap gap-2">
-                    {["Prompt", "LLM", "Fine-tuning", "RAG", "Halucinace", "Vibe Coding", "AI Agent", "Neuronová síť", "Token", "ChatGPT"].map((term, index) => (
-                      <span key={term} className={`px-3 py-1 bg-white/8 text-white/60 text-xs rounded-full border border-white/10${index >= 7 ? " hidden sm:inline-block" : ""}`}>
-                        {term}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {["Prompt", "LLM", "Fine-tuning", "RAG", "Halucinace", "Vibe Coding", "AI Agent", "Neuronová síť", "Token", "ChatGPT"].map((term, index) => (
+                    <span key={term} className={`px-3 py-1 bg-white/8 text-white/60 text-xs rounded-full border border-white/10${index >= 7 ? " hidden sm:inline-block" : ""}`}>
+                      {term}
+                    </span>
+                  ))}
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -233,116 +231,239 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
                     Spustit kvíz
                   </Link>
                 </div>
-
-                {/* Decorative elements */}
-                <div className="absolute top-6 right-6 w-16 h-16 border border-white/10 rounded-full hidden md:block" />
-                <div className="absolute bottom-6 right-12 w-6 h-6 bg-white/5 rounded-full hidden md:block" />
               </div>
-            </div>
-          </motion.div>
 
-          {/* Podcast Card */}
+              {/* Decorative elements */}
+              <div className="absolute top-6 right-6 w-16 h-16 border border-white/10 rounded-full hidden md:block" />
+              <div className="absolute bottom-6 right-12 w-6 h-6 bg-white/5 rounded-full hidden md:block" />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Podcasts Subsection */}
+        <div className="mt-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="group relative"
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-6"
           >
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-amber-800 to-amber-950 h-full">
-              {/* Pattern overlay - subtle */}
-              <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-              />
+            <div className="w-10 h-10 bg-primary/15 rounded-xl flex items-center justify-center">
+              <Mic className="text-primary" size={20} />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold text-secondary">
+              Podcasty<span className="text-primary">.</span>
+            </h3>
+          </motion.div>
 
-              <div className="relative p-6 md:p-8">
-                {/* Podcast Image + Badge */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
-                    <Image
-                      src="/coffee_break_promo.png"
-                      alt="Coffee Break s Filipem - Podcast"
-                      fill
-                      className="object-cover"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Coffee Break Podcast Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="group relative"
+            >
+              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-amber-800 to-amber-950 h-full">
+                {/* Pattern overlay - subtle */}
+                <div
+                  className="absolute inset-0 opacity-[0.04]"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  }}
+                />
+
+                <div className="relative p-6 md:p-8">
+                  {/* Podcast Image + Badge */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+                      <Image
+                        src="/coffee_break_promo.png"
+                        alt="Coffee Break s Filipem - Podcast"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/15 backdrop-blur-sm rounded-full text-xs font-medium text-white mb-2">
+                        <Coffee size={12} />
+                        Solo podcast
+                      </div>
+                      <h3 className="font-bold text-xl md:text-2xl text-white leading-tight">
+                        Coffee Break s Filipem
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-white/70 text-sm leading-relaxed mb-4">
+                    Novinky, inspirace a zamyšlení ze světa AI, technologií a produktů. Servírováno u kávy.
+                  </p>
+
+                  {/* Spotify Embed */}
+                  <div className="mb-4 rounded-xl overflow-hidden">
+                    <iframe
+                      src={spotifyEmbedUrl}
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                      className="rounded-xl"
                     />
                   </div>
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/15 backdrop-blur-sm rounded-full text-xs font-medium text-white mb-2">
-                      <Coffee size={12} />
-                      Podcast
-                    </div>
-                    <h3 className="font-bold text-xl md:text-2xl text-white leading-tight">
-                      Coffee Break s Filipem
-                    </h3>
+
+                  {/* Platform Links */}
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href="https://open.spotify.com/show/42u73bXQYUOmXkyf9sySMz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      <Headphones size={14} />
+                      Spotify
+                    </a>
+                    <a
+                      href="https://podcasts.apple.com/gb/podcast/coffee-break-s-filipem/id1869317894"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      Apple Podcasts
+                      <ExternalLink size={12} />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/playlist?list=PLy6-Siwmo4p-EIxm3U2DPlrMVAs0mrNZJ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      <Play size={12} className="fill-current" />
+                      YouTube
+                    </a>
+                    <a
+                      href="https://podcast.filipobornik.cz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      Web
+                      <ExternalLink size={12} />
+                    </a>
                   </div>
+
+                  {/* Decorative elements */}
+                  <div className="absolute top-6 right-6 w-16 h-16 border border-white/10 rounded-full hidden md:block" />
+                  <div className="absolute bottom-6 right-12 w-6 h-6 bg-white/5 rounded-full hidden md:block" />
                 </div>
-
-                <p className="text-white/70 text-sm leading-relaxed mb-4">
-                  Novinky, inspirace a zamyšlení ze světa AI, technologií a produktů. Servírováno u kávy.
-                </p>
-
-                {/* Spotify Embed */}
-                <div className="mb-4 rounded-xl overflow-hidden">
-                  <iframe
-                    src={spotifyEmbedUrl}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    className="rounded-xl"
-                  />
-                </div>
-
-                {/* Platform Links */}
-                <div className="flex flex-wrap gap-2">
-                  <a
-                    href="https://open.spotify.com/show/42u73bXQYUOmXkyf9sySMz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
-                  >
-                    <Headphones size={14} />
-                    Spotify
-                  </a>
-                  <a
-                    href="https://podcasts.apple.com/gb/podcast/coffee-break-s-filipem/id1869317894"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
-                  >
-                    Apple Podcasts
-                    <ExternalLink size={12} />
-                  </a>
-                  <a
-                    href="https://www.youtube.com/playlist?list=PLy6-Siwmo4p-EIxm3U2DPlrMVAs0mrNZJ"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
-                  >
-                    <Play size={12} className="fill-current" />
-                    YouTube
-                  </a>
-                  <a
-                    href="https://podcast.filipobornik.cz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
-                  >
-                    Web
-                    <ExternalLink size={12} />
-                  </a>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="absolute top-6 right-6 w-16 h-16 border border-white/10 rounded-full hidden md:block" />
-                <div className="absolute bottom-6 right-12 w-6 h-6 bg-white/5 rounded-full hidden md:block" />
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Deeplink Show Podcast Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group relative"
+            >
+              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a2b1a] to-[#0d1a0d] h-full">
+                {/* Pattern overlay - subtle */}
+                <div
+                  className="absolute inset-0 opacity-[0.04]"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  }}
+                />
+
+                <div className="relative p-6 md:p-8">
+                  {/* Podcast Image + Badge */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-lg flex-shrink-0 bg-[#CCE114]/10">
+                      <Image
+                        src="/deeplink_show_cover.png"
+                        alt="Deeplink Show - Podcast"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#CCE114]/20 backdrop-blur-sm rounded-full text-xs font-medium text-[#CCE114] mb-2">
+                        <Radio size={12} />
+                        Podcast ve dvou
+                      </div>
+                      <h3 className="font-bold text-xl md:text-2xl text-white leading-tight">
+                        Deeplink Show
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-white/70 text-sm leading-relaxed mb-4">
+                    Český podcast o AI, technologiích a byznysu. S Jindřichem Dědkem rozebíráme novinky z více perspektiv — tech i produkt.
+                  </p>
+
+                  {/* Spotify Embed */}
+                  <div className="mb-4 rounded-xl overflow-hidden">
+                    <iframe
+                      src="https://open.spotify.com/embed/show/3E4kxISJEfgqZ6r31P1uMk?utm_source=generator&theme=0"
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                      className="rounded-xl"
+                    />
+                  </div>
+
+                  {/* Platform Links */}
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href="https://open.spotify.com/show/3E4kxISJEfgqZ6r31P1uMk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      <Headphones size={14} />
+                      Spotify
+                    </a>
+                    <a
+                      href="https://podcasts.apple.com/us/podcast/deeplink-show/id1877165703"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      Apple Podcasts
+                      <ExternalLink size={12} />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@deeplinkshow"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      <Play size={12} className="fill-current" />
+                      YouTube
+                    </a>
+                    <a
+                      href="https://deeplink.show"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-[#CCE114]/20 hover:bg-[#CCE114]/30 text-[#CCE114] px-3.5 py-2 rounded-full font-semibold text-xs transition-all duration-300"
+                    >
+                      Web
+                      <ExternalLink size={12} />
+                    </a>
+                  </div>
+
+                  {/* Decorative elements */}
+                  <div className="absolute top-6 right-6 w-16 h-16 border border-[#CCE114]/15 rounded-full hidden md:block" />
+                  <div className="absolute bottom-6 right-12 w-6 h-6 bg-[#CCE114]/8 rounded-full hidden md:block" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
