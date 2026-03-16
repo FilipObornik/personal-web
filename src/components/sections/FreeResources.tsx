@@ -401,7 +401,7 @@ export default function FreeResources({ spotifyEmbedUrl }: { spotifyEmbedUrl: st
                   </div>
 
                   <p className="text-white/70 text-sm leading-relaxed mb-4">
-                    Český podcast o AI, technologiích a byznysu. S Jindřichem Dědkem rozebíráme novinky z více perspektiv — tech i produkt.
+                    Český podcast o AI, technologiích a byznysu. S Jindřichem Dědkem rozebíráme novinky z více perspektiv — tech, business i produkt.
                   </p>
 
                   {/* Spotify Embed */}
