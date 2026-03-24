@@ -396,6 +396,11 @@ export const socialLinks: SocialLink[] = [
     url: "https://discord.com/invite/mgrgyZuJuv",
     icon: MessageCircle,
   },
+  {
+    name: "aisrozumem.cz",
+    url: "https://aisrozumem.cz",
+    icon: Globe,
+  },
 ];
 
 // ============================================
