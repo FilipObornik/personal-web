@@ -58,7 +58,7 @@ const consultationTypes = [
   {
     title: "Technické konzultace",
     description:
-      "Řešení konkrétních technických problémů, pomoc s Vašich automatizacemi nebo vibe coded řešeními.",
+      "Řešení konkrétních technických problémů, pomoc s vašich automatizacemi nebo vibe coded řešeními.",
     icon: Code2,
     examples: ["Architektura aplikace", "Zhodnocení vibe coded řešení", "..."],
   },
@@ -145,7 +145,7 @@ const whyMe = [
   {
     icon: MessageSquare,
     title: "Srozumitelnost",
-    description: "Vysvětlím i komplexní témata tak, aby jim rozuměl každý",
+    description: "vysvětlím i komplexní témata tak, aby jim rozuměl každý",
   },
 ];
 
@@ -161,7 +161,7 @@ export default function KonzultaceContent() {
       <ServicePageHeader
         title="Konzultace"
         subtitle="Expertní poradenství"
-        description="Potřebujete rychle vyřešit konkrétní problém nebo se poradit o směřování vašeho projektu? Využijte mé zkušenosti jako vývojáře, analytika a AI experta."
+        description="Potřebujete rychle vyřešit konkrétní problém nebo se poradit o směřování vašeho projektu? využijte mé zkušenosti jako vývojáře, analytika a AI experta."
         icon={MessageSquare}
       />
 
@@ -319,7 +319,7 @@ export default function KonzultaceContent() {
                 <div className="mb-6">
                   <CheckCircle2 className="text-primary mb-4" size={32} />
                   <h3 className="text-xl font-bold text-white mb-4">
-                    Můj závazek k Vám
+                    Můj závazek k vám
                   </h3>
                   <ul className="space-y-3">
                     {[
@@ -419,7 +419,7 @@ export default function KonzultaceContent() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-4xl font-bold text-secondary mb-4"
               >
-                Vyberte si, co vám vyhovuje<span className="text-primary">.</span>
+                vyberte si, co vám vyhovuje<span className="text-primary">.</span>
               </motion.h2>
             </div>
 
