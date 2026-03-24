@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+/.claude/worktrees
+
 # production
 /build
 
