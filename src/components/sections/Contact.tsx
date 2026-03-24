@@ -147,7 +147,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-secondary font-bold text-xl">
-                    Vyberte si termín
+                    vyberte si termín
                   </h3>
                   <p className="text-muted text-sm">
                     15minutový úvodní hovor zdarma
@@ -209,7 +209,7 @@ export default function Contact() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
-                            placeholder="Vaše jméno"
+                            placeholder="vaše jméno"
                           />
                         </div>
                         <div>
@@ -238,7 +238,7 @@ export default function Contact() {
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                           className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
                         >
-                          <option value="">Vyberte službu (nepovinné)</option>
+                          <option value="">vyberte službu (nepovinné)</option>
                           {services.map((service) => (
                             <option key={service.id} value={service.slug}>
                               {service.title}

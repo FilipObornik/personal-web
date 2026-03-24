@@ -35,7 +35,7 @@ import Footer from "@/components/layout/Footer";
 import WaveSeparator from "@/components/ui/WaveSeparator";
 
 const projectTypes = [
-  { title: "Webové Prezentace", description: "Moderní webové prezentace a landing page na míru - od desingu přes implementaci až po následný provoz. Díky využití AI bude Váš web hotový rychle a mnohem levněji, než dříve.", icon: Globe, examples: ["Web pro kavárnu", "Landing page nového produktu", "Osobní vizitka"] },
+  { title: "Webové Prezentace", description: "Moderní webové prezentace a landing page na míru - od desingu přes implementaci až po následný provoz. Díky využití AI bude váš web hotový rychle a mnohem levněji, než dříve.", icon: Globe, examples: ["Web pro kavárnu", "Landing page nového produktu", "Osobní vizitka"] },
   { title: "Mobilní aplikace", description: "Nativní i cross-platform mobilní aplikace pro iOS a Android. Od prvotního návrhu po publikaci v obchodech.", icon: Smartphone, examples: ["iOS aplikace", "Android aplikace", "Cross-platform", "PWA"] },
   { title: "AI integrace", description: "Nasazení umělé inteligence do vašich produktů a procesů. Chatboti, automatizace, analýza dat a další AI řešení.", icon: Brain, examples: ["Chatboti", "Automatizace", "Analýza dat", "ML modely"] },
   { title: "Webové aplikace", description: "Moderní webové aplikace na míru - od jednoduchých webových aplikací až po komplexní SaaS platformy. React, Next.js, Node.js a další moderní technologie.", icon: Globe, examples: ["E-commerce", "Interní systémy", "SaaS platformy", "Portály"] },
@@ -44,19 +44,19 @@ const projectTypes = [
 
 const collaborationProcess = [
   { icon: MessageCircleQuestion, title: "Úvodní konzultace", description: "Probereme váš projekt a potřeby" },
-  { icon: FileSearch, title: "Propojení s partnery", description: "Vyslechnutí vašich potřeb" },
+  { icon: FileSearch, title: "Propojení s partnery", description: "vyslechnutí vašich potřeb" },
   { icon: Users, title: "Technická analýza", description: "Zpracování analýzi a návrh řešení" },
   { icon: Rocket, title: "Realizace projektu", description: "Partneři realizují projekt, mě máte vždy po ruce" },
 ];
 
 const whyPartnership = [
   { icon: Shield, title: "Ověření partneři", description: "Spolupracuji pouze s profesionály, se kterými mám osobní zkušenost a jejichž práci znám" },
-  { icon: Brain, title: "Techincké konzultace", description: "Partneři si projekt vezmou na starosti od začátku do konce, já Vám budu k dispozici po celou dobu ke konzultacím." },
-  { icon: Zap, title: "AI-first přístup", description: "Využíváme AI nástroje pro rychlejší a efektivnější vývoj" },
+  { icon: Brain, title: "Techincké konzultace", description: "Partneři si projekt vezmou na starosti od začátku do konce, já vám budu k dispozici po celou dobu ke konzultacím." },
+  { icon: Zap, title: "AI-first přístup", description: "využíváme AI nástroje pro rychlejší a efektivnější vývoj" },
 ];
 
 const projectExamples = [
-  { icon: LineChart, text: "Prezentační web, osobní portfolio nebo landing page Vašeho nového produktu" },
+  { icon: LineChart, text: "Prezentační web, osobní portfolio nebo landing page vašeho nového produktu" },
   { icon: ShoppingCart, text: "E-shop s napojením na skladový systém" },
   { icon: Database, text: "Interní systém pro správu klientů a automatizaci procesů" },
   { icon: Globe, text: "Moderní webová prezentace s redakčním systémem" },
@@ -66,7 +66,7 @@ const projectExamples = [
 
 const serviceOptions = [
   { title: "Technické konzultace", description: "Potřebujete pouze technickou expertízu? Pomohu s architekturou, výběrem technologií nebo code review vašeho existujícího projektu.", icon: Lightbulb, features: ["Architektonický návrh", "Výběr technologií", "Code review", "Technická specifikace"], link: "/sluzby/konzultace", linkText: "Více o konzultacích" },
-  { title: "Kompletní realizace", description: "Potřebujete celé řešení od A do Z? Propojím Vás s partnery, kteří váš projekt kompletně zrealizují. Máte mě k dispozici ke konzultacím.", icon: Wrench, features: ["Návrh a specifikace", "Vývoj a implementace", "Testování a nasazení", "Podpora a údržba"], link: "/#kontakt", linkText: "Nezávazná poptávka" },
+  { title: "Kompletní realizace", description: "Potřebujete celé řešení od A do Z? Propojím vás s partnery, kteří váš projekt kompletně zrealizují. Máte mě k dispozici ke konzultacím.", icon: Wrench, features: ["Návrh a specifikace", "Vývoj a implementace", "Testování a nasazení", "Podpora a údržba"], link: "/#kontakt", linkText: "Nezávazná poptávka" },
   { title: "AI implementace", description: "Chcete do projektu zapojit umělou inteligenci? Navrhnu a implementuji AI řešení, která přinesou reálnou hodnotu.", icon: Cpu, features: ["AI strategie", "Výběr nástrojů", "Integrace do systémů", "Školení týmu"], link: "/sluzby/ai-implementace", linkText: "Více o AI implementaci" },
 ];
 
@@ -82,7 +82,7 @@ export default function PartnerskeProjektyContent() {
       <ServicePageHeader
         title="Software projekty"
         subtitle="Partnerská síť"
-        description="Menší projekty realizujeme společně a pro větší projekty vás propojím s mými ověřenými partnery, kteří navrhnou profesionální řešení a projekt realizují. Já Vám ale budu neustále k dispozici."
+        description="Menší projekty realizujeme společně a pro větší projekty vás propojím s mými ověřenými partnery, kteří navrhnou profesionální řešení a projekt realizují. Já vám ale budu neustále k dispozici."
         icon={Handshake}
       />
 
@@ -121,7 +121,7 @@ export default function PartnerskeProjektyContent() {
               <div>
                 <motion.span initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block">Proč partnerský model</motion.span>
                 <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl md:text-4xl font-bold text-white mb-6">Výhody spolupráce<span className="text-primary">.</span></motion.h2>
-                <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-white/70 text-lg mb-8">Kombinuji své technické know-how s kapacitami zkušených partnerů. Vy získáte profesionální ověřený tým a mě k ruce ke konzultacím.</motion.p>
+                <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-white/70 text-lg mb-8">Kombinuji své technické know-how s kapacitami zkušených partnerů. vy získáte profesionální ověřený tým a mě k ruce ke konzultacím.</motion.p>
                 <div className="space-y-4">
                   {whyPartnership.map((item, index) => {
                     const Icon = item.icon;
@@ -182,7 +182,7 @@ export default function PartnerskeProjektyContent() {
           <div className="container-narrow mx-auto">
             <div className="text-center mb-12">
               <motion.span initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block">Možnosti spolupráce</motion.span>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl md:text-4xl font-bold text-secondary mb-4">Vyberte si, co potřebujete<span className="text-primary">.</span></motion.h2>
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl md:text-4xl font-bold text-secondary mb-4">vyberte si, co potřebujete<span className="text-primary">.</span></motion.h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {serviceOptions.map((option, index) => {

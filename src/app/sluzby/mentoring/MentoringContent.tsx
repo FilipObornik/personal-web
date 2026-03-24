@@ -121,7 +121,7 @@ const whyMentoring = [
     icon: Clock,
     title: "Úspora času",
     description:
-      "Vyhnete se slepým uličkám a zbytečnému zkoušení. Naučím vás to, co opravdu funguje.",
+      "vyhnete se slepým uličkám a zbytečnému zkoušení. Naučím vás to, co opravdu funguje.",
   },
   {
     icon: Zap,
@@ -133,7 +133,7 @@ const whyMentoring = [
     icon: Brain,
     title: "Praktické zkušenosti",
     description:
-      "Učíte se Vašich reálných projektech a situacích, ne na teoretických příkladech.",
+      "Učíte se vašich reálných projektech a situacích, ne na teoretických příkladech.",
   },
 ];
 
@@ -273,7 +273,7 @@ export default function MentoringContent() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
               >
-                Vyberte si, co vám vyhovuje<span className="text-primary">.</span>
+                vyberte si, co vám vyhovuje<span className="text-primary">.</span>
               </motion.h2>
             </div>
 

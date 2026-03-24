@@ -56,7 +56,7 @@ export default function NewsletterForm({ variant }: NewsletterFormProps) {
             className="flex items-center gap-2 text-green-400 text-sm"
           >
             <CheckCircle2 size={16} />
-            <span>Skvěle! Váš e-mail byl úspěšně přidán.</span>
+            <span>Skvěle! váš e-mail byl úspěšně přidán.</span>
           </motion.div>
         ) : (
           <motion.div key="form" exit={{ opacity: 0 }}>
@@ -103,7 +103,7 @@ export default function NewsletterForm({ variant }: NewsletterFormProps) {
           className="flex items-center gap-2 text-green-600 justify-center py-4"
         >
           <CheckCircle2 size={20} />
-          <span>Skvěle! Váš e-mail byl úspěšně přidán.</span>
+          <span>Skvěle! váš e-mail byl úspěšně přidán.</span>
         </motion.div>
       ) : (
         <motion.div key="form" exit={{ opacity: 0 }}>

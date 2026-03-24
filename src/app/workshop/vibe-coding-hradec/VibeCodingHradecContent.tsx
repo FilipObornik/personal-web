@@ -1047,7 +1047,7 @@ export default function VibeCodingHradecContent() {
                   viewport={{ once: true }}
                   className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block"
                 >
-                  Váš lektor
+                  váš lektor
                 </motion.span>
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
@@ -1215,7 +1215,7 @@ export default function VibeCodingHradecContent() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
               >
-                Zaujal Vás workshop<span className="text-primary">?</span>
+                Zaujal vás workshop<span className="text-primary">?</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -1225,7 +1225,7 @@ export default function VibeCodingHradecContent() {
                 className="text-white/60"
               >
                 Udělejte si nezávaznou registraci. Jakmile bude termín, ozveme se
-                Vám jako prvním.
+                vám jako prvním.
               </motion.p>
             </div>
 
@@ -1304,7 +1304,7 @@ export default function VibeCodingHradecContent() {
                           id="name"
                           name="name"
                           required
-                          placeholder="Vaše jméno"
+                          placeholder="vaše jméno"
                           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-primary transition-colors"
                         />
                       </div>
@@ -1348,7 +1348,7 @@ export default function VibeCodingHradecContent() {
                         htmlFor="expectations"
                         className="block text-white/80 text-sm mb-2"
                       >
-                        Jaké jsou Vaše očekávání od workshopu? (nepovinné)
+                        Jaké jsou vaše očekávání od workshopu? (nepovinné)
                       </label>
                       <textarea
                         id="expectations"

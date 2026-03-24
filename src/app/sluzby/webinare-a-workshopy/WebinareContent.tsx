@@ -74,7 +74,7 @@ export default function WebinareContent() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-4xl font-bold text-secondary mb-4"
               >
-                Co Vás naučím<span className="text-primary">.</span>
+                Co vás naučím<span className="text-primary">.</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ export default function WebinareContent() {
                 transition={{ delay: 0.2 }}
                 className="text-muted text-lg max-w-2xl mx-auto"
               >
-                Vyberte si téma podle vašich potřeb a zkušeností. Každý workshop
+                vyberte si téma podle vašich potřeb a zkušeností. Každý workshop
                 je šitý na míru, praktický, interaktivní a zaměřený na okamžité využití v praxi.
               </motion.p>
             </div>
@@ -367,7 +367,7 @@ export default function WebinareContent() {
                   { icon: ClipboardList, title: "Zjištění potřeb", desc: "Úvodní rozhovor o vašich cílech" },
                   { icon: FileQuestion, title: "Dotazník pro tým", desc: "Přizpůsobení obsahu na míru" },
                   { icon: Presentation, title: "Workshop nebo školení", desc: "Interaktivní obsah" },
-                  { icon: MessageCircleQuestion, title: "Živé Q&A", desc: "Prostor pro Vaše dotazy" },
+                  { icon: MessageCircleQuestion, title: "Živé Q&A", desc: "Prostor pro vaše dotazy" },
                   { icon: FileText, title: "Materiály", desc: "Obdržíte materiály a důležité odkazy" },
                   { icon: Mail, title: "Follow-up", desc: "Možnost zaslání dalších otázek" },
                 ].map((step, index) => {
@@ -725,7 +725,7 @@ export default function WebinareContent() {
                       Akademie AI s Rozumem
                     </h3>
                     <p className="text-white/80 text-sm leading-relaxed mb-6">
-                      Vyzkoušejte si mé online kurzy a podívejte se na preview
+                      vyzkoušejte si mé online kurzy a podívejte se na preview
                       lekce. Získáte představu o stylu a obsahu mých workshopů.
                     </p>
                     <a
@@ -818,7 +818,7 @@ export default function WebinareContent() {
                 Máte zájem o školení nebo workshop<span className="text-primary">?</span>
               </h2>
               <p className="text-white/70 text-lg mb-8">
-                Ať už hledáte školení pro sebe nebo pro celý tým, rád s Vámi
+                Ať už hledáte školení pro sebe nebo pro celý tým, rád s vámi
                 proberu možnosti. Napište mi a domluvíme se.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
