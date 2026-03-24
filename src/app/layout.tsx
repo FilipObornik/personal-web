@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, SUSE } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
+
+const GTM_ID = "GTM-TQ6MVCK2";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -58,6 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="cs">
+      <GoogleTagManager gtmId={GTM_ID} />
       <body className={`${inter.variable} ${suse.variable} antialiased font-sans`}>
         {children}
       </body>
