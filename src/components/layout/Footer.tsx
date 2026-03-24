@@ -1,4 +1,4 @@
-import { siteConfig, newsletterContent } from "@/lib/data";
+import { siteConfig, newsletterContent, socialLinks } from "@/lib/data";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 
 export default function Footer() {
@@ -19,6 +19,24 @@ export default function Footer() {
           <div className="md:w-[400px]">
             <NewsletterForm variant="footer" />
           </div>
+        </div>
+
+        <div className="flex justify-center gap-6 mb-6">
+          {socialLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              >
+                <Icon size={16} />
+                {link.name}
+              </a>
+            );
+          })}
         </div>
 
         <div className="text-center">
