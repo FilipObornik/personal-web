@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibecodingem to teprve začíná | Filip Oborník</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060d16;--card:rgba(255,255,255,.04);--a:#e88f31;--al:#f5a54d;--ag:rgba(232,143,49,.25);--as:rgba(232,143,49,.1);--t:#f0f0f0;--t2:rgba(255,255,255,.88);--t3:rgba(255,255,255,.65);--b:rgba(255,255,255,.08);--bh:rgba(255,255,255,.15);--f:'Inter',system-ui,sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{overflow:hidden}
+body{font-family:var(--f);background:var(--bg);color:var(--t);overflow:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+.slides{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.slide{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:3vh 4vw;position:relative;overflow:hidden}
+.si{max-width:1600px;width:100%;z-index:2;position:relative}
+.am{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:0;transition:opacity 1.5s}
+.slide.active .am{opacity:1}
+
+.prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--a),var(--al));z-index:200;transition:width .5s;width:0}
+.dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:8px}
+.dt{width:6px;height:6px;border-radius:50%;background:var(--t3);cursor:pointer;transition:all .3s;border:none;padding:0}
+.dt:hover{background:var(--t2)}.dt.on{background:var(--a);box-shadow:0 0 10px var(--ag);transform:scale(1.6)}
+.ctr{position:fixed;bottom:28px;right:28px;z-index:200;font-size:clamp(12px,1vw,15px);color:var(--t3);font-variant-numeric:tabular-nums}.ctr b{color:var(--a);font-weight:600}
+
+.slide .si>*{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.slide.active .si>*{opacity:1;transform:translateY(0)}
+.slide.active .si>*:nth-child(1){transition-delay:.05s}
+.slide.active .si>*:nth-child(2){transition-delay:.15s}
+.slide.active .si>*:nth-child(3){transition-delay:.25s}
+.slide.active .si>*:nth-child(4){transition-delay:.35s}
+
+.step{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.step.revealed{opacity:1;transform:translateY(0);pointer-events:auto}
+
+.h0{font-size:clamp(4.5rem,10vw,9rem);font-weight:900;line-height:1;letter-spacing:-.04em}
+.h1{font-size:clamp(3.2rem,7vw,6rem);font-weight:800;line-height:1.05;letter-spacing:-.035em}
+.h2{font-size:clamp(2.4rem,5vw,4.2rem);font-weight:700;line-height:1.15;letter-spacing:-.025em}
+.h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;line-height:1.35}
+.sub{font-size:clamp(1.15rem,1.8vw,1.65rem);line-height:1.6;color:var(--t2)}
+.small{font-size:clamp(1.05rem,1.35vw,1.35rem);color:var(--t3);line-height:1.5}
+.ac{background:linear-gradient(135deg,var(--a),var(--al));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.tag{display:inline-block;padding:10px 24px;border-radius:100px;font-size:clamp(12px,1.2vw,16px);font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+.tag-n{background:var(--as);color:var(--a);border:1px solid rgba(232,143,49,.2)}
+.line{width:clamp(48px,5vw,72px);height:3px;background:linear-gradient(90deg,var(--a),var(--al));border-radius:2px}
+
+.speaker{display:inline-flex;align-items:center;gap:16px;padding:10px 28px 10px 10px;background:var(--card);border:1px solid var(--b);border-radius:100px;font-size:clamp(1.1rem,1.5vw,1.45rem)}
+.speaker .av{width:clamp(40px,3.5vw,56px);height:clamp(40px,3.5vw,56px);border-radius:50%;background:linear-gradient(135deg,var(--a),var(--al));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg);font-size:clamp(14px,1.4vw,18px)}
+.card{background:var(--card);border:1px solid var(--b);border-radius:16px;padding:clamp(24px,2.5vw,36px);position:relative;overflow:hidden;transition:all .4s}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent)}
+.card:hover{border-color:var(--bh)}
+.centered{text-align:center;display:flex;flex-direction:column;align-items:center}
+.contact a{color:var(--a);text-decoration:none;font-weight:500;font-size:clamp(1.05rem,1.4vw,1.35rem)}.contact a:hover{color:var(--al)}
+
+/* ── PUZZLE ── */
+.puzzle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,16px);justify-items:center;max-width:700px;width:100%}
+.pz{border-radius:14px;padding:0 clamp(16px,2vw,32px);text-align:center;font-size:clamp(1.1rem,1.5vw,1.45rem);font-weight:600;line-height:1.3;width:100%;display:flex;align-items:center;justify-content:center;height:clamp(70px,8vh,100px);opacity:0;transform:scale(.8);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.pz.revealed{opacity:1;transform:scale(1)}
+.pz.code{background:linear-gradient(135deg,var(--a),var(--al));color:var(--bg);font-size:clamp(1.2rem,1.7vw,1.6rem);box-shadow:0 0 30px var(--ag);grid-row:2;grid-column:2}
+.pz.oth{background:var(--card);border:1px solid var(--b);color:var(--t2)}
+
+/* ── DISPOSABLE ── */
+.disp{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(16px,2vw,28px)}
+.disp-c{background:var(--card);border:1px solid var(--b);border-radius:18px;padding:clamp(24px,3vw,40px);text-align:center;transition:all .4s}
+.disp-c:hover{border-color:var(--bh);transform:translateY(-2px)}
+.disp-i{font-size:clamp(2rem,3vw,3rem);margin-bottom:12px}
+
+/* ── TIMELINE ── */
+.tl{display:flex;align-items:flex-start;justify-content:space-between;width:100%;max-width:1100px;position:relative;padding:0 20px}
+.tl::before{content:'';position:absolute;top:28px;left:60px;right:60px;height:2px;background:rgba(255,255,255,.07);z-index:0}
+.tl-item{display:flex;flex-direction:column;align-items:center;gap:12px;z-index:1;flex:1;text-align:center}
+.tl-dot{width:clamp(44px,4vw,56px);height:clamp(44px,4vw,56px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(1.1rem,1.6vw,1.4rem);border:2px solid var(--b);background:var(--card);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.tl-item.hi .tl-dot{background:linear-gradient(135deg,var(--a),var(--al));border-color:transparent;box-shadow:0 0 28px var(--ag);transform:scale(1.15)}
+.tl-era{font-size:clamp(.65rem,.8vw,.82rem);font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.tl-item.hi .tl-era{color:var(--al)}
+.tl-name{font-size:clamp(.85rem,1.1vw,1.1rem);font-weight:700;color:var(--t3);line-height:1.3}
+.tl-item.hi .tl-name{color:var(--t);font-size:clamp(.95rem,1.3vw,1.25rem)}
+.tl-desc{font-size:clamp(.7rem,.85vw,.88rem);color:var(--t3);line-height:1.4;max-width:110px}
+.tl-item.hi .tl-desc{color:var(--t2)}
+
+/* ── AGENT LOOP ── */
+.loop-step{background:var(--card);border:1px solid var(--b);border-radius:14px;padding:clamp(16px,2vw,28px);text-align:center;min-width:clamp(130px,14vw,190px);flex:1;max-width:220px}
+.loop-step.hi{border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent)}
+.loop-arr-h{color:var(--a);font-size:clamp(1.2rem,2vw,1.8rem);opacity:.6;flex-shrink:0}
+
+/* ── ORCHESTRACE ── */
+.orch-wrap{display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.2vw,16px);width:100%;max-width:860px}
+.orch-main{background:linear-gradient(135deg,var(--as),transparent);border:1px solid rgba(232,143,49,.3);border-radius:14px;padding:clamp(16px,2vw,28px);text-align:center;min-width:220px}
+.orch-agents{display:flex;justify-content:center;width:100%;gap:clamp(8px,1.2vw,16px)}
+.orch-agent{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:clamp(12px,1.5vw,20px);text-align:center;flex:1;max-width:180px}
+.orch-agent.hi{border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent)}
+.orch-line{width:2px;height:clamp(20px,2.5vw,32px);background:linear-gradient(to bottom,rgba(232,143,49,.5),rgba(232,143,49,.15));margin:0 auto}
+.orch-human{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:clamp(14px,1.8vw,24px);text-align:center;min-width:200px}
+.orch-spread{width:80%;max-width:600px;height:2px;background:linear-gradient(90deg,transparent,rgba(232,143,49,.25),transparent);position:relative}
+.orch-spread::before,.orch-spread::after{content:'';position:absolute;top:0;bottom:0;width:2px;background:rgba(232,143,49,.25)}
+.orch-spread::before{left:16%}.orch-spread::after{right:16%}
+
+/* ── STORY (slide 09) ── */
+.story-row{display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;max-width:860px}
+.story-human{background:var(--as);border:1px solid rgba(232,143,49,.2);border-radius:12px;padding:clamp(10px,1.2vw,16px) clamp(16px,2vw,24px);flex:1}
+.story-agent{background:var(--card);border:1px solid rgba(232,143,49,.3);border-radius:12px;padding:clamp(10px,1.2vw,16px) clamp(16px,2vw,24px);flex-shrink:0;white-space:nowrap}
+.story-arr{color:var(--a);font-size:1.2rem;flex-shrink:0;opacity:.7}
+
+/* ── 3 VÝZVY (slide 13) ── */
+.vyzva{display:flex;align-items:center;gap:clamp(20px,3vw,48px);max-width:900px;width:100%}
+.vyzva-num{font-size:clamp(3rem,6vw,6rem);font-weight:900;line-height:1;flex-shrink:0;min-width:clamp(60px,7vw,100px)}
+.vyzva-icon{font-size:clamp(2rem,3vw,3rem);flex-shrink:0}
+
+/* ── TOOL BADGES ── */
+.tool-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.tool-badge{padding:5px 14px;border-radius:100px;font-size:clamp(.7rem,.85vw,.88rem);font-weight:600;letter-spacing:.4px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--t3)}
+
+/* Click hint */
+.click-hint{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:200;font-size:clamp(11px,1vw,14px);color:var(--t3);display:flex;align-items:center;gap:8px;opacity:0;transition:opacity .5s}
+.click-hint.show{opacity:1}
+.click-hint kbd{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border:1px solid var(--bh);border-radius:4px;font-size:clamp(10px,.9vw,13px);font-family:var(--f);color:var(--t3)}
+
+@media(max-width:1024px){.slide{padding:3vh 3vw}.disp{grid-template-columns:1fr 1fr}.tl{flex-wrap:wrap;justify-content:center;gap:20px}.tl::before{display:none}.orch-agents{flex-wrap:wrap}}
+@media(max-width:768px){.slide{padding:2vh 2vw}.dots{display:none}.story-row{flex-wrap:wrap}}
+
+#particles{position:fixed;inset:0;z-index:1;pointer-events:none}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="prog" id="prog"></div>
+<nav class="dots" id="dots"></nav>
+<div class="ctr"><b id="cur">01</b> / <span id="tot">16</span></div>
+<div class="click-hint" id="clickHint"><kbd>→</kbd> nebo klik pro další</div>
+
+<div class="slides" id="slides">
+
+<!-- ═══ 01 TITLE ═══ -->
+<section class="slide" id="s0">
+    <div class="am" style="width:500px;height:500px;top:-15%;right:-10%;background:radial-gradient(circle,rgba(232,143,49,.12),transparent 70%)"></div>
+    <div class="am" style="width:400px;height:400px;bottom:-10%;left:-5%;background:radial-gradient(circle,rgba(59,130,246,.07),transparent 70%)"></div>
+    <div class="si centered" style="justify-content:center;min-height:0">
+        <div class="tag tag-n" style="margin-bottom:32px">DAMI Síťovka #3 &middot; 25. 3. 2026</div>
+        <h1 class="h1"><span class="ac">Vibecodingem</span><br>to teprve začíná</h1>
+        <div class="line" style="margin:28px auto"></div>
+        <p class="sub" style="max-width:540px;margin-bottom:0">AI dramaticky mění vývoj software.</p>
+    </div>
+    <div style="position:absolute;bottom:clamp(28px,4vh,48px);left:50%;transform:translateX(-50%);z-index:2">
+        <div class="speaker"><div class="av">FO</div><span><strong>Filip Oborník</strong> &middot; AI s rozumem</span></div>
+    </div>
+</section>
+
+<!-- ═══ 03 KARPATHY — DEFINICE ═══ -->
+<section class="slide" id="skarpathy">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.07),transparent 60%)"></div>
+    <div class="si centered">
+        <div class="tag tag-n" style="margin-bottom:36px">Definice</div>
+        <div style="max-width:920px;text-align:center">
+            <p class="h2" style="font-weight:500;line-height:1.45;color:var(--t2);margin-bottom:40px">
+                „There's a new kind of coding I call <span class="ac" style="font-style:normal;font-weight:700">vibe coding</span>, where you fully give in to the vibes, embrace exponentials, and <em>forget that the code even exists</em>."
+            </p>
+            <div class="line" style="margin:0 auto 24px"></div>
+            <p class="sub" style="color:var(--t3)">Andrej Karpathy &nbsp;&middot;&nbsp; spoluzakladatel OpenAI, bývalý šéf AI Tesla &nbsp;&middot;&nbsp; 2025</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 04 S VIBECODING HODNĚ VĚCÍ ═══ -->
+<section class="slide" id="s1">
+    <div class="am" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.08),transparent 65%)"></div>
+    <div class="si centered">
+        <h2 class="h2">S vibecoding se dá postavit<br><span class="ac">hodně věcí.</span></h2>
+        <p class="sub" style="margin-top:12px;max-width:520px">Má svoje místo. A to nezanedbatelné.</p>
+        <div class="step" data-step="s1-0" style="margin-top:36px;width:100%;max-width:1100px">
+            <div class="disp" style="grid-template-columns:1fr 1fr 1fr 1fr">
+                <div class="disp-c"><div class="disp-i">📐</div><div class="h3">Prototypy</div></div>
+                <div class="disp-c"><div class="disp-i">🧪</div><div class="h3">Validace nápadů</div></div>
+                <div class="disp-c"><div class="disp-i">📊</div><div class="h3">Interní dashboardy</div></div>
+                <div class="disp-c"><div class="disp-i">🔧</div><div class="h3">Vlastní nástroje</div></div>
+            </div>
+            <div class="tool-badges">
+                <span class="tool-badge">Cursor</span>
+                <span class="tool-badge">Macaly</span>
+                <span class="tool-badge">Lovable</span>
+                <span class="tool-badge">Bolt</span>
+                <span class="tool-badge">v0</span>
+                <span class="tool-badge">Claude Code</span>
+                <span class="tool-badge">Replit</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 05 GRAF — ÚČINNOST VIBECODING ═══ -->
+<section class="slide" id="sgraf1">
+    <div class="am" style="width:700px;height:300px;top:35%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.06),transparent 70%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Úspěšnost vibe codingu<br><span class="ac">klesá s komplexitou.</span></h2>
+        <p class="sub" style="margin-bottom:24px;max-width:560px;opacity:0;pointer-events:none">&nbsp;</p>
+        <div style="width:100%;max-width:100%;height:clamp(280px,36vh,420px);position:relative">
+            <canvas id="corrGraph1" style="width:100%;height:100%"></canvas>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:28px;align-items:center;justify-content:center">
+            <span style="display:flex;align-items:center;gap:8px;font-size:clamp(.9rem,1.1vw,1.15rem);color:var(--al)"><span style="width:32px;height:4px;background:var(--a);border-radius:2px;display:inline-block"></span>Účinnost vibecoding</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 06 DVOJITÝ GRAF ═══ -->
+<section class="slide" id="sgraf">
+    <div class="am" style="width:700px;height:300px;top:35%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.06),transparent 70%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Čím složitější produkt,<br>tím <span class="ac">menší roli kód hraje</span>.</h2>
+        <p class="sub" style="margin-bottom:24px;max-width:560px">A tím méně stačí samotný vibecoding.</p>
+        <div style="width:100%;max-width:100%;height:clamp(280px,36vh,420px);position:relative">
+            <canvas id="corrGraph" style="width:100%;height:100%"></canvas>
+        </div>
+        <div class="step" data-step="sg-legend" style="margin-top:16px;display:flex;gap:28px;align-items:center;justify-content:center">
+            <span style="display:flex;align-items:center;gap:8px;font-size:clamp(.9rem,1.1vw,1.15rem);color:var(--al)"><span style="width:32px;height:4px;background:var(--a);border-radius:2px;display:inline-block"></span>Účinnost vibecoding</span>
+            <span style="display:flex;align-items:center;gap:8px;font-size:clamp(.9rem,1.1vw,1.15rem);color:#60a5fa"><span style="width:32px;height:4px;background:#60a5fa;border-radius:2px;display:inline-block;opacity:.7"></span>Podíl kódu na celku</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 06 SOFTWARE JE SKLÁDAČKA ═══ -->
+<section class="slide" id="s5">
+    <div class="am" style="width:500px;height:500px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(59,130,246,.05),transparent 65%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Software je <span class="ac">skládačka</span>.</h2>
+        <p class="sub" style="margin-bottom:20px">Kód je jen jeden z dílků. A těch dílků je <em>hodně</em>.</p>
+        <div style="width:100%;max-width:760px">
+            <div class="puzzle-grid" style="max-width:760px">
+                <div class="pz code step" data-step="s5-0">Kód</div>
+                <div class="pz oth step" data-step="s5-1" style="grid-row:1;grid-column:1">Monitoring</div>
+                <div class="pz oth step" data-step="s5-2" style="grid-row:1;grid-column:2">Architektura</div>
+                <div class="pz oth step" data-step="s5-3" style="grid-row:1;grid-column:3">Bezpečnost</div>
+                <div class="pz oth step" data-step="s5-4" style="grid-row:2;grid-column:1">DevOps</div>
+                <div class="pz oth step" data-step="s5-5" style="grid-row:2;grid-column:3">Testování</div>
+                <div class="pz oth step" data-step="s5-6" style="grid-row:3;grid-column:1">Spolehlivost</div>
+                <div class="pz oth step" data-step="s5-7" style="grid-row:3;grid-column:2">Škálovatelnost</div>
+                <div class="pz oth step" data-step="s5-8" style="grid-row:3;grid-column:3">Údržba</div>
+                <div class="pz oth step" data-step="s5-9" style="grid-row:4;grid-column:1">GDPR</div>
+                <div class="pz oth step" data-step="s5-10" style="grid-row:4;grid-column:2">Compliance</div>
+                <div class="pz oth step" data-step="s5-11" style="grid-row:4;grid-column:3">NIS2</div>
+            </div>
+            <div class="step" data-step="s5-12" style="display:flex;align-items:center;gap:8px;margin-top:clamp(10px,1.2vw,16px);justify-content:center">
+                <span style="width:36px;height:clamp(24px,3vh,36px);border-radius:7px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.12)"></span>
+                <span style="width:36px;height:clamp(24px,3vh,36px);border-radius:7px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.12)"></span>
+                <span style="width:36px;height:clamp(24px,3vh,36px);border-radius:7px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.12)"></span>
+                <span class="small" style="margin-left:10px;color:var(--t3)">…a desítky dalších dílků</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══ 07 VIBECODING vs. AGENTIC ENGINEERING ═══ -->
+<section class="slide" id="sagentic">
+    <div class="am" style="width:700px;height:300px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.08),transparent 70%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Vibecoding <span style="color:var(--t3)">vs.</span> <span class="ac">Agentic Engineering</span></h2>
+        <p class="sub" style="margin-bottom:36px;max-width:600px">Jiný přístup ke kódu. Jiný přístup ke skládačce.</p>
+        <div class="step" data-step="ag-0" style="display:flex;gap:clamp(16px,2.5vw,40px);align-items:stretch;flex-wrap:wrap;justify-content:center;width:100%;max-width:1000px">
+            <div class="card" style="flex:1;min-width:260px;max-width:420px;text-align:center">
+                <div style="font-size:clamp(10px,1vw,14px);text-transform:uppercase;letter-spacing:2px;color:var(--t3);margin-bottom:12px;font-weight:700">Vibecoding</div>
+                <div class="h3" style="margin-bottom:12px">Nezajímá nás kód.</div>
+                <div class="h3" style="color:var(--a);margin-bottom:20px">Zajímá nás výsledek.</div>
+                <p class="small" style="text-align:left;line-height:1.9;color:var(--t2)">
+                    ✓ Promptujeme, iterujeme<br>
+                    ✓ Kód ignorujeme<br>
+                    ✓ Výsledek je to jediné, co počítá<br>
+                    <span style="color:rgba(255,255,255,.3)">✗ Ostatní dílky skládačky neřeší</span>
+                </p>
+            </div>
+            <div style="display:flex;align-items:center;color:var(--t3);font-size:clamp(1.5rem,2vw,2rem);font-weight:300">→</div>
+            <div class="card step" data-step="ag-1" style="flex:1;min-width:260px;max-width:420px;text-align:center;border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent)">
+                <div style="font-size:clamp(10px,1vw,14px);text-transform:uppercase;letter-spacing:2px;color:var(--a);margin-bottom:12px;font-weight:700">Agentic Engineering</div>
+                <div class="h3" style="margin-bottom:12px">Zajímá nás kód.</div>
+                <div class="h3" style="color:var(--a);margin-bottom:20px">A všechno kolem něj.</div>
+                <p class="small" style="text-align:left;line-height:1.9;color:var(--t2)">
+                    ✓ Kvalita a bezpečnost kódu<br>
+                    ✓ Architektura a škálovatelnost<br>
+                    ✓ Testování, monitoring, nasazení<br>
+                    ✓ Celá skládačka najednou
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 07b ŠKÁLA ═══ -->
+<section class="slide" id="sskala">
+    <div class="am" style="width:900px;height:400px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.08),transparent 70%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:12px">Není to buď anebo.<br><span class="ac">Je to škála.</span></h2>
+        <p class="sub" style="margin-bottom:48px;max-width:620px">Kde se na ní nacházíte určují vaše znalosti.</p>
+
+        <div class="step" data-step="sk-0" style="width:100%;max-width:920px">
+            <!-- Tags nad barem -->
+            <div style="display:flex;justify-content:space-between;margin-bottom:18px;padding:0 1%">
+                <span style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 18px;font-size:clamp(.7rem,.85vw,.92rem);color:var(--t3)">kód neznám</span>
+                <span style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 18px;font-size:clamp(.7rem,.85vw,.92rem);color:var(--t3)">základní orientace</span>
+                <span style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 18px;font-size:clamp(.7rem,.85vw,.92rem);color:var(--t2)">znám architekturu</span>
+                <span style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 18px;font-size:clamp(.7rem,.85vw,.92rem);color:var(--t2)">bezpečnost & ops</span>
+                <span style="background:rgba(232,143,49,.12);border:1px solid rgba(232,143,49,.25);border-radius:100px;padding:5px 18px;font-size:clamp(.7rem,.85vw,.92rem);color:var(--a)">systémové myšlení</span>
+            </div>
+
+            <!-- Gradient bar -->
+            <div style="height:10px;border-radius:100px;background:linear-gradient(90deg,rgba(255,255,255,.12) 0%,var(--a) 100%)"></div>
+
+            <!-- Popisky pod barem -->
+            <div style="display:flex;justify-content:space-between;margin-top:16px;padding:0 1%">
+                <span class="small">Vibecoding</span>
+                <span class="small" style="color:var(--t2)">Hybrid</span>
+                <span class="small" style="color:var(--a)">Agentic Engineering</span>
+            </div>
+        </div>
+
+        <p class="step sub" data-step="sk-1" style="margin-top:40px;max-width:700px">Čím víc rozumíte systémům — <span class="ac">tím dál doprava se dostanete.</span></p>
+    </div>
+</section>
+
+<!-- ═══ 08 VRSTVY ABSTRAKCE ═══ -->
+<section class="slide" id="sabstrakce">
+    <div class="am" style="width:700px;height:400px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.07),transparent 70%)"></div>
+    <div class="si centered">
+        <div class="tag tag-n" style="margin-bottom:24px">Každá dekáda, nová vrstva</div>
+        <h2 class="h2" style="margin-bottom:12px">To, jak tvoříme software,<br><span class="ac">se mění.</span></h2>
+        <p class="sub" style="margin-bottom:44px;max-width:540px">Pokaždé vyšší abstrakce. Pokaždé dostupnější.</p>
+        <div class="tl">
+            <div class="tl-item">
+                <div class="tl-dot">⚙️</div>
+                <div class="tl-era">1950–70s</div>
+                <div class="tl-name">Assembler</div>
+                <div class="tl-desc">Říkáte každý krok procesoru</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🔤</div>
+                <div class="tl-era">1970–80s</div>
+                <div class="tl-name">C &amp; procedurální</div>
+                <div class="tl-desc">Říkáte jak krok po kroku</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🧱</div>
+                <div class="tl-era">1980–2000s</div>
+                <div class="tl-name">OOP &amp; jazyky</div>
+                <div class="tl-desc">Říkáte jak to má fungovat</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">📦</div>
+                <div class="tl-era">2000–2020s</div>
+                <div class="tl-name">Frameworky &amp; cloud</div>
+                <div class="tl-desc">Říkáte co chcete postavit</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">💬</div>
+                <div class="tl-era">2021–2023</div>
+                <div class="tl-name">AI &amp; LLMs</div>
+                <div class="tl-desc">Popisujete, AI generuje</div>
+            </div>
+            <div class="tl-item hi">
+                <div class="tl-dot">🤖</div>
+                <div class="tl-era">2024+</div>
+                <div class="tl-name">AI agenti</div>
+                <div class="tl-desc">Zadáváte cíl. AI naviguje cestu.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 08b CO JE AI AGENT ═══ -->
+<section class="slide" id="sagentdef">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.1),transparent 60%)"></div>
+    <div class="si centered">
+        <div class="tag tag-n" style="margin-bottom:36px">Nová éra</div>
+        <h2 class="h2" style="margin-bottom:24px">Co je <span class="ac">AI agent</span>?</h2>
+        <div class="line" style="margin:0 auto 36px"></div>
+        <p class="sub" style="max-width:680px;margin-bottom:48px">AI, které dostanete <strong style="color:var(--t)">cíl</strong> — a sama si naplánuje kroky, použije nástroje a dotáhne to do konce.</p>
+        <div style="display:flex;gap:clamp(16px,3vw,48px);flex-wrap:wrap;justify-content:center;max-width:900px;width:100%">
+            <div class="card step" data-step="ad-0" style="flex:1;min-width:200px;text-align:center;padding:clamp(20px,2.5vw,36px)">
+                <div style="font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:10px">🧠</div>
+                <div class="h3">Plánuje</div>
+                <p class="small" style="margin-top:6px">Rozloží cíl na kroky</p>
+            </div>
+            <div class="card step" data-step="ad-0" style="flex:1;min-width:200px;text-align:center;padding:clamp(20px,2.5vw,36px)">
+                <div style="font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:10px">🔧</div>
+                <div class="h3">Používá nástroje</div>
+                <p class="small" style="margin-top:6px">Kód, web, soubory, API</p>
+            </div>
+            <div class="card step" data-step="ad-0" style="flex:1;min-width:200px;text-align:center;padding:clamp(20px,2.5vw,36px)">
+                <div style="font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:10px">✅</div>
+                <div class="h3">Dokončuje</div>
+                <p class="small" style="margin-top:6px">Bez dalšího promptování</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 10 AGENTI POTŘEBUJÍ PŘÍSTUP KE KONTEXTU ═══ -->
+<section class="slide" id="skontext">
+    <div class="am" style="width:500px;height:500px;top:40%;left:-5%;background:radial-gradient(circle,rgba(232,143,49,.07),transparent 65%)"></div>
+    <div class="si" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;max-width:1200px">
+        <div>
+            <div class="tag tag-n" style="margin-bottom:24px">Automatizace zadání</div>
+            <h2 class="h2" style="margin-bottom:16px">Aby agent pracoval<br><span class="ac">samostatně</span>,<br>potřebuje kontext.</h2>
+            <div class="line" style="margin-bottom:24px"></div>
+            <p class="sub">Agent musí vědět kde co je.<br><strong style="color:var(--t)">Sám. Bez dotazu na vás.</strong></p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px)">
+            <div class="step card" data-step="ctx-0" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">💻</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Přístup ke kódu</div>
+                <p class="small" style="margin-top:6px">Repozitář, git historie, větve</p>
+            </div>
+            <div class="step card" data-step="ctx-0" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">⚙️</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Instrukční soubory</div>
+                <p class="small" style="margin-top:6px">AGENTS.md, CLAUDE.md</p>
+            </div>
+            <div class="step card" data-step="ctx-1" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">📐</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Designové podklady</div>
+                <p class="small" style="margin-top:6px">Figma, wireframy, brand</p>
+            </div>
+            <div class="step card" data-step="ctx-1" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">📋</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Zadání &amp; tickety</div>
+                <p class="small" style="margin-top:6px">PRD, user stories, issues</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 10b NÁSTROJE ═══ -->
+<section class="slide" id="stools">
+    <div class="am" style="width:500px;height:500px;top:40%;right:-5%;background:radial-gradient(circle,rgba(232,143,49,.07),transparent 65%)"></div>
+    <div class="si" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;max-width:1200px">
+        <div>
+            <div class="tag tag-n" style="margin-bottom:24px">Nástroje agenta</div>
+            <h2 class="h2" style="margin-bottom:16px">Kontext nestačí.<br>Agent musí umět<br><span class="ac">také konat.</span></h2>
+            <div class="line" style="margin-bottom:24px"></div>
+            <p class="sub">Bez přístupu k nástrojům<br><strong style="color:var(--t)">agent jen čte. Neudělá nic.</strong></p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px)">
+            <div class="step card" data-step="tl-0" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">🧪</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Testování aplikace</div>
+                <p class="small" style="margin-top:6px">Playwright, test suite</p>
+            </div>
+            <div class="step card" data-step="tl-0" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">🗄️</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Přístup k databázi</div>
+                <p class="small" style="margin-top:6px">Čtení i zápis dat</p>
+            </div>
+            <div class="step card" data-step="tl-1" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">🌐</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Externí nástroje</div>
+                <p class="small" style="margin-top:6px">Slack, Jira, GitHub, API</p>
+            </div>
+            <div class="step card" data-step="tl-1" style="text-align:center;padding:clamp(16px,2vw,28px)">
+                <div style="font-size:clamp(1.6rem,2.2vw,2rem);margin-bottom:8px">🖥️</div>
+                <div class="h3" style="font-size:clamp(.9rem,1.2vw,1.1rem)">Terminál &amp; příkazy</div>
+                <p class="small" style="margin-top:6px">Build, deploy, migrace</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 11 PROAKTIVNÍ AI ═══ -->
+<section class="slide" id="sproactive">
+    <div class="am" style="width:500px;height:500px;top:40%;right:-5%;background:radial-gradient(circle,rgba(232,143,49,.07),transparent 65%)"></div>
+    <div class="si" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;max-width:1200px">
+        <div>
+            <div class="tag tag-n" style="margin-bottom:24px">AI v procesu</div>
+            <h2 class="h2" style="margin-bottom:16px">AI není jen nástroj,<br><span class="ac">je součást procesu.</span></h2>
+            <div class="line" style="margin-bottom:24px"></div>
+            <p class="sub">Nemusíte proaktivně zadávat práci,<br><strong style="color:var(--t)">agenti proaktivně pracují.</strong></p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:clamp(12px,1.5vw,20px)">
+            <div class="step card" data-step="pro-0" style="padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">🔍</span>
+                    <div class="h3">Monitoring &amp; alerting</div>
+                </div>
+                <p class="small">Detekuje problém dřív, než ho zákazník uvidí.</p>
+            </div>
+            <div class="step card" data-step="pro-1" style="padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">🔒</span>
+                    <div class="h3">Code review &amp; kvalita</div>
+                </div>
+                <p class="small">Čte každý commit. Hlídá standardy a bezpečnost.</p>
+            </div>
+            <div class="step card" data-step="pro-2" style="border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent);padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">🔧</span>
+                    <div class="h3">Návrh opravy</div>
+                </div>
+                <p class="small">Najde příčinu, navrhne řešení, čeká na váš souhlas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 11b PROČ TÝM AGENTŮ ═══ -->
+<section class="slide" id="steam">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.09),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:24px">Jeden agent<br><span class="ac">nestačí.</span></h2>
+        <div class="line" style="margin:0 auto 36px"></div>
+        <p class="sub" style="max-width:640px">Složitý software vyžaduje paralelní práci, specializaci a vzájemnou kontrolu.<br><strong style="color:var(--t)">Stejně jako tým lidí.</strong></p>
+    </div>
+</section>
+
+<!-- ═══ 12 ORCHESTRACE ═══ -->
+<section class="slide" id="sorchestra">
+    <div class="am" style="width:600px;height:400px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.07),transparent 70%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Tým agentů.<br><span class="ac">Každý svou roli.</span></h2>
+        <p class="sub" style="margin-bottom:40px;max-width:560px">Agenti si delegují práci, komunikují mezi sebou, kontrolují navzájem.</p>
+        <div class="orch-wrap">
+            <div class="step orch-main" data-step="orch-0">
+                <div style="font-size:clamp(1.6rem,2.5vw,2.2rem);margin-bottom:8px">🎯</div>
+                <div class="h3">Orchestrátor</div>
+                <p class="small" style="margin-top:4px">Rozděluje úkoly, koordinuje</p>
+            </div>
+            <div class="step orch-spread" data-step="orch-1"></div>
+            <div class="step orch-agents" data-step="orch-1">
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">💻</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">Coding</div>
+                </div>
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">🔍</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">Review</div>
+                </div>
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">🧪</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">QA</div>
+                </div>
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">🔒</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">Security</div>
+                </div>
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">📝</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">Dokumentace</div>
+                </div>
+                <div class="orch-agent">
+                    <div style="font-size:clamp(1.3rem,1.8vw,1.7rem);margin-bottom:6px">🔬</div>
+                    <div class="h3" style="font-size:clamp(.85rem,1.1vw,1.05rem)">Research</div>
+                </div>
+            </div>
+            <div class="step orch-line" data-step="orch-2"></div>
+            <div class="step orch-human" data-step="orch-2">
+                <div style="font-size:clamp(1.4rem,2vw,1.8rem);margin-bottom:6px">👤</div>
+                <div class="h3">Člověk</div>
+                <p class="small" style="margin-top:4px">Schvaluje výsledek</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 12b PROČ ORCHESTRACE ═══ -->
+<section class="slide" id="sorchdef">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.09),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:24px">Tým agentů<br>potřebuje <span class="ac">koordinaci.</span></h2>
+        <div class="line" style="margin:0 auto 36px"></div>
+        <p class="sub" style="max-width:640px">Kdo rozděluje práci? Kdo hlídá výsledky? Kdo volá člověka?</p>
+    </div>
+</section>
+
+<!-- ═══ 13b ŘÍZENÍ AGENTNÍCH TÝMŮ ═══ -->
+<section class="slide" id="smanage">
+    <div class="am" style="width:600px;height:400px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,143,49,.07),transparent 70%)"></div>
+    <div class="si" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;max-width:1200px">
+        <div>
+            <div class="tag tag-n" style="margin-bottom:24px">Orchestrace v praxi</div>
+            <h2 class="h2" style="margin-bottom:16px">Týmy agentů je třeba<br><span class="ac">řídit a mít přehled.</span></h2>
+            <div class="line" style="margin-bottom:24px"></div>
+            <p class="sub">Podobně jako lidi.<br><strong style="color:var(--t)">Vstupujete jen tam, kde je to nutné.</strong></p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:clamp(12px,1.5vw,20px)">
+            <div class="step card" data-step="mg-0" style="padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">📋</span>
+                    <div class="h3">Vibe Kanban</div>
+                </div>
+                <p class="small">Kanban board generovaný AI — tasky vznikají a uzavírají se automaticky.</p>
+            </div>
+            <div class="step card" data-step="mg-1" style="padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">🎯</span>
+                    <div class="h3">Linear / GitHub Issues</div>
+                </div>
+                <p class="small">Agenti sami vytvářejí, přiřazují a uzavírají tickety. Vy schvalujete priority.</p>
+            </div>
+            <div class="step card" data-step="mg-2" style="border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent);padding:clamp(16px,2vw,28px)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">👤</span>
+                    <div class="h3">Human-in-the-loop</div>
+                </div>
+                <p class="small">Systém vás upozorní, když agent potřebuje rozhodnutí. Ne dřív.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 13c ŠKÁLUJETE AGENTY ═══ -->
+<section class="slide" id="sscale">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.1),transparent 60%)"></div>
+    <div class="si centered">
+        <p class="h1" style="line-height:1.15">Neškálujte sebe.<br><span class="ac">Škálujte AI agenty.</span></p>
+    </div>
+</section>
+
+<!-- ═══ 13d KÓD JE LEVNÝ ═══ -->
+<section class="slide" id="slevny">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.1),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h1" style="line-height:1.15;margin-bottom:40px">Kód je levný.<br><span class="ac">Experimentujte dřív.</span></h2>
+        <div class="step" data-step="lev-0">
+            <div class="line" style="margin:0 auto 32px"></div>
+            <p class="sub" style="max-width:680px">Prototyp za odpoledne. Zjistíte jestli to dává smysl.<br><strong style="color:var(--t)">Pak teprve stavíte produkci.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 14 KAM SE POSOUVÁ HODNOTA ČLOVĚKA ═══ -->
+<section class="slide" id="shoднota">
+    <div class="am" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.07),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:8px">Kam se posouvá<br><span class="ac">hodnota člověka?</span></h2>
+        <p class="sub" style="margin-bottom:48px;max-width:640px">Architektura, bezpečnost a technické řemeslo zůstávají — ale nestačí samy o sobě.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px);width:100%;max-width:860px">
+            <div class="card step" data-step="h-0" style="text-align:left">
+                <div class="h3" style="margin-bottom:10px">Byznys kontext</div>
+                <p class="small" style="line-height:1.6">Vědět <em>co</em> a <em>proč</em> stavět je vzácnější než vědět jak.</p>
+            </div>
+            <div class="card step" data-step="h-1" style="text-align:left;border-color:rgba(232,143,49,.2)">
+                <div class="h3" style="margin-bottom:10px">Doménová znalost</div>
+                <p class="small" style="line-height:1.6">Kdo zná odvětví zevnitř, umí AI nařídit správné věci.</p>
+            </div>
+            <div class="card step" data-step="h-2" style="text-align:left;border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent)">
+                <div class="h3" style="margin-bottom:10px">Systémové myšlení</div>
+                <p class="small" style="line-height:1.6">AI optimalizuje dílek po dílku. Kdo vidí celý obraz, vyhrává.</p>
+            </div>
+            <div class="card step" data-step="h-3" style="text-align:left;border-color:rgba(232,143,49,.3);background:linear-gradient(135deg,var(--as),transparent)">
+                <div class="h3" style="margin-bottom:10px">Orchestrace AI agentů</div>
+                <p class="small" style="line-height:1.6">Řídit tým agentů je nová klíčová dovednost.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 15 CO SI Z TOHO VZÍT ═══ -->
+<section class="slide" id="s12">
+    <div class="am" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.09),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h2" style="margin-bottom:16px">Co si z toho<br><span class="ac">vzít.</span></h2>
+        <div style="display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);margin-top:32px;max-width:860px;width:100%;text-align:left">
+            <div class="vyzva step" data-step="v-0">
+                <div class="vyzva-num ac">1</div>
+                <div class="vyzva-icon"></div>
+                <div>
+                    <div class="h3">Vibecoding má smysl — použijte ho</div>
+                    <p class="small" style="margin-top:4px">Prototypy, validace nápadů, interní nástroje. Jeho místo je i na velkých projektech.</p>
+                </div>
+            </div>
+            <div class="vyzva step" data-step="v-1">
+                <div class="vyzva-num ac">2</div>
+                <div class="vyzva-icon"></div>
+                <div>
+                    <div class="h3">Selhání je levné — zkoušejte víc věcí</div>
+                    <p class="small" style="margin-top:4px">Dřív stál prototyp měsíce. Dnes hodiny. Využijte toho.</p>
+                </div>
+            </div>
+            <div class="vyzva step" data-step="v-2">
+                <div class="vyzva-num ac">3</div>
+                <div class="vyzva-icon"></div>
+                <div>
+                    <div class="h3">Pro produkci nestačí prompt</div>
+                    <p class="small" style="margin-top:4px">Software je skládačka. Kód je jen jeden dílek.</p>
+                </div>
+            </div>
+            <div class="vyzva step" data-step="v-3">
+                <div class="vyzva-num ac">4</div>
+                <div class="vyzva-icon"></div>
+                <div>
+                    <div class="h3">AI agenti mění workflow</div>
+                    <p class="small" style="margin-top:4px">Orchestrace a jejich řízení je nová klíčová dovednost.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 16 ZÁVĚR ═══ -->
+<section class="slide" id="s13">
+    <div class="am" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,143,49,.1),transparent 60%)"></div>
+    <div class="si centered">
+        <h2 class="h1" style="max-width:900px;line-height:1.1;margin-bottom:40px"><span class="ac">Vibecodingem</span><br>to teprve začíná.</h2>
+        <div class="step" data-step="s13-0">
+            <div class="line" style="margin:0 auto 24px"></div>
+            <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">
+                <div style="text-align:left">
+                    <div class="speaker" style="margin-bottom:12px"><div class="av">FO</div><span><strong>Filip Oborník</strong> &middot; AI s rozumem</span></div>
+                    <div class="contact" style="padding-left:4px;margin-top:4px"><a href="https://filipobornik.cz">filipobornik.cz</a></div>
+                </div>
+                <div style="text-align:center">
+                    <img id="qrWeb" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQMAAABDsxw2AAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABY0lEQVRoge3ZW47DIAwFULOCLIGlZqssgRXgifEDMppK/cSja0VVG06/bgGTEn1XN3t1+fi8Mg+iwq3ECDewM1i31ATMiyq71JEClo5p7hx+jc70G1hiZm9sCoP9B0YXS+bVl2iwtMxm8fSPlOlcbdTnNVgqxl6+7Vro7WPHBXY4e9Ul93wu08cCO5vdkfssWaWrzuixLrBUTBO3Dfd1jCUDYOnYNJq+si3uIl/RXwJYHnbPrnj1xkS2Pj+j7BgsFZP7stXakcemcx3eIeupB+wI9sr0dT7dtlQCS8ZW6N1a31nDpqqvvWDpGMVjB1tvY74XsHRsgSvOMv7AwQ+qYInYXnK/kzVIGjqP3wjseHazVzfm2+72hLCBpWLdc4+F2oBHHx0XWB5mucebvbbowVIy/RlU9q44Nl+wxGze3Z7bV+umwHKxWKI15/mpWEPF48+/zsGOZuwVi3Pz0KPAUrHv6gfv38/Gq1Gp4QAAAABJRU5ErkJggg==" alt="Web QR" style="width:clamp(110px,12vw,170px);height:clamp(110px,12vw,170px);border-radius:10px;background:white;padding:6px">
+                    <div class="small" style="margin-top:6px">filipobornik.cz</div>
+                </div>
+                <div style="text-align:center">
+                    <img id="qrLinkedIn" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQMAAABDsxw2AAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB1ElEQVRoge2aO3LDMAxEoXHBUkfQUXI0+Wg+io7g0oXHCLkAKClx4Qayit0iwyFfqh18ZZHPNKurnge9jfUwPQa7meJtIZaMLTDjYq+3eoCudmNOEcvHSr29X9RumllSXvXwFHftSexArAXIbcTlUM0SYifGYKUp8huxwzA8wKyX/GgLKHX+fRokloCpy6oMQqa6NkcQQcSSsY0QO7BGvNy8FbGvYebpHf1Yjaw7LiOthbnEkrGezVDi25CiqDsNa7raE7FkrBV0c2Q3pMhaZexM7OvYDCtlm9bwauauAUgsE4NHb4aUNlHCJfUDsURsXtbZJFTU9RgivxHLxRRVZjek1JCZo/qHWcTOgC3tL+Kot8fd5eKbSWLpWFHrxxRFH8+R38rGLGKZGBJZvG7aY9fV6g6xXGyJvaJtGlu+esS+V31LL8ROgvl3k/oq61LFq8w2vxHLxGJCXNrz6OO8dgyxRiwXW2XfdpuKriM8ROwc2KwudMX+JcWs7N+zRIglY+ZXWNPb49F/prLroomlYREg06497ivHXuuJHYXtlvM+pKgVI2KnwnTbHvfeQPVPZBHLwCK/TWoDvojfKHZcfYdPLBHrjsRg2M3CP/5vCYh9DftMv6ehvPZSsE59AAAAAElFTkSuQmCC" alt="LinkedIn QR" style="width:clamp(110px,12vw,170px);height:clamp(110px,12vw,170px);border-radius:10px;background:white;padding:6px">
+                    <div class="small" style="margin-top:6px">LinkedIn</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<script>
+const C=document.getElementById('slides'),S=document.querySelectorAll('.slide'),N=S.length;
+let cur=0,scrolling=false,sT;
+document.getElementById('tot').textContent=String(N).padStart(2,'0');
+
+const slideSteps={};
+S.forEach((slide,i)=>{
+    const steps=[...slide.querySelectorAll('.step')];
+    slideSteps[i]={steps,current:-1};
+});
+
+const dotsEl=document.getElementById('dots');
+S.forEach((_,i)=>{const d=document.createElement('button');d.className='dt'+(i===0?' on':'');d.onclick=()=>goSlide(i);dotsEl.appendChild(d)});
+
+function goSlide(i){
+    if(i<0||i>=N||scrolling)return;
+    scrolling=true;cur=i;
+    S[i].scrollIntoView({behavior:'smooth'});
+    ui();
+    setTimeout(()=>scrolling=false,800);
+}
+
+function ui(){
+    document.getElementById('cur').textContent=String(cur+1).padStart(2,'0');
+    document.getElementById('prog').style.width=(cur/(N-1)*100)+'%';
+    dotsEl.querySelectorAll('.dt').forEach((d,i)=>d.classList.toggle('on',i===cur));
+    S.forEach((s,i)=>s.classList.toggle('active',i===cur));
+    runSlideInit(cur);
+    updateClickHint();
+}
+
+function updateClickHint(){
+    const info=slideSteps[cur];
+    const hasMore=info&&info.current<info.steps.length-1;
+    document.getElementById('clickHint').classList.toggle('show',hasMore);
+}
+
+function next(){
+    const info=slideSteps[cur];
+    if(info&&info.current<info.steps.length-1){
+        info.current++;
+        const stepName=info.steps[info.current].getAttribute('data-step');
+        info.steps.forEach(s=>{if(s.getAttribute('data-step')===stepName)s.classList.add('revealed')});
+        while(info.current<info.steps.length-1&&info.steps[info.current+1].getAttribute('data-step')===stepName)info.current++;
+        updateClickHint();
+    } else {
+        goSlide(cur+1);
+    }
+}
+
+function prev(){goSlide(cur-1)}
+
+document.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();next()}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+    else if(e.key==='Home'){e.preventDefault();goSlide(0)}
+    else if(e.key==='End'){e.preventDefault();goSlide(N-1)}
+});
+
+document.addEventListener('click',e=>{
+    if(e.target.closest('.dots')||e.target.closest('a'))return;
+    next();
+});
+
+let ty=0;
+C.addEventListener('touchstart',e=>ty=e.touches[0].clientY,{passive:true});
+C.addEventListener('touchend',e=>{const d=ty-e.changedTouches[0].clientY;if(Math.abs(d)>50){d>0?next():prev()}},{passive:true});
+C.addEventListener('scroll',()=>{clearTimeout(sT);sT=setTimeout(()=>{const n=Math.round(C.scrollTop/window.innerHeight);if(n!==cur&&n>=0&&n<N){cur=n;ui()}scrolling=false},100)});
+
+// ── SLIDE INIT ──
+const inited=new Set();
+function runSlideInit(i){
+    if(inited.has(i))return;inited.add(i);
+    const id=S[i]&&S[i].id;
+    if(id==='sgraf1')drawSingleGraph();
+    if(id==='sgraf')drawCorrGraph();
+}
+
+// ── JEDNODUCHÝ GRAF — jen vibecoding (slide sgraf1) ──
+function drawSingleGraph(){
+    const cv=document.getElementById('corrGraph1');if(!cv)return;
+    const ctx=cv.getContext('2d');
+    const dpr=window.devicePixelRatio||1;
+    const rect=cv.getBoundingClientRect();
+    cv.width=rect.width*dpr;cv.height=rect.height*dpr;
+    ctx.scale(dpr,dpr);
+    const W=rect.width,H=rect.height;
+    const pad={t:20,r:60,b:85,l:65};
+    const gw=W-pad.l-pad.r,gh=H-pad.t-pad.b;
+    const labels=['Landing\npage','Komplexnější\nweb','Dashboard','Interní\nnástroje','E-shop','Složité\naplikace','Enterprise\naplikace'];
+    let progress=0;
+    function frame(){
+        progress=Math.min(progress+.015,1);
+        ctx.clearRect(0,0,W,H);
+        ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=.5;
+        for(let i=1;i<=4;i++){const y=pad.t+gh*(i/5);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke()}
+        for(let i=0;i<labels.length;i++){const x=pad.l+gw*(i/(labels.length-1));ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,H-pad.b);ctx.stroke()}
+        ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+        const steps=120;
+        const aGrad=ctx.createLinearGradient(pad.l,pad.t,pad.l,H-pad.b);
+        aGrad.addColorStop(0,'rgba(232,143,49,.12)');aGrad.addColorStop(1,'rgba(232,143,49,0)');
+        ctx.beginPath();ctx.moveTo(pad.l,H-pad.b);
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,3);const y=pad.t+gh*(1-c);ctx.lineTo(x,y)}
+        ctx.lineTo(pad.l+progress*gw,H-pad.b);ctx.closePath();ctx.fillStyle=aGrad;ctx.fill();
+        ctx.beginPath();
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,3);const y=pad.t+gh*(1-c);s===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+        ctx.strokeStyle='#e88f31';ctx.lineWidth=3;ctx.setLineDash([]);ctx.stroke();
+        const lbSz=Math.max(13,Math.round(W*0.016));
+        ctx.fillStyle='rgba(255,255,255,.45)';ctx.font=`500 ${lbSz}px Inter,sans-serif`;ctx.textAlign='center';
+        labels.forEach((l,idx)=>{const x=pad.l+gw*(idx/(labels.length-1));const lines=l.split('\n');lines.forEach((line,li)=>{ctx.fillText(line,x,H-pad.b+35+li*(lbSz+3))});ctx.beginPath();ctx.moveTo(x,H-pad.b);ctx.lineTo(x,H-pad.b+4);ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1;ctx.stroke()});
+        if(progress<1)requestAnimationFrame(frame);
+    }
+    frame();
+}
+
+// ── DVOJITÝ GRAF (slide sgraf) ──
+function drawCorrGraph(){
+    const cv=document.getElementById('corrGraph');if(!cv)return;
+    const ctx=cv.getContext('2d');
+    const dpr=window.devicePixelRatio||1;
+    const rect=cv.getBoundingClientRect();
+    cv.width=rect.width*dpr;cv.height=rect.height*dpr;
+    ctx.scale(dpr,dpr);
+    const W=rect.width,H=rect.height;
+    const pad={t:20,r:60,b:85,l:65};
+    const gw=W-pad.l-pad.r,gh=H-pad.t-pad.b;
+    const labels=['Landing\npage','Komplexnější\nweb','Dashboard','Interní\nnástroje','E-shop','Složité\naplikace','Enterprise\naplikace'];
+    let progress=0;
+    function frame(){
+        progress=Math.min(progress+.015,1);
+        ctx.clearRect(0,0,W,H);
+        ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=.5;
+        for(let i=1;i<=4;i++){const y=pad.t+gh*(i/5);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke()}
+        for(let i=0;i<labels.length;i++){const x=pad.l+gw*(i/(labels.length-1));ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,H-pad.b);ctx.stroke()}
+        ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+        const steps=120;
+        // Účinnost vibecoding (oranžová)
+        const aGrad=ctx.createLinearGradient(pad.l,pad.t,pad.l,H-pad.b);
+        aGrad.addColorStop(0,'rgba(232,143,49,.12)');aGrad.addColorStop(1,'rgba(232,143,49,0)');
+        ctx.beginPath();ctx.moveTo(pad.l,H-pad.b);
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,3);const y=pad.t+gh*(1-c);ctx.lineTo(x,y)}
+        ctx.lineTo(pad.l+progress*gw,H-pad.b);ctx.closePath();ctx.fillStyle=aGrad;ctx.fill();
+        ctx.beginPath();
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,3);const y=pad.t+gh*(1-c);s===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+        ctx.strokeStyle='#e88f31';ctx.lineWidth=3;ctx.setLineDash([]);ctx.stroke();
+        // Podíl kódu na celku (modrá přerušovaná)
+        const bGrad=ctx.createLinearGradient(pad.l,pad.t,pad.l,H-pad.b);
+        bGrad.addColorStop(0,'rgba(96,165,250,.1)');bGrad.addColorStop(1,'rgba(96,165,250,0)');
+        ctx.beginPath();ctx.moveTo(pad.l,H-pad.b);
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,2)*.65+.2;const y=pad.t+gh*(1-c);ctx.lineTo(x,y)}
+        ctx.lineTo(pad.l+progress*gw,H-pad.b);ctx.closePath();ctx.fillStyle=bGrad;ctx.fill();
+        ctx.beginPath();
+        for(let s=0;s<=steps*progress;s++){const t=s/steps;const x=pad.l+t*gw;const c=Math.pow(1-t,2)*.65+.2;const y=pad.t+gh*(1-c);s===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+        ctx.strokeStyle='#60a5fa';ctx.lineWidth=2.5;ctx.setLineDash([6,4]);ctx.stroke();ctx.setLineDash([]);
+        // X osy
+        const lbSz=Math.max(13,Math.round(W*0.016));
+        ctx.fillStyle='rgba(255,255,255,.45)';ctx.font=`500 ${lbSz}px Inter,sans-serif`;ctx.textAlign='center';
+        labels.forEach((l,idx)=>{const x=pad.l+gw*(idx/(labels.length-1));const lines=l.split('\n');lines.forEach((line,li)=>{ctx.fillText(line,x,H-pad.b+35+li*(lbSz+3))});ctx.beginPath();ctx.moveTo(x,H-pad.b);ctx.lineTo(x,H-pad.b+4);ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1;ctx.stroke()});
+        if(progress<1)requestAnimationFrame(frame);
+    }
+    frame();
+}
+
+// ── PARTICLES ──
+const pcv=document.getElementById('particles');
+if(pcv){
+    const cx=pcv.getContext('2d');let pts=[];const PC=45;
+    function resize(){pcv.width=window.innerWidth;pcv.height=window.innerHeight}
+    function mkPt(){return{x:Math.random()*pcv.width,y:Math.random()*pcv.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5,o:Math.random()*.25+.05,c:Math.random()>.8?[232,143,49]:[255,255,255]}}
+    function init(){resize();pts=[];for(let i=0;i<PC;i++)pts.push(mkPt())}
+    function draw(){cx.clearRect(0,0,pcv.width,pcv.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=pcv.width;if(p.x>pcv.width)p.x=0;if(p.y<0)p.y=pcv.height;if(p.y>pcv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(${p.c.join(',')},${p.o})`;cx.fill()});for(let i=0;i<pts.length;i++){for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<130){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(232,143,49,${.05*(1-d/130)})`;cx.lineWidth=.5;cx.stroke()}}}requestAnimationFrame(draw)}
+    init();draw();window.addEventListener('resize',init);
+}
+
+// ── QR kódy ──
+const qrWeb=document.getElementById('qrWeb');
+if(qrWeb)qrWeb.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent('https://filipobornik.cz');
+const qrEl=document.getElementById('qrLinkedIn');
+if(qrEl)qrEl.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent('https://www.linkedin.com/in/filipobornik/');
+
+S[0].classList.add('active');ui();inited.add(0);
+</script>
+</body>
+</html>
