@@ -48,9 +48,9 @@ const PROMPT_TEXT =
 
 const THINKING_LINES = [
   { text: "Analyzuji požadavek...", delay: 0 },
-  { text: "Networking s C-level? Vizitka musí udělat dojem za 3 sekundy.", delay: 600 },
-  { text: "AI konzultant s vizitkou od AI — to je ta nejlepší reference.", delay: 1300 },
-  { text: "Přidám vibe coding touch, ať to žije", delay: 2000 },
+  { text: "DAMI síťovka, C-level publikum — papírová vizitka nepřipadá v úvahu.", delay: 600 },
+  { text: "Konzultant na AI, co si nechá vizitku postavit od AI. Důvěryhodnost +100.", delay: 1300 },
+  { text: "Ještě přidám trochu vibe coding magie, ať si ji zapamatují", delay: 2000 },
 ];
 
 const GEN_LINES = [
