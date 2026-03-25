@@ -44,21 +44,21 @@ const secondaryLinks = [
 ];
 
 const PROMPT_TEXT =
-  "Hej Claude, postav vizitku pro toho týpka z COE 2026, co staví AI produkty a učí to i ostatní. Ať to žije.";
+  "Claude, připrav digitální vizitku pro DAMI síťovku. Profesionální, ale ať je vidět, že AI opravdu používáme.";
 
 const THINKING_LINES = [
   { text: "Analyzuji požadavek...", delay: 0 },
-  { text: "AI konzultant, co sám používá AI na svou vizitku? Meta.", delay: 600 },
-  { text: "Vizitka musí být cooler než PowerPoint prezentace na expu", delay: 1300 },
-  { text: "Přidám matrix rain, protože proč ne", delay: 2000 },
+  { text: "Networking s C-level? Vizitka musí udělat dojem za 3 sekundy.", delay: 600 },
+  { text: "AI konzultant s vizitkou od AI — to je ta nejlepší reference.", delay: 1300 },
+  { text: "Přidám vibe coding touch, ať to žije", delay: 2000 },
 ];
 
 const GEN_LINES = [
-  { text: "Stahuji fotku... ok, aspoň se usmívá", delay: 0 },
-  { text: "Kontaktní údaje nalezeny", delay: 450 },
-  { text: "Aplikuji COE 2026 branding", delay: 850 },
-  { text: "Přidávám Easter egg pro pozorné čtenáře", delay: 1250 },
-  { text: "Vizitka zkompilována", delay: 1600 },
+  { text: "Načítám profil...", delay: 0 },
+  { text: "Kontaktní údaje ověřeny", delay: 450 },
+  { text: "Aplikuji DAMI síťovka branding", delay: 850 },
+  { text: "Generuji interaktivní vizitku", delay: 1250 },
+  { text: "Vizitka připravena", delay: 1600 },
 ];
 
 const GENERATION_TIME = "4.2";
