@@ -1,5 +1,4 @@
-import { createServer } from "http";
-import next from "next";
+import { createServer, IncomingMessage, ServerResponse } from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { workshopQuestions } from "./src/lib/workshop/questions";
 import type { WorkshopState } from "./src/lib/workshop/types";
@@ -8,9 +7,6 @@ import type { ClientMessage, ServerMessage } from "./src/lib/workshop/protocol";
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOSTNAME || "0.0.0.0";
 const port = parseInt(process.env.PORT || "3000", 10);
-
-const app = next({ dev, hostname, port });
-const handle = app.getRequestHandler();
 
 // In-memory workshop state
 const state: WorkshopState = {
@@ -34,30 +30,7 @@ function broadcastState(wss: WebSocketServer) {
   broadcast(wss, { type: "state_update", state });
 }
 
-app.prepare().then(() => {
-  const server = createServer((req, res) => {
-    handle(req, res);
-  });
-
-  const wss = new WebSocketServer({ noServer: true });
-
-  server.on("upgrade", (request, socket, head) => {
-    const { pathname } = new URL(request.url || "/", `http://${request.headers.host}`);
-
-    if (pathname === "/ws") {
-      wss.handleUpgrade(request, socket, head, (ws) => {
-        wss.emit("connection", ws, request);
-      });
-    } else {
-      // Let Next.js handle other upgrades (HMR in dev)
-      if (dev) {
-        // Don't destroy — Next.js dev server needs upgrade for HMR websocket
-        return;
-      }
-      socket.destroy();
-    }
-  });
-
+function setupWebSocket(wss: WebSocketServer) {
   wss.on("connection", (ws) => {
     state.connectedClients++;
     broadcastState(wss);
@@ -131,9 +104,61 @@ app.prepare().then(() => {
       broadcastState(wss);
     });
   });
+}
+
+function startServer(handle: (req: IncomingMessage, res: ServerResponse) => void) {
+  const server = createServer(handle);
+  const wss = new WebSocketServer({ noServer: true });
+
+  server.on("upgrade", (request, socket, head) => {
+    const { pathname } = new URL(request.url || "/", `http://${request.headers.host}`);
+
+    if (pathname === "/ws") {
+      wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit("connection", ws, request);
+      });
+    } else if (dev) {
+      // Don't destroy — Next.js dev server needs upgrade for HMR websocket
+      return;
+    } else {
+      socket.destroy();
+    }
+  });
+
+  setupWebSocket(wss);
 
   server.listen(port, () => {
     console.log(`> Ready on http://${hostname}:${port}`);
     console.log(`> WebSocket server on ws://${hostname}:${port}/ws`);
   });
+}
+
+async function main() {
+  if (dev) {
+    // Development: use next() with full dev server (HMR, etc.)
+    const next = (await import("next")).default;
+    const app = next({ dev: true, hostname, port });
+    await app.prepare();
+    startServer(app.getRequestHandler());
+  } else {
+    // Production: use NextServer directly (doesn't need webpack)
+    const path = await import("path");
+    const NextServer = (await import("next/dist/server/next-server")).default;
+
+    const nextServer = new NextServer({
+      hostname,
+      port,
+      dir: path.join(__dirname),
+      dev: false,
+      customServer: true,
+      conf: require(path.join(__dirname, ".next", "required-server-files.json")).config,
+    });
+
+    startServer(nextServer.getRequestHandler());
+  }
+}
+
+main().catch((err) => {
+  console.error("Failed to start server:", err);
+  process.exit(1);
 });
