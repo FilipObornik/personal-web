@@ -142,8 +142,9 @@ async function main() {
     startServer(app.getRequestHandler());
   } else {
     // Production: use NextServer directly (doesn't need webpack)
-    const path = await import("path");
-    const NextServer = (await import("next/dist/server/next-server")).default;
+    // Must use require() — dynamic import() needs .js extension in standalone
+    const path = require("path");
+    const NextServer = require("next/dist/server/next-server").default;
 
     const nextServer = new NextServer({
       hostname,
