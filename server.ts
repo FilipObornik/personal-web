@@ -106,8 +106,16 @@ function setupWebSocket(wss: WebSocketServer) {
   });
 }
 
-function startServer(handle: (req: IncomingMessage, res: ServerResponse) => void) {
-  const server = createServer(handle);
+function startServer(handle: (req: IncomingMessage, res: ServerResponse) => Promise<void> | void) {
+  const server = createServer(async (req, res) => {
+    try {
+      await handle(req, res);
+    } catch (err) {
+      console.error("Request error:", err);
+      res.statusCode = 500;
+      res.end("Internal Server Error");
+    }
+  });
   const wss = new WebSocketServer({ noServer: true });
 
   server.on("upgrade", (request, socket, head) => {
@@ -151,7 +159,7 @@ async function main() {
       port,
       dir: path.join(__dirname),
       dev: false,
-      customServer: true,
+      customServer: false,
       conf: require(path.join(__dirname, ".next", "required-server-files.json")).config,
     });
 
