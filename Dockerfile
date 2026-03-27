@@ -19,6 +19,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
 
+# Bundle custom server for production
+RUN npx esbuild server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js --external:next --packages=external
+
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -39,6 +42,9 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Copy compiled custom server
+COPY --from=builder --chown=nextjs:nodejs /app/dist/server.js ./server.custom.js
+
 USER nextjs
 
 EXPOSE 3000
@@ -46,4 +52,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["node", "server.custom.js"]
