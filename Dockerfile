@@ -20,7 +20,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # Bundle custom server for production
-RUN npx esbuild server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js --external:next
+# Bundle ws inline; keep next/* external (provided by standalone output)
+RUN npx esbuild server.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/server.js --external:"next" --external:"next/*"
 
 # Production image, copy all the files and run next
 FROM base AS runner
