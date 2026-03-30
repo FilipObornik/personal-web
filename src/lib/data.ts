@@ -146,7 +146,7 @@ export const siteConfig = {
   description:
     "Semináře, mentoring, konzultace a implementace technických a AI řešení. Naučte se vibe coding a pracujte efektivněji s umělou inteligencí.",
   email: "info@filipobornik.cz",
-  linkedin: "https://linkedin.com/in/obornik",
+  linkedin: "https://linkedin.com/in/filipobornik",
   calendarUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_9GuxtdMSenskvP4AMBfLJYelAMs5W1wa3vJ_EnwKSMLsxWzxzV5NTweVMhNXj-nU1HPmKFD9?gv=true",
 };
 
