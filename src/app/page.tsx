@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import WhatIDo from "@/components/sections/WhatIDo";
 import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
+import InstagramFeed from "@/components/sections/InstagramFeed";
 import FreeResources from "@/components/sections/FreeResources";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
@@ -25,6 +26,7 @@ export default async function Home() {
         <WhatIDo />
         <Services />
         <Portfolio />
+        <InstagramFeed />
         <FreeResources spotifyEmbedUrl={spotifyEmbedUrl} />
         <Testimonials />
         <Instagram />
