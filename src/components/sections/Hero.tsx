@@ -39,8 +39,53 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container-narrow mx-auto px-4 md:px-8 pt-32 pb-40 md:pt-40 md:pb-56 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="container-narrow mx-auto px-4 md:px-8 pt-0 pb-40 md:pt-40 md:pb-56 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-8 items-center">
+          {/* Mobile photo - visible only below lg */}
+          <div className="lg:hidden flex justify-center -mx-4">
+            <div className="relative w-full max-w-xs" style={{ aspectRatio: "4/5" }}>
+              {/* Glow */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={imageLoaded ? { opacity: 1, scale: 1.1 } : { opacity: 0, scale: 0.5 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent blur-2xl"
+              />
+              {/* Blob photo */}
+              <motion.div
+                initial={{ scale: 0, rotate: -10 }}
+                animate={imageLoaded ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -10 }}
+                transition={{ duration: 0.8, type: "spring", stiffness: 200, damping: 20 }}
+                className="relative w-full h-full"
+                style={{ clipPath: "url(#blob-mask-mobile)" }}
+              >
+                <Image
+                  src="/images/portrait.png"
+                  alt="Filip Oborník"
+                  fill
+                  className="object-cover object-[center_5%] scale-[1.15]"
+                  style={{ transformOrigin: "center 5%" }}
+                  priority
+                  onLoad={() => setImageLoaded(true)}
+                />
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  animate={imageLoaded ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="absolute inset-0 bg-secondary"
+                />
+              </motion.div>
+              {/* SVG blob mask for mobile */}
+              <svg className="absolute w-0 h-0">
+                <defs>
+                  <clipPath id="blob-mask-mobile" clipPathUnits="objectBoundingBox">
+                    <path d="M0.5,0.02 C0.75,0.02 0.92,0.15 0.96,0.35 C1,0.55 0.95,0.75 0.85,0.88 C0.75,1 0.55,0.98 0.4,0.96 C0.25,0.94 0.1,0.88 0.05,0.7 C0,0.52 0.05,0.3 0.15,0.15 C0.25,0 0.35,0.02 0.5,0.02" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
           {/* Left content */}
           <div>
             {/* Name with accent */}
