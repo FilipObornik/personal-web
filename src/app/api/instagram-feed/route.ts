@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 3600; // revalidate every hour
+// Revalidate the Behold feed at most once per hour.
+// NOTE: we intentionally rely on the per-fetch `next: { revalidate }` option
+// below instead of `export const revalidate` at the route level, because the
+// two don't compose well with route handlers in Next.js 16 and previously
+// caused the feed to either never update or to skip caching entirely.
+const FEED_REVALIDATE_SECONDS = 3600;
 
 interface BeholdPost {
   id: string;
@@ -34,7 +39,7 @@ export async function GET() {
 
   try {
     const res = await fetch(`https://feeds.behold.so/${feedId}`, {
-      cache: "no-store",
+      next: { revalidate: FEED_REVALIDATE_SECONDS, tags: ["instagram-feed"] },
     });
 
     if (!res.ok) {
