@@ -7,7 +7,9 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
-RUN npm ci
+# Force install devDependencies even when NODE_ENV=production is set at build time
+# (required because next.config.ts needs typescript to transpile)
+RUN npm ci --include=dev
 
 # Rebuild the source code only when needed
 FROM base AS builder
