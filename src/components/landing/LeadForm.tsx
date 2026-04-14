@@ -1,0 +1,333 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, Calendar, MessageSquare, Mail, Linkedin } from "lucide-react";
+import { siteConfig } from "@/lib/data";
+
+type ServiceType = "skoleni" | "mentoring" | "konzultace";
+type TabType = "calendar" | "form";
+
+interface LeadFormFields {
+  showCompany?: boolean;
+  showBudget?: boolean;
+  messagePlaceholder?: string;
+  packages?: string[];
+}
+
+interface LeadFormProps {
+  service: ServiceType;
+  fields?: LeadFormFields;
+}
+
+const serviceLabels: Record<ServiceType, string> = {
+  skoleni: "Školení pro vývojáře",
+  mentoring: "Mentoring",
+  konzultace: "Konzultace & Vývoj",
+};
+
+export default function LeadForm({ service, fields = {} }: LeadFormProps) {
+  const {
+    showCompany = true,
+    showBudget = false,
+    messagePlaceholder = "Popište vaši situaci nebo otázku...",
+    packages,
+  } = fields;
+
+  const [activeTab, setActiveTab] = useState<TabType>("calendar");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    package: "",
+    message: "",
+    budget: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const payload: Record<string, string> = {
+        name: formData.name,
+        email: formData.email,
+        subject: serviceLabels[service],
+        service,
+      };
+      if (showCompany && formData.company) payload.company = formData.company;
+      if (packages && formData.package) payload.package = formData.package;
+      if (formData.message) payload.message = formData.message;
+      if (showBudget && formData.budget) payload.budget = formData.budget;
+
+      const response = await fetch(
+        "https://n8n.filipobornik.com/webhook/402ede76-f446-4f9f-b7c3-00da6becf432",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", company: "", package: "", message: "", budget: "" });
+      } else {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+    } catch (err) {
+      console.error("Lead form error:", err);
+      setError(
+        "Nepodařilo se odeslat zprávu. Zkuste to prosím později nebo mě kontaktujte přímo e-mailem."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const tabs = [
+    { id: "calendar" as const, label: "Rezervace hovoru", icon: Calendar },
+    { id: "form" as const, label: "Napsat zprávu", icon: MessageSquare },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Tab switcher */}
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex bg-white/5 backdrop-blur-sm rounded-2xl p-1.5 border border-white/10">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === tab.id
+                  ? "bg-primary text-secondary shadow-lg"
+                  : "text-white/70 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <tab.icon size={20} />
+              <span className="hidden sm:inline">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Calendar tab */}
+      {activeTab === "calendar" && (
+        <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 overflow-hidden">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+              <Calendar className="text-primary" size={24} />
+            </div>
+            <div>
+              <h3 className="text-secondary font-bold text-xl">Vyberte si termín</h3>
+              <p className="text-muted text-sm">15minutový úvodní hovor zdarma</p>
+            </div>
+          </div>
+          <div className="rounded-xl overflow-hidden">
+            <iframe
+              src={siteConfig.calendarUrl}
+              style={{ border: 0 }}
+              width="100%"
+              className="h-[800px] md:h-[600px]"
+              title="Rezervace termínu"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Form tab */}
+      {activeTab === "form" && (
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Form — 3 cols */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-10">
+              {submitted ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="text-green-600" size={40} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-secondary mb-3">Zpráva odeslána!</h3>
+                  <p className="text-muted mb-6">Děkuji za zájem. Brzy se ozvu a domluvíme, jak vám dokážu pomoct.</p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-primary font-medium hover:underline text-sm"
+                  >
+                    Odeslat další zprávu
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                      {error}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="lead-name" className="block text-sm font-semibold text-secondary mb-2">
+                        Jméno
+                      </label>
+                      <input
+                        type="text"
+                        id="lead-name"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                        placeholder="Vaše jméno"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lead-email" className="block text-sm font-semibold text-secondary mb-2">
+                        E-mail
+                      </label>
+                      <input
+                        type="email"
+                        id="lead-email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                        placeholder="vas@email.cz"
+                      />
+                    </div>
+                  </div>
+
+                  {showCompany && (
+                    <div>
+                      <label htmlFor="lead-company" className="block text-sm font-semibold text-secondary mb-2">
+                        Firma <span className="text-muted font-normal text-sm">(nepovinné)</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="lead-company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                        placeholder="Název firmy"
+                      />
+                    </div>
+                  )}
+
+                  {packages && packages.length > 0 && (
+                    <div>
+                      <label htmlFor="lead-package" className="block text-sm font-semibold text-secondary mb-2">
+                        Balíček <span className="text-muted font-normal text-sm">(nepovinné)</span>
+                      </label>
+                      <select
+                        id="lead-package"
+                        value={formData.package}
+                        onChange={(e) => setFormData({ ...formData, package: e.target.value })}
+                        className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                      >
+                        <option value="">Vyberte balíček...</option>
+                        {packages.map((pkg) => (
+                          <option key={pkg} value={pkg}>{pkg}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {showBudget && (
+                    <div>
+                      <label htmlFor="lead-budget" className="block text-sm font-semibold text-secondary mb-2">
+                        Orientační rozpočet <span className="text-muted font-normal text-sm">(nepovinné)</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="lead-budget"
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-secondary"
+                        placeholder="Např. 50 000 – 100 000 Kč"
+                      />
+                    </div>
+                  )}
+
+                  <div>
+                    <label htmlFor="lead-message" className="block text-sm font-semibold text-secondary mb-2">
+                      Co řešíte? <span className="text-muted font-normal text-sm">(nepovinné)</span>
+                    </label>
+                    <textarea
+                      id="lead-message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-4 bg-section-alt border-0 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all resize-none text-secondary"
+                      placeholder={messagePlaceholder}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-secondary hover:bg-secondary-light disabled:opacity-50 text-white px-8 py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-3 group"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Odesílám...
+                      </>
+                    ) : (
+                      <>
+                        Odeslat zprávu
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+
+          {/* Contact sidebar — 2 cols */}
+          <div className="lg:col-span-2">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10">
+              <h3 className="text-white font-semibold text-lg mb-6">Přímý kontakt</h3>
+              <div className="space-y-4">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <Mail className="text-primary group-hover:text-secondary transition-colors" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white/50 text-xs mb-1">E-mail</div>
+                    <div className="text-white font-medium">{siteConfig.email}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={siteConfig.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <Linkedin className="text-primary group-hover:text-secondary transition-colors" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white/50 text-xs mb-1">LinkedIn</div>
+                    <div className="text-white font-medium">Filip Oborník</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </motion.div>
+  );
+}
