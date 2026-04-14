@@ -61,7 +61,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="cs">
-      <GoogleTagManager gtmId={GTM_ID} />
+      {process.env.NODE_ENV === "production" && (
+        <GoogleTagManager gtmId={GTM_ID} />
+      )}
       <body className={`${inter.variable} ${suse.variable} antialiased font-sans`}>
         {children}
       </body>
