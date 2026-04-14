@@ -29,7 +29,7 @@ interface InstagramFeed {
 }
 
 const CARD_HEIGHT = 320;
-const PROFILE_URL = "https://instagram.com/ai_s_rozumem";
+const PROFILE_URL = "https://instagram.com/filipobornik";
 
 export default function Instagram() {
   const [feed, setFeed] = useState<InstagramFeed | null>(null);
@@ -174,7 +174,7 @@ export default function Instagram() {
                 </div>
                 <div className="text-center px-4">
                   <p className="font-semibold text-secondary text-sm mb-1">Více na Instagramu</p>
-                  <p className="text-muted text-xs">@ai_s_rozumem</p>
+                  <p className="text-muted text-xs">@filipobornik</p>
                 </div>
               </motion.a>
             </div>
