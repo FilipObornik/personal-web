@@ -21,7 +21,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block"
           >
-            Jak vám mohu pomoci
+            Další způsoby spolupráce
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

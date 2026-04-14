@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import WhatIDo from "@/components/sections/WhatIDo";
+import FeaturedOffers from "@/components/sections/FeaturedOffers";
 import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import FreeResources from "@/components/sections/FreeResources";
@@ -22,7 +22,7 @@ export default async function Home() {
       <WorkshopBanner />
       <main>
         <Hero />
-        <WhatIDo />
+        <FeaturedOffers />
         <Services />
         <Portfolio />
         <FreeResources spotifyEmbedUrl={spotifyEmbedUrl} />

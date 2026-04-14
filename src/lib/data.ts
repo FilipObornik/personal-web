@@ -71,8 +71,12 @@ export interface Testimonial {
   name: string;
   role: string;
   company?: string;
+  companyUrl?: string;
   content: string;
   imageUrl?: string;
+  linkedinUrl?: string;
+  published: boolean;
+  tags: string[]; // e.g. "skoleni", "mentoring", "konzultace", "general"
 }
 
 export interface FreeResource {
@@ -325,30 +329,114 @@ export function getProjectBySlug(slug: string): ProjectItem | undefined {
 
 export const testimonials: Testimonial[] = [
   {
-    id: "1",
-    name: "Účastník kurzu",
-    role: "Online kurz",
-    company: "Zorientujte se ve světě umělé inteligence",
+    id: "9",
+    name: "Filip Šefl",
+    role: "Zástupce ředitele",
+    linkedinUrl: "https://www.linkedin.com/in/filip-%C5%A1efl-0685b1227/",
+    published: false,
+    tags: ["konzultace", "general"],
     content:
-      "Jsem rád, že kurz zahrnul velkou část oboru AI, abych si dokázal představit její využití v praxi.",
+      "Potřeboval jsem aplikaci, která automaticky vytěží faktury a příjemky a zkontroluje, jestli dorazilo všechno objednané zboží. Filip to pochopil hned napoprvé, navrhl řešení a dotáhl ho do konce. Výsledek šetří čas a odstranil ruční chyby, které nás předtím stály nervy. Spolehlivý a technicky zdatný.",
   },
   {
-    id: "2",
-    name: "YouTube divák",
-    role: "YouTube video",
-    company: "AI a robotizace",
+    id: "8",
+    name: "Michal Stryja",
+    role: "Freelancer",
+    published: true,
+    tags: ["mentoring", "general"],
     content:
-      "Super vysvětluješ, hlavně v pohodě, seš svůj a to je dnes asi jedinečný. Každý má titulky ve smyslu heeeej to je šílenýýý a nevím co ještě, je to přepálený. Tvá videa, projev, všechno je na jedničku s hvězdičkou, samozřejmě i témata. Hodně štěstí a doufám, že budeš mít více videí. Klobouk dolů a díky.",
+      "Mohl bych Vám říct, že Filip pomáhá lidem s AI. Nebo že má YouTube kanál o AI. Vede kurzy a konzultace o AI... A vše by byla pravda. Důvod proč spolupracovat s Filipem, ale neleží jen v AI a jeho mnohaleté praxi aplikačního developmentu. Leží ve Filipovi samotném. Zajímáte ho, zajímá ho Váš business a proto je s ním tak cenné spolupracovat. Je totiž jiný než ostatní s nimiž jsem měl tu čest. Pokud se tedy sejde odbornost a lidskost s upřímným zájmem, dostanete jako výsledek parťáka. Takže pokud hledáte parťáka, jste na správné adrese, je těžší najít někoho takového než někoho kdo Vám jen pomůže s AI, to dnes dělá kde kdo...",
+  },
+  {
+    id: "4",
+    name: "Martin Kučera",
+    role: "CTO",
+    company: "Fastest",
+    companyUrl: "https://fastest.cz",
+    imageUrl: "/martin-kucera.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/kucera-martin/",
+    published: false,
+    tags: ["skoleni"],
+    content:
+      "S Filipem jsme konzultovali zavedení AI nástrojů do našeho vývojového týmu. Přišel připravený, znal náš kontext a neházel do nás teorií — rovnou jsme řešili konkrétní věci, které dávaly smysl pro náš stack. Za pár hodin jsme měli jasno, kde začít a co má smysl zkoušet. Doporučuju každému, kdo nechce tápat.",
+  },
+  {
+    id: "7",
+    name: "Juraj Mihalík",
+    role: "Product & Marketing Growth",
+    company: "Macaly",
+    companyUrl: "https://macaly.ai",
+    imageUrl: "/juraj-mihalik.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/juraj-mihalik/",
+    published: false,
+    tags: ["general"],
+    content:
+      "S Filipem spolupracujeme na YouTube obsahu pro Macaly — AI platformu pro tvorbu webů a aplikací bez kódu. Potřebovali jsme někoho, kdo dokáže téma vibe codingu a AI vývoje vysvětlit tak, aby to dávalo smysl i lidem mimo tech bublinu. Filip to zvládá přirozeně a bez zbytečného žargonu. Na kameře je autentický a diváci to cítí.",
   },
   {
     id: "3",
     name: "Vývojář",
     role: "Online školení",
     company: "AI v profesionálním vývoji",
+    published: true,
+    tags: ["skoleni", "general"],
     content:
       "Za mě super úvod do problematiky používání AI při programování. Délka i forma super, přiměřené množství informací i zdrojů.",
   },
+  {
+    id: "5",
+    name: "Jindřich Děděk",
+    role: "CPO",
+    company: "Investown",
+    companyUrl: "https://investown.cz",
+    imageUrl: "/jindrich-dedek.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/dedekcze/",
+    published: false,
+    tags: ["skoleni", "general"],
+    content:
+      "Pozvali jsme Filipa na krátkou přednášku pro tým — neformálně, bez velkých očekávání. Přišel s jasným pohledem na to, kam směřuje vývoj softwaru v době AI a co to v praxi znamená pro lidi, kteří ho dělají. Žádné velké řeči — jen věci, které dávají smysl a nad kterými se pak přirozeně diskutuje. Přesně to jsme hledali.",
+  },
+  {
+    id: "2",
+    name: "YouTube divák",
+    role: "YouTube video",
+    company: "AI a robotizace",
+    published: true,
+    tags: ["general"],
+    content:
+      "Super vysvětluješ, hlavně v pohodě, seš svůj a to je dnes asi jedinečný. Každý má titulky ve smyslu heeeej to je šílenýýý a nevím co ještě, je to přepálený. Tvá videa, projev, všechno je na jedničku s hvězdičkou, samozřejmě i témata. Hodně štěstí a doufám, že budeš mít více videí. Klobouk dolů a díky.",
+  },
+  {
+    id: "1",
+    name: "Účastník kurzu",
+    role: "Online kurz",
+    company: "Zorientujte se ve světě umělé inteligence",
+    published: true,
+    tags: ["general"],
+    content:
+      "Jsem rád, že kurz zahrnul velkou část oboru AI, abych si dokázal představit její využití v praxi.",
+  },
+  {
+    id: "6",
+    name: "Daniel Vostrý",
+    role: "CBO",
+    company: "DAMI development",
+    companyUrl: "https://damidev.com",
+    imageUrl: "/daniel-vostry.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/daniel-vostry/",
+    published: false,
+    tags: ["skoleni", "general"],
+    content:
+      "Na naší síťovce jsem chtěl dát lidem něco, co je opravdu posune v přemýšlení o AI — ne další přehled nástrojů. Filipova přednáška 'Vibe codingem to teprve začíná' to trefila přesně. Sál plný CEO a CTO, a přesto bylo ticho. Téma, které dnes každého šéfa technologií zajímá, podané s nadhledem a bez zbytečného humbuku.",
+  },
 ];
+
+export function getTestimonials(tag?: string): Testimonial[] {
+  const showUnpublished = process.env.NEXT_PUBLIC_SHOW_UNPUBLISHED === "true";
+  return testimonials.filter(
+    (t) => (showUnpublished || t.published) && (!tag || t.tags.includes(tag))
+  );
+}
 
 export const ACADEMY_STUDENT_COUNT = 198;
 

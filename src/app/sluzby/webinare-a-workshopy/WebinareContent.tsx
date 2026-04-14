@@ -841,6 +841,42 @@ export default function WebinareContent() {
           <WaveSeparator fillColor="#F8FAFC" variant={4} />
         </section>
 
+        {/* Promo: Školení pro vývojáře */}
+        <section className="px-4 md:px-8 py-12 bg-section-alt">
+          <div className="container-narrow mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative bg-secondary rounded-3xl px-8 py-10 md:px-12 md:py-12 overflow-hidden flex flex-col md:flex-row items-center gap-8"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="flex-1 relative z-10">
+                <span className="inline-block bg-primary/20 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
+                  Specializované školení
+                </span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  Máte vývojářský tým?
+                </h3>
+                <p className="text-white/70 leading-relaxed max-w-lg">
+                  Pro vývojáře mám připravené dedikované školení — žádné obecné slidy, jen reálné
+                  ukázky a nástroje, které vývojáři okamžitě použijí v práci.
+                </p>
+              </div>
+              <div className="relative z-10 flex-shrink-0">
+                <Link
+                  href="/skoleni-pro-vyvojare"
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-7 py-4 rounded-full font-semibold transition-colors group whitespace-nowrap"
+                >
+                  Školení pro vývojáře
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Other Services */}
         <OtherServices currentSlug="webinare-a-workshopy" />
       </main>

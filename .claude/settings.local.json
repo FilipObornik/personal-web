@@ -10,7 +10,13 @@
       "mcp__plugin_playwright_playwright__browser_wait_for",
       "mcp__plugin_playwright_playwright__browser_run_code",
       "mcp__plugin_playwright_playwright__browser_resize",
-      "mcp__plugin_playwright_playwright__browser_console_messages"
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_resize",
+      "Bash(mkdir -p /Users/filip/Projects/freelance/personal-web-app/.claude/worktrees/sale-landing-pages/.claude)",
+      "Bash(echo '{\"context\": \"Video hosting research for testimonials\"}')"
     ]
   }
 }
