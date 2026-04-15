@@ -4,6 +4,9 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 const GTM_ID = "GTM-TQ6MVCK2";
+const PRODUCTION_URL = "https://filipobornik.cz";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? PRODUCTION_URL;
+const IS_PRODUCTION_SITE = SITE_URL === PRODUCTION_URL;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,7 +20,14 @@ const suse = SUSE({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://filipobornik.cz"),
+  metadataBase: new URL(SITE_URL),
+  robots: IS_PRODUCTION_SITE
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        googleBot: { index: false, follow: false },
+      },
   title: "Filip Oborník | AI, Vibe Coding a technologie",
   description:
     "Pomohu vám s AI a vibe codingem. Semináře, mentoring, konzultace a implementace AI řešení.",

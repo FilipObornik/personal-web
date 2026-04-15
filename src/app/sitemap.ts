@@ -1,8 +1,18 @@
 import { MetadataRoute } from "next";
 import { glossaryTerms } from "@/lib/glossary-data";
 
+const PRODUCTION_URL = "https://filipobornik.cz";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://filipobornik.cz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? PRODUCTION_URL;
+
+  // On non-production deployments (e.g. dev.filipobornik.cz) return an empty
+  // sitemap so search engines have nothing to discover there.
+  if (siteUrl !== PRODUCTION_URL) {
+    return [];
+  }
+
+  const baseUrl = PRODUCTION_URL;
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
